@@ -1,0 +1,105 @@
+\documentclass[a4paper, oneside, 11pt]{book}
+
+\textwidth 145mm
+\topmargin -2mm
+\textheight 235mm
+
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[]{quotchap}
+\usepackage{mdwlist}
+
+% nastaveni zahlavi
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[L]{} 
+\fancyfoot[R]{} 
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt} 
+\fancyhead{}
+\fancyhead[RO]{\rightmark}
+\fancyhead[LE]{\leftmark}
+
+% nastaveni nazvu kapitoly
+\renewcommand\chapterheadstartvskip{\vspace*{-4\baselineskip}}
+
+% nastaveni tučného bezpatkového písma
+\DeclareMathAlphabet{\mathsfb}{T1}{lcmss}{b}{sl}
+
+\newcommand{\me}{\mathrm{e}} % Eulerovo cislo
+\newcommand{\mi}{\mathrm{i}} % komplexni jednotka
+\newcommand{\mj}{\mathrm{j}} % komplexni jednotka
+\newcommand{\dif}{\,\mathrm{d}} % diferencial
+\newcommand{\mat}[1]{\mathrm{\mathbf{{#1}}}} % tenzor nebo matice
+\renewcommand{\vec}[1]{\mbox{\boldmath$#1$}} % vektor
+\newcommand{\faz}[1]{{\underline{#1}}} % fazor
+\newcommand{\vecfaz}[1]{\mbox{\underline{\boldmath$#1$}}} % fazor vektoru
+\newcommand*{\unit}[1]{\ensuremath{\mathrm{\,#1}}} % jednotky
+\newcommand{\degree}{\ensuremath{^{\circ}\mathrm{C}}} % stupne Celsia
+\renewcommand{\Re}{\mathrm{Re}} % imaginarni cast
+\renewcommand{\Im}{\mathrm{Im}} % realna cast
+\newcommand{\tg}{\mathrm{tg}\ } % tangens
+\newcommand{\grad}{\mathrm{grad}\ } % gradient
+\newcommand{\curl}{\mathrm{curl}\ } % rotace
+\newcommand{\rot}{\mathrm{rot}\ } % rotace
+\renewcommand{\div}{\mathrm{div}\ } % divergence
+\newcommand{\const}{\mathrm{const}} % konstanta
+\newcommand{\konst}{\mathrm{konst}} % konstanta
+
+% nastaveni vysky bunek tabulek
+\renewcommand\arraystretch{1.2}
+
+\makeatletter
+\g@addto@macro\@verbatim\footnotesize
+\makeatother 
+
+% nastavení dělení/nedělení slov
+% \hyphenation{definovaném}
+
+\begin{document}
+
+\input{Titul}
+\input{Pred_uvodem}
+\renewcommand\thepage{}
+
+\tableofcontents
+\newpage
+
+\renewcommand\thepage{\arabic{page}}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\chapter{Úvod}
+\input{Uvod}
+
+\chapter{Cíle práce} \label{kap:Cile}
+\input{Cile}
+
+\chapter{EMC v~elektrické trakci} \label{kap:EMC}
+\input{EMC}
+
+\chapter{Elektromagnetické vlny} \label{kap:Evlny}
+\input{Evlny}
+
+\chapter{Simulace} \label{kap:Simulace}
+\input{Simulace}
+
+\chapter{Závěr} \label{kap:Zaver}
+\input{Zaver}
+
+\include{Literatura}
+
+\listoffigures
+\listoftables
+\newpage
+
+\appendix
+\input{Priloha}
+
+\end{document}
