@@ -2,7 +2,7 @@
 
 \section{Šíření ve volném prostředí}
 \subsection{Obecná vlnová rovnice}
-Elektromagnetickým vlněním je označováno šíření nestacionárního elektromagnetického pole. Jedná se o~vektorové pole, pro jehož obecný popis je potřeba znát následující čtveřici vektorů pole v~každém bodě prostoru.\\ 
+Elektromagnetickým vlněním je označováno šíření nestacionárního elektromagnetického pole. Jedná se o vektorové pole, pro jehož obecný popis je potřeba znát následující čtveřici vektorů pole v každém bodě prostoru.\\ 
 
 \begin{tabular}{lll}
 $\vec E$ & $[V/m]$ & intenzita elektrického pole\\
@@ -10,8 +10,8 @@ $\vec D$ & $[C/m^{2}]$ & indukce elektrická\\
 $\vec B$ & $[Wb/m^{2}],[T]$ & indukce magnetická\\
 $\vec H$ & $[A/m]$ & intenzita magnetického pole\\
 \end{tabular}\bigskip \\
-Pro řešení pole ve vakuu nebo v~prostředí se známými materiálovými konstantami postačuje jakákoliv dvojice vektorů, kdy jeden je vektorem elektrického pole a druhý magentického pole. To znamená, že libovolná dvojice z~variant $\vec E\vec B$, $\vec E\vec H$, $\vec D\vec H$ a~$\vec D\vec B$ postačuje po popis a řešení elektromagnetického pole.
-Relace mezi vektrory indukce a~intenzity popisují parametry prostředí. 
+Pro řešení pole ve vakuu nebo v prostředí se známými materiálovými konstantami postačuje jakákoliv dvojice vektorů, kdy jeden je vektorem elektrického pole a druhý magentického pole. To znamená, že libovolná dvojice z variant $\vec E\vec B$, $\vec E\vec H$, $\vec D\vec H$ a $\vec D\vec B$ postačuje po popis a řešení elektromagnetického pole.
+Relace mezi vektrory indukce a intenzity popisují parametry prostředí. 
 \begin{equation}
 \vec D = \varepsilon\vec E = \varepsilon_{0}\varepsilon_{r}\vec E
 \label{rce:D_epsE}
@@ -20,29 +20,29 @@ Relace mezi vektrory indukce a~intenzity popisují parametry prostředí.
 \vec B = \mu\vec H = \mu_{0}\mu_{r}\vec H
 \label{rce:B_muH}
 \end{equation}
-Pro úplnost je v~tabulce \ref{tab:evlny_vlastnosti_prostredi} přehled možných materiálových parametrů prostředí včetně hodnot pro vakuum, které jsou odlišené indexem $0$.
+Pro úplnost je v tabulce \ref{tab:evlny_vlastnosti_prostredi} přehled možných paramterů prostředí včetně hodnot pro vakuum, které jsou odlišené indexem $0$.
 \begin{table}[!h]
 \catcode`\-=12
 \begin{center}
-  	\caption{Materiálové vlastnosti prostředí}
+  	\caption{Vlastnosti prostředí}
   	\label{tab:evlny_vlastnosti_prostredi}
 \begin{tabular}{l||llp{1cm}l}
-	permitivita		& $\varepsilon$	& [F/m] & & $\varepsilon_{0} = 8,854.10^{-12} $\\
+	permitivita		& $\varepsilon$	& $[F/m]$ & & $\varepsilon_{0} = 8,854.10^{-12} [F/m]$\\
 	\hline
-	permeabilita	& $\mu$			& [H/m] & & $\mu_{0} = 4\pi.10^{-7} $\\
+	permeabilita	& $\mu$			& $[H/m]$ & & $\mu_{0} = 4\pi.10^{-7} [H/m]$\\
 	\hline
-	měrná vodivost	& $\sigma$		& [S/m] & &\\
+	měrná vodivost	& $\sigma$		& $[S/m]$ & &\\
 \end{tabular}
 \end{center}
 \end{table}
 
-Podle \cite[str.33]{emp} existují dva možné přístupy k~řešení polí, související s~časovou proměnností pole.
+Podle \cite[str.33]{emp} existují dva možné přístupy k řešení polí, související s časovou proměnností pole.
 \begin{description}
-\item[Stacionární pole]Určují se všechny zdroje a následně ke každému z~nich jejich prostorové rozložení pole. Výsledkem je superpozice všech polí.
-\item[Nestacionární pole]Sestavíme diferenciální rovnici pro některý z~vektorů pole. Následně nalezneme obecné řešení a dle okrajových podmínek vybereme nejhodnější.
+\item[Stacionární pole]Určují se všechny zdroje a následně ke každému z nich jejich prostorové rozložení pole. Výsledkem je superpozice všech polí.
+\item[Nestacionární pole]Sestavíme diferenciální rovnici pro některý z vektorů pole. Následně nalezneme obecné řešení a dle okrajových podmínek vybereme nejhodnější.
 \end{description}
  
-Podrobné odvození vlnových rovnic pro vektory pole $\vec E$ a $\vec B$, pro časově neměnné parametry prostředí, se nachází v~příloze \ref{kap:Odvozeni_VlnR}.
+Podrobné odvození vlnových rovnic pro vektory pole $\vec E$ a $\vec B$, pro časově neměnné parametry prostředí, se nachází v příloze \ref{kap:Odvozeni_VlnR}.
  
 \subsection{Harmonické pole}
 
@@ -51,26 +51,25 @@ str.40\\
 \newpage
 
 \section{Rozhraní dvou prostředí}
+\newpage
 str.86, 91, 92, 94, 95, 96
-\newpage
-
 \section{Vrstvené prostředí}
-str.103\\
-str.104 - čtvrtvlnny transf\\
-str.107 půlvlnné diel okno\\
 \newpage
+str.103
+str.104 - čtvrtvlnny transf
+str.107 půlvlnné diel okno
 
 \section{Vlnovody}
 \subsection{Klasifikace vln}
-str.112 - TEM, TE, TM, HE, EH\\
-str.108 - obecně\\
-str.131 - TE, Ez = 0, TM Hz = 0\\
-str.143 - Snell\\
+str.112 - TEM, TE, TM, HE, EH
+str.108 - obecně
+str.131 - TE, Ez = 0, TM Hz = 0
+str.143 - Snell
 \subsection{Kritická frekvence}
 str.132
 \newpage
 
 \section{Dutinové rezonátory}
-str.150\\
-str.151 - rez. kmitočet\\
+str.150
+str.151 - rez. kmitočet
 \newpage

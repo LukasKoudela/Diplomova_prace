@@ -1,15 +1,13 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2010.12.29)  2 FEB 2011 11:34
+This is pdfTeX, Version 3.1415926-1.40.10 (MiKTeX 2.8) (preloaded format=pdflatex 2010.12.1)  3 FEB 2011 19:33
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**Main.tex
-(./Main.tex
+**E:/Diplomka_v_LaTeXu/Main.tex
+(E:/Diplomka_v_LaTeXu/Main.tex
 LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, czech, slovak, loaded.
-(/usr/share/texmf-texlive/tex/latex/base/book.cls
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman, ngerman, german-x-2009-06-19, ngerman-x-2009-06-19, french, loaded.
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\book.cls"
 Document Class: book 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texmf-texlive/tex/latex/base/bk11.clo
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\bk11.clo"
 File: bk11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -25,34 +23,45 @@ File: bk11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texmf-texlive/tex/generic/babel/babel.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\babel.sty"
 Package: babel 2008/07/06 v3.8l The Babel package
 
-(/usr/share/texmf-texlive/tex/generic/babel/czech.ldf
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\czech.ldf"
 Language: czech 2008/07/06 v3.1a Czech support from the babel system
 
-(/usr/share/texmf-texlive/tex/generic/babel/babel.def
+("C:\Program Files (x86)\MiKTeX 2.8\tex\generic\babel\babel.def"
 File: babel.def 2008/07/06 v3.8l Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
 )
+
+Package babel Warning: No hyphenation patterns were loaded for
+(babel)                the language `Czech'
+(babel)                I will use the patterns loaded for \language=0 instead.
+
+\l@czech = a dialect from \language0
 Package babel Info: Making " an active character on input line 172.
 \cs@wordlen=\count89
 Package babel Info: Making - an active character on input line 226.
-))
-(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+)) ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
-(/usr/share/texmf-texlive/tex/latex/base/t1enc.dfu
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\t1enc.dfu"
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -202,7 +211,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
-(/usr/share/texmf-texlive/tex/latex/base/ot1enc.dfu
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\ot1enc.dfu"
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -233,7 +242,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(/usr/share/texmf-texlive/tex/latex/base/omsenc.dfu
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omsenc.dfu"
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -257,31 +266,31 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
-(/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\fontenc.sty"
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(/usr/share/texmf-texlive/tex/latex/base/t1enc.def
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\t1enc.def"
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
 ))
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsmath.sty"
 Package: amsmath 2000/07/18 v2.13 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amstext.sty"
 Package: amstext 2000/06/29 v2.01
 
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks16
 \ex@=\dimen104
 ))
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen105
 )
-(/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\ams\math\amsopn.sty"
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count90
@@ -322,42 +331,42 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
-(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\amsfonts.sty"
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 96.
 )
-(/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2009/06/22 v3.00
 )
-(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks21
 )
-(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/etc/texmf/tex/latex/config/graphics.cfg
-File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2010/11/26 v0.05c Graphics/color for pdfTeX
 \Gread@gobject=\count102
 ))
 \Gin@req@height=\dimen113
 \Gin@req@width=\dimen114
 )
-(/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\fancyhdr\fancyhdr.sty"
 \fancy@headwidth=\skip46
 \f@ncyO@elh=\skip47
 \f@ncyO@erh=\skip48
@@ -368,29 +377,27 @@ File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
 \f@ncyO@olf=\skip53
 \f@ncyO@orf=\skip54
 )
-(/usr/share/texmf-texlive/tex/latex/quotchap/quotchap.sty
-Package: quotchap 1998/02/09 v0.9f Decorative Chapter Headings with Quotes
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\quotchap\quotchap.sty"
+Package: quotchap 2011/01/15 v1.0 Decorative Chapter Headings with Quotes
 
-(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\graphics\color.sty"
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
-(/etc/texmf/tex/latex/config/color.cfg
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\00miktex\color.cfg"
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
 \@quotebox=\box28
 )
-(/usr/share/texmf-texlive/tex/latex/mdwtools/mdwlist.sty
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\mdwtools\mdwlist.sty"
 Package: mdwlist 1996/05/02 1.1 Various list-related things
 )
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
 less on input line 27.
 
-(./Main.aux (./Literatura.aux))
-\openout1 = `Main.aux'.
-
+(E:\Diplomka_v_LaTeXu\Main.aux (E:\Diplomka_v_LaTeXu\Literatura.aux))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
@@ -404,7 +411,7 @@ LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
 
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+("C:\Program Files (x86)\MiKTeX 2.8\tex\context\base\supp-pdf.tex"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count103
 \scratchdimen=\dimen115
@@ -416,31 +423,31 @@ LaTeX Font Info:    ... okay on input line 65.
 \MPscratchDim=\dimen116
 \MPnumerator=\count107
 \everyMPtoPDFconversion=\toks23
-) (./Titul.tex [1
+) (E:\Diplomka_v_LaTeXu\Titul.tex [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
-(./Pred_uvodem.tex <zadani1.png, id=9, 1245.65375pt x 1723.43875pt>
+{C:/ProgramData/MiKTeX/2.8/pdftex/config/pdftex.map}]) (E:\Diplomka_v_LaTeXu\Pr
+ed_uvodem.tex
+<zadani1.png, id=9, 1245.65375pt x 1723.43875pt>
 File: zadani1.png Graphic file (type png)
-
-<use zadani1.png>
+ <use zadani1.png>
 Overfull \hbox (14.22638pt too wide) in paragraph at lines 6--7
  [][] 
  []
 
 [1
 
- <./zadani1.png (PNG copy)>] <zadani2.png, id=13, 1225.57875pt x 1706.375pt>
+ <E:/Diplomka_v_LaTeXu/zadani1.png (PNG copy)>]
+<zadani2.png, id=13, 1225.57875pt x 1706.375pt>
 File: zadani2.png Graphic file (type png)
-
-<use zadani2.png>
+ <use zadani2.png>
 Overfull \hbox (14.22638pt too wide) in paragraph at lines 11--12
  [][] 
  []
 
 [1
 
- <./zadani2.png (PNG copy)>]
+ <E:/Diplomka_v_LaTeXu/zadani2.png (PNG copy)>]
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 13.59999pt.
@@ -454,8 +461,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--38
 
 [3]
 Overfull \hbox (3.3275pt too wide) in paragraph at lines 47--48
-[]\T1/cmr/m/n/10.95 Také bych touto ces-tou cht¥l po-d¥-ko-vat svým ro-di-£·m a
- p°í-tel-kyni Sta-ni-slav¥ Mlsnové
+[]\T1/cmr/m/n/10.95 Také bych touto ces-tou cht¥l pod¥ko-vat svým rodi£·m a p°í
+telkyni Stanislav¥ Mlsnové
  []
 
 
@@ -465,287 +472,346 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
 [4])
 LaTeX Font Info:    Try loading font information for T1+pbk on input line 71.
- (/usr/share/texmf-texlive/tex/latex/psnfss/t1pbk.fd
+ ("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\psnfss\t1pbk.fd"
 File: t1pbk.fd 2001/06/04 font definitions for T1/pbk.
 )
 LaTeX Font Info:    Font shape `T1/pbk/b/n' in size <20.74> not available
 (Font)              Font shape `T1/pbk/db/n' tried instead on input line 71.
 LaTeX Font Info:    Font shape `T1/pbk/b/n' in size <100> not available
 (Font)              Font shape `T1/pbk/db/n' tried instead on input line 71.
- (./Main.toc
+
+(E:\Diplomka_v_LaTeXu\Main.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 5.
 
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 5.
 
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ))
 \tf@toc=\write3
-\openout3 = `Main.toc'.
-
  [5
 
 ]
 Kapitola 1.
-(./Uvod.tex) [1
+(E:\Diplomka_v_LaTeXu\Uvod.tex
+Overfull \hbox (6.59514pt too wide) in paragraph at lines 3--4
+\T1/cmr/m/n/10.95 nep°í-pustné úrovn¥ elek-tro-mag-net-ick-ého ru²ení a schop-n
+ost bezchyb-ného fun-gování v defi-
+ []
+
+
+Overfull \hbox (1.973pt too wide) in paragraph at lines 7--8
+[]\T1/cmr/m/n/10.95 Problematika elek-tro-mag-net-ické kom-pat-i-bil-ity za-°íz
+ení velmi ²iroce sou-visí s návrhem
+ []
+
+
+Overfull \hbox (4.23817pt too wide) in paragraph at lines 9--10
+\T1/cmr/m/n/10.95 nachází po-drobné odvození vl-nových rovnic elek-tro-mag-net-
+ick-ého pole. P°íloha B[] zahrnuje
+ []
+
+) [1
 
 ]
 Kapitola 2.
-(./Cile.tex) [2
+(E:\Diplomka_v_LaTeXu\Cile.tex
+Overfull \hbox (1.22653pt too wide) in paragraph at lines 2--3
+\T1/cmr/m/n/10.95 uni-verzální mul-ti-plat-for-mín pro-gram dis-tribuo-vaný pod
+ GNU/GPL li-cencí slouºí k °e²ení
+ []
+
+) [2
 
 ]
 Kapitola 3.
-(./EMC.tex
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 6.
- (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+(E:\Diplomka_v_LaTeXu\EMC.tex
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 5.
+
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 5.
  [3
 
-] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 30--37
+]
+<emc_retezec.png, id=45, 912.5292pt x 302.0886pt>
+File: emc_retezec.png Graphic file (type png)
+ <use emc_retezec.png>
+<emc_emi.png, id=46, 441.0879pt x 316.5426pt>
+File: emc_emi.png Graphic file (type png)
+ <use emc_emi.png> [4 <E:/Diplomka_v_LaTeXu/emc_retezec.png
+
+pdfTeX warning: pdflatex (file E:/Diplomka_v_LaTeXu/emc_retezec.png): large int
+erlaced PNG might cause out of memory (use non-interlaced PNG to fix this)
+> <E:/Diplomka_v_LaTeXu/emc_emi.png>]
+<emc_ems.png, id=50, 449.5194pt x 326.6604pt>
+File: emc_ems.png Graphic file (type png)
+ <use emc_ems.png>
+<emc_meze.png, id=51, 452.892pt x 222.3507pt>
+File: emc_meze.png Graphic file (type png)
+ <use emc_meze.png> [5 <E:/Diplomka_v_LaTeXu/emc_ems.png> <E:/Diplomka_v_LaTeXu
+/emc_meze.png>] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 78--85
 
  []
 
-[5] <emc_emise2.png, id=55, 729.927pt x 454.0965pt>
+[7] <emc_emise2.png, id=63, 729.927pt x 454.0965pt>
 File: emc_emise2.png Graphic file (type png)
  <use emc_emise2.png>
-Overfull \hbox (5.66719pt too wide) in paragraph at lines 65--76
+Overfull \hbox (5.66719pt too wide) in paragraph at lines 113--124
  [] 
  []
 
-[6 <./emc_emise2.png
+[8 <E:/Diplomka_v_LaTeXu/emc_emise2.png
 
-pdfTeX warning: pdflatex (file ./emc_emise2.png): large interlaced PNG might ca
-use out of memory (use non-interlaced PNG to fix this)
->] <emc_IO.png, id=60, 455.5419pt x 110.5731pt>
+pdfTeX warning: pdflatex (file E:/Diplomka_v_LaTeXu/emc_emise2.png): large inte
+rlaced PNG might cause out of memory (use non-interlaced PNG to fix this)
+>] <emc_IO.png, id=67, 455.5419pt x 110.5731pt>
 File: emc_IO.png Graphic file (type png)
  <use emc_IO.png>
-<emc_vf.png, id=61, 425.1885pt x 162.3666pt>
+<emc_vf.png, id=68, 425.1885pt x 162.3666pt>
 File: emc_vf.png Graphic file (type png)
- <use emc_vf.png> [7 <./emc_IO.png> <./emc_vf.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 117--117
+ <use emc_vf.png> [9 <E:/Diplomka_v_LaTeXu/emc_IO.png> <E:/Diplomka_v_LaTeXu/em
+c_vf.png>]
+Overfull \hbox (5.32521pt too wide) in paragraph at lines 156--157
+[]\T1/cmr/m/n/10.95 Zkou²ky odol-nosti jsou touto nor-mou speci-fikovány pro zk
+-ou²ky pos-tup-ného testování,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 165--165
 []\T1/cmr/bx/n/10.95 Základní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 []\T1/cmr/bx/n/10.95 Funk£ní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--118
-\T1/cmr/bx/n/10.95 kri-té-
+Overfull \hbox (0.54298pt too wide) in paragraph at lines 165--166
+\T1/cmr/bx/n/10.95 kritérium| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--120
+Underfull \hbox (badness 10000) in paragraph at lines 168--168
 []\T1/cmr/m/n/10.95 Vysokofrekven£ní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--120
-\T1/cmr/m/n/10.95 elek-tro-mag-ne-tické
+Underfull \hbox (badness 10000) in paragraph at lines 168--168
+\T1/cmr/m/n/10.95 elek-tro-mag-net-ické
  []
 
 
-Underfull \hbox (badness 2285) in paragraph at lines 120--120
+Underfull \hbox (badness 2285) in paragraph at lines 168--168
 \T1/cmr/m/n/10.95 pole (am-pli-tu-dov¥
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 120--120
+Underfull \hbox (badness 10000) in paragraph at lines 168--168
 \T1/cmr/m/n/10.95 20 V/m (ef.)
  []
 
 
-Overfull \hbox (1.87349pt too wide) in paragraph at lines 120--120
+Overfull \hbox (1.87349pt too wide) in paragraph at lines 168--168
 []\T1/cmr/m/n/10.95 Nemodulovaná
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--122
+Underfull \hbox (badness 10000) in paragraph at lines 170--170
 \T1/cmr/m/n/10.95 20 V/m (ef.)
  []
 
 
-Overfull \hbox (1.87349pt too wide) in paragraph at lines 122--122
+Overfull \hbox (1.87349pt too wide) in paragraph at lines 170--170
 []\T1/cmr/m/n/10.95 Nemodulovaná
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
 []\T1/cmr/m/n/10.95 Vysokofrekven£ní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
-\T1/cmr/m/n/10.95 elek-tro-mag-ne-tické
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+\T1/cmr/m/n/10.95 elek-tro-mag-net-ické
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
-\T1/cmr/m/n/10.95 pole (di-gi-tální
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+\T1/cmr/m/n/10.95 pole (dig-itální
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 124--124
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
 \T1/cmr/m/n/10.95 10 V/m (ef.)
  []
 
 
-Overfull \hbox (1.87349pt too wide) in paragraph at lines 124--124
+Overfull \hbox (1.87349pt too wide) in paragraph at lines 172--172
 []\T1/cmr/m/n/10.95 Nemodulovaná
  []
 
 
-Overfull \hbox (1.87349pt too wide) in paragraph at lines 126--126
+Overfull \hbox (1.87349pt too wide) in paragraph at lines 174--174
 []\T1/cmr/m/n/10.95 Nemodulovaná
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
+Underfull \hbox (badness 10000) in paragraph at lines 176--176
 []\T1/cmr/m/n/10.95 Elektrostatický
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
+Underfull \hbox (badness 10000) in paragraph at lines 176--176
 []\T1/cmr/m/n/10.95 Kontaktní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
-\T1/cmr/m/n/10.95 vý-boj
+Underfull \hbox (badness 10000) in paragraph at lines 176--176
+\T1/cmr/m/n/10.95 výboj
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 128--128
+Underfull \hbox (badness 10000) in paragraph at lines 176--176
 []
  []
 
 
-Overfull \hbox (3.09447pt too wide) in paragraph at lines 115--132
+Overfull \hbox (3.09447pt too wide) in paragraph at lines 163--180
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--142
+Underfull \hbox (badness 10000) in paragraph at lines 190--190
 []\T1/cmr/bx/n/10.95 Základní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 190--191
 []\T1/cmr/bx/n/10.95 Funk£ní
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
-\T1/cmr/bx/n/10.95 kri-té-
+Overfull \hbox (0.54298pt too wide) in paragraph at lines 190--191
+\T1/cmr/bx/n/10.95 kritérium| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--145
+Underfull \hbox (badness 10000) in paragraph at lines 193--193
 []\T1/cmr/m/n/10.95 Vysokofrekven£ní
  []
 
 
-Underfull \hbox (badness 1052) in paragraph at lines 145--145
+Underfull \hbox (badness 1052) in paragraph at lines 193--193
 []\T1/cmr/m/n/10.95 0,15 - 80 MHz
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--145
+Underfull \hbox (badness 10000) in paragraph at lines 193--193
 \T1/cmr/m/n/10.95 20 V (ef.)
  []
 
 
-Overfull \hbox (1.87349pt too wide) in paragraph at lines 145--145
+Overfull \hbox (1.87349pt too wide) in paragraph at lines 193--193
 []\T1/cmr/m/n/10.95 Nemodulovaná
  []
 
 
-Underfull \hbox (badness 5302) in paragraph at lines 147--147
+Underfull \hbox (badness 5302) in paragraph at lines 195--195
 []\T1/cmr/m/n/10.95 Rychlé p°e-chodné
  []
 
 
-Underfull \hbox (badness 1048) in paragraph at lines 147--147
-[]\T1/cmr/m/n/10.95 5/50 $\OML/cmm/m/it/10.95 ^^V$\T1/cmr/m/n/10.95 s 5 kHz
+Underfull \hbox (badness 1048) in paragraph at lines 195--195
+[]\T1/cmr/m/n/10.95 5/50 $\OML/cmm/m/it/10.95 $\T1/cmr/m/n/10.95 s 5 kHz
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--147
+Underfull \hbox (badness 10000) in paragraph at lines 195--195
 []\T1/cmr/m/n/10.95 Tr/Tn
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--147
-\T1/cmr/m/n/10.95 Kmito£et
+Underfull \hbox (badness 10000) in paragraph at lines 195--195
+\T1/cmr/m/n/10.95 Kmi-to£et
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--147
-\T1/cmr/m/n/10.95 opa-ko-vání
+Underfull \hbox (badness 10000) in paragraph at lines 195--195
+\T1/cmr/m/n/10.95 opakování
  []
 
 
-Overfull \hbox (5.48732pt too wide) in paragraph at lines 147--147
- \T1/cmr/m/n/10.95 A B pro I/O 
- []
-
-
-Underfull \hbox (badness 1910) in paragraph at lines 149--149
-[]$\OMS/cmsy/m/n/10.95 ^^F$ \T1/cmr/m/n/10.95 2 kV 42 $\OT1/cmr/m/n/10.95 
+Underfull \hbox (badness 1910) in paragraph at lines 197--197
+[]$\OMS/cmsy/m/n/10.95 $ \T1/cmr/m/n/10.95 2 kV 42 $\OT1/cmr/m/n/10.95 
 $
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--149
-[]\T1/cmr/m/n/10.95 Zku². na-p¥tí
+Underfull \hbox (badness 10000) in paragraph at lines 197--197
+[]\T1/cmr/m/n/10.95 Zku²ební
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 149--149
-\T1/cmr/m/n/10.95 na-prázdno,
+Underfull \hbox (badness 10000) in paragraph at lines 197--197
+\T1/cmr/m/n/10.95 nap¥tí
  []
 
 
-Underfull \hbox (badness 1910) in paragraph at lines 151--151
-[]$\OMS/cmsy/m/n/10.95 ^^F$ \T1/cmr/m/n/10.95 1 kV 42 $\OT1/cmr/m/n/10.95 
+Underfull \hbox (badness 10000) in paragraph at lines 197--197
+\T1/cmr/m/n/10.95 naprázdno,
+ []
+
+
+Underfull \hbox (badness 1910) in paragraph at lines 199--199
+[]$\OMS/cmsy/m/n/10.95 $ \T1/cmr/m/n/10.95 1 kV 42 $\OT1/cmr/m/n/10.95 
 $
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 151--151
-[]\T1/cmr/m/n/10.95 Zku². na-p¥tí
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+[]\T1/cmr/m/n/10.95 Zku²ební
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 151--151
-\T1/cmr/m/n/10.95 na-prázdno,
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+\T1/cmr/m/n/10.95 nap¥tí
  []
 
 
-Overfull \hbox (3.09447pt too wide) in paragraph at lines 140--154
+Underfull \hbox (badness 10000) in paragraph at lines 199--199
+\T1/cmr/m/n/10.95 naprázdno,
+ []
+
+
+Overfull \hbox (3.09447pt too wide) in paragraph at lines 188--202
  [] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8] [9]) [10]
+[10] [11]) [12]
 Kapitola 4.
-(./Evlny.tex
+(E:\Diplomka_v_LaTeXu\Evlny.tex
 Underfull \hbox (badness 10000) in paragraph at lines 5--6
 
  []
 
-[11
+
+Overfull \hbox (9.1713pt too wide) in paragraph at lines 42--43
+[]\T1/cmr/m/n/10.95 Sestavíme difer-en-ciální rovnici pro n¥k-terý z vek-tor· p
+ole. Následn¥
+ []
+
+[13
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 50--51
@@ -758,97 +824,92 @@ Package Fancyhdr Warning: \headheight is too small (13.59999pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[12] [13]
+[14] [15]
 Underfull \hbox (badness 10000) in paragraph at lines 58--61
 
  []
 
-[14]
+[16]
 Underfull \hbox (badness 10000) in paragraph at lines 65--69
 
  []
 
-[15]
+[17]
 Underfull \hbox (badness 10000) in paragraph at lines 74--76
 
  []
 
-[16])
+[18])
 Kapitola 5.
-(./Simulace.tex [17
+(E:\Diplomka_v_LaTeXu\Simulace.tex [19
 
-]) [18]
+]) [20]
 Kapitola 6.
-(./Zaver.tex) [19
+(E:\Diplomka_v_LaTeXu\Zaver.tex) [21
 
-]
-\openout2 = `Literatura.aux'.
-
- (./Literatura.tex
+] (E:\Diplomka_v_LaTeXu\Literatura.tex
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 14.
 
-(/usr/share/texmf-texlive/tex/latex/base/t1cmtt.fd
+("C:\Program Files (x86)\MiKTeX 2.8\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)) [20
-
-
-] (./Main.lof)
-\tf@lof=\write4
-\openout4 = `Main.lof'.
-
- [21
+)) [22
 
 
 ]
-(./Main.lot)
+(E:\Diplomka_v_LaTeXu\Main.lof)
+\tf@lof=\write4
+ [23
+
+
+] (E:\Diplomka_v_LaTeXu\Main.lot)
 \tf@lot=\write5
-\openout5 = `Main.lot'.
+ [24
 
- [22
-
-] (./Priloha.tex
+]
+(E:\Diplomka_v_LaTeXu\Priloha.tex
 P\v {r}\'{\i }loha A.
-<vnuceny_I.png, id=120, 422.5386pt x 297.2706pt>
+<vnuceny_I.png, id=128, 422.5386pt x 297.2706pt>
 File: vnuceny_I.png Graphic file (type png)
- <use vnuceny_I.png> [23
+ <use vnuceny_I.png> [25
 
- <./vnuceny_I.png>] [24] [25]
+ <E:/Diplomka_v_LaTeXu/vnuceny_I.png>] [26] [27]
 P\v {r}\'{\i }loha B.
-) [26
+) [28
 
-] (./Main.aux (./Literatura.aux)) ) 
+] (E:\Diplomka_v_LaTeXu\Main.aux (E:\Diplomka_v_LaTeXu\Literatura.aux)) ) 
 Here is how much of TeX's memory you used:
- 3156 strings out of 495027
- 36186 string characters out of 1181418
- 100778 words of memory out of 3000000
- 6210 multiletter control sequences out of 15000+50000
- 30462 words of font info for 79 fonts, out of 3000000 for 9000
- 40 hyphenation exceptions out of 8191
- 27i,12n,43p,1013b,314s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/lukas/.texmf-var/fonts/pk/ljfour/jkn
-appen/ec/ectt1095.600pk> </home/lukas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ec
-ti1095.600pk> </home/lukas/.texmf-var/fonts/pk/ljfour/jknappen/ec/eccc1095.600p
-k> </home/lukas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/l
-ukas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </home/lukas/.texmf
--var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/lukas/.texmf-var/fonts/
-pk/ljfour/jknappen/ec/ecrm0800.600pk>{/usr/share/texmf-texlive/fonts/enc/dvips/
-base/8r.enc} </home/lukas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk
-> </home/lukas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm2074.600pk> </home/lu
-kas/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/lukas/.texmf-
-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk> </home/lukas/.texmf-var/fonts/p
-k/ljfour/jknappen/ec/ecbx2074.600pk> </home/lukas/.texmf-var/fonts/pk/ljfour/jk
-nappen/ec/eccc1440.600pk> </home/lukas/.texmf-var/fonts/pk/ljfour/jknappen/ec/e
-cbx1440.600pk></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-></usr/share/texmf-texlive/fonts/type1/urw/bookman/ubkd8a.pfb>
-Output written on Main.pdf (33 pages, 1753067 bytes).
+ 3230 strings out of 495285
+ 38814 string characters out of 3179827
+ 101723 words of memory out of 3000000
+ 6306 multiletter control sequences out of 15000+200000
+ 25977 words of font info for 67 fonts, out of 3000000 for 9000
+ 16 hyphenation exceptions out of 8191
+ 29i,12n,43p,1034b,388s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Pr
+ogram Files (x86)/MiKTeX 2.8/fonts/enc/dvips/cm-super/cm-super-t1.enc}{C:/Progr
+am Files (x86)/MiKTeX 2.8/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x8
+6)/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)
+/MiKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files (x86)/M
+iKTeX 2.8/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files (x86)/MiKT
+eX 2.8/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Program Files (x86)/MiKTe
+X 2.8/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x86)/MiKTeX 2
+.8/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x86)/MiKTeX 2.8/f
+onts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.8/fon
+ts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/
+type1/public/cm-super/sfbx1095.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/typ
+e1/public/cm-super/sfbx1200.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/
+public/cm-super/sfbx1440.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/pub
+lic/cm-super/sfbx1728.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public
+/cm-super/sfbx2074.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/cm
+-super/sfcc1095.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/cm-su
+per/sfcc1440.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/cm-super
+/sfrm1095.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/cm-super/sf
+rm2074.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/cm-super/sfti1
+095.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/public/cm-super/sftt1095
+.pfb><C:/Program Files (x86)/MiKTeX 2.8/fonts/type1/urw/bookman/ubkd8a.pfb>
+Output written on Main.pdf (35 pages, 2351966 bytes).
 PDF statistics:
- 645 PDF objects out of 1000 (max. 8388607)
+ 206 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 

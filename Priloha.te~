@@ -23,16 +23,16 @@ K~sestavení vlnové diferenciální rovnice pro vektor intenzity elektrického 
 
 \subsection*{Vlnová rovnice pro vektor intenzity elektrického pole $\vec E$.}
 Dle \cite[str. 33]{emp} uvažujeme případ, že se v~daném objemu nachází indukovaný proud a navíc proud, který vnucen vnějším zdrojem. Důsledkem je modifikace rovnice (\ref{rce:1MaxwR}).
-\begin{equation}
-	\rot\vec H = \vec J+\frac{\partial\vec D}{\partial t}+\vec J_{vn}
-	\label{rce:1MaxwR_vn}
-\end{equation}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=5cm]{vnuceny_I.png}
 	\caption{Vnucený proud vnějším zdrojem.}
 	\label{obr:vnuceny_I}
-\end{figure}\\
+\end{figure}
+\begin{equation}
+	\rot\vec H = \vec J+\frac{\partial\vec D}{\partial t}+\vec J_{vn}
+	\label{rce:1MaxwR_vn}
+\end{equation}
 Vyjádření $\rot\vec B$ z~rovnice (\ref{rce:1MaxwR_vn}).
 \begin{displaymath}
 	\frac{1}{\mu} \rot\vec B = \sigma \vec E+\varepsilon\frac{\partial\vec E}{\partial t}+\vec J_{vn}
@@ -130,5 +130,5 @@ Je zřejmé, že tyto vztahy můžeme získat rovnou z~vlnových rovnic pro dan�
 \chapter{Obsah přiloženého CD-ROM} \label{kap:Obsah_CD}
 \begin{itemize}
 \item text diplomové práce ve formátu PDF a TEX
-\item obrázky použité v~diplomové práci ve formátu PNG
+\item obrázky použité v diplomové práci ve formátu PNG
 \end{itemize}

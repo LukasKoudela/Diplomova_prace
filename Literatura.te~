@@ -8,19 +8,9 @@
 {\sc Novotný, K.:}  {\bf Elektromagnetické pole a vlny: teorie elektromagnetického pole II},
 Vydavatelství ČVUT, Praha~2001, \mbox{ISBN 80-01-02429-6}
 
-\bibitem{hpfem}
-{\em Oficiální internetové stránky sdružení hpFEM},
+\bibitem{cstug}{\em Oficiální internetové stránky sdružení hpFEM},
 citováno dne \today \\
 \texttt{http://www.hpfem.org/}
 
-\bibitem{emc_trakce}
-{\sc Kůs, V., Skála, J., Laurenc, J.:}  {\bf Elektrická trakce a EMC},
-odborný článek, Plzeň~1997
-
-\bibitem{nfr}
-{\sc Kůs, K.:}  {\bf Nízkofrekvenční rušení},
-skriptum, Západočeská univerzita, Plzeň~2003, \mbox{ISBN 80-7082-976-1}
-
 \end{thebibliography}
-
 %\newpage
