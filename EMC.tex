@@ -1,6 +1,6 @@
 % !TeX root = Main.tex
 \section{Souvislost EMC a elektrické trakce} \label{sec:emc_trakce}
-Elektrická trakce je velmi specifickou oblastí. Problematika elektromagnetické kompatibility je zde tak obsáhlá, neboť se týká nejen situace ohraničené prostorem vlakových souprav, ale i~dalších propojených oblastí. Prolínají se tu elektrické systémy velmi vysokých výkonů, nelineární výkonové elektronické prvky i systémy dopravní signalizační a zabezpečovací. Mezi konkrétní odlišnosti u drážních zařízení patří například:
+Elektrická trakce je velmi specifickou oblastí. Problematika elektromagnetické kompatibility je zde obsáhlá, neboť se týká nejen situace ohraničené prostorem vlakových souprav, ale i~dalších propojených oblastí. Prolínají se tu elektrické systémy velmi vysokých výkonů, nelineární výkonové elektronické prvky i systémy dopravní signalizační a zabezpečovací. Mezi konkrétní odlišnosti u drážních zařízení patří dle \cite{nfr} například:
 \begin{itemize}
 \item topologie trakčního vedení (jednostranně nebo maximálně oboustranně napájené)
 \item lokomotiva představuje jednofázovou zátěž o značném výkonu v řádech tisíců kW (např. ŠKODA 109 E poskytuje jmenovitý výkon 6400 kW)
@@ -14,22 +14,23 @@ Zdrojem rušení představují především polovodičové měniče. Ty během s
 
 \medskip
 {\bf Vysokofrekvenční a impulsní rušení} - frekvenční pásmo 9 kHz až 1 GHz \\
-V této kmitočtové oblasti jsou předmětem zájmu impulsy, které vznikají při spínacích pochodech v napájecích stanicích, případně i v lokomotivách. Zdroje tohoto rušení mohou nepříznivě až kriticky ovlivňovat kromě všech drážních zařízení také blízké okolí rozvodů trakčního vedení. Mezi obzvláště citlivé spotřebiče na rušivé vlivy od elektromagnetického pole lze považovat zařízení komunikací, sdělovací systémy a veškerá řídící technika, realizovaná v dnešní době procesorovou a číslicovou elektronikou. O~úrovních přípustného rušení v elektrické trakci je pojednáno v příslušných normativech, které jsou popsány v podkapitole \ref{sec:emc_normy_trakce}. Omezení vlivu elektromagnetického pole na dané zařízení je možné pomocí stínění, k jehož návrhu a realizaci je čato vhodné využití simulačních aplikací. Více o tom pojednává kapitola \ref{kap:Simulace}.
+V této kmitočtové oblasti jsou předmětem zájmu impulsy, které vznikají při spínacích pochodech v napájecích stanicích, případně v lokomotivách. Zdroje tohoto rušení mohou nepříznivě až kriticky ovlivňovat kromě všech drážních zařízení také blízké okolí rozvodů trakčního vedení. Mezi obzvláště citlivé spotřebiče na rušivé vlivy od elektromagnetického pole lze považovat zařízení komunikací, sdělovací systémy a veškerá řídící technika, realizovaná v dnešní době procesorovou a číslicovou elektronikou. O~úrovních přípustného rušení v elektrické trakci je pojednáno v příslušných normativech, které jsou popsány v podkapitole \ref{sec:emc_normy_trakce}. Omezení vlivu elektromagnetického pole na dané zařízení je možné pomocí stínění, k jehož návrhu a realizaci je čato vhodné využití simulačních aplikací. Více o realizaci nástroje pro simulaci pojednává kapitola \ref{kap:Simulace}.
 \newpage
-\section{Struktura norem EMC}
-Rozdělení příslušných norem souvisí s tím, o jakou konkrétní oblast elektomagnetické kompatibility se jedná. U technických systémů jsou oblasti rozčleněny dle působení a~definuje se základní přenosový řetězec. 
+
+\section{Dělení EMC a struktura norem}
+Rozdělení příslušných norem souvisí s tím, o jakou konkrétní oblast elektomagnetické kompatibility se jedná. U technických systémů jsou oblasti rozčleněny dle působení a~definuje se základní přenosový řetězec. V této podkapitole je využito zdrojů \cite{nfr} a \cite{emc_encyklopedie}.
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=14.5cm]{emc_retezec.png}
+	\includegraphics[width=14.6cm]{emc_retezec.png}
 	\caption{Přenosový řetězec EMC a příklady jednotlivých bloků.}
 	\label{obr:emc_retezec}
 \end{figure}\\
-Základní rozdělení EMC se tedy zabývá:
+Základní rozdělení EMC se zabývá:
 \begin{itemize}
 \item {\bf EMI} - elektromagnetická interference (zdroj elektromagentického rušení) \\
 Tato oblast se věnuje prvnímu bloku na obr. \ref{obr:emc_retezec}. Zabývá příčinami vzniku rušení, dále například parametry, intenzitou, charakterem a také možnostmi jeho měření. Interferenční zdroje se rozdělují na přírodní a na technické, neboli umělé. U těch se ještě blíže rozlišuje, zda se jedná o požadovanou funkci vysílače nebo nechtěnou. Konkrétních zdrojů, především pak technických, existuje nepřeberné množství, z~nichž některé jsou uvedeny u přenosového řetězce.
 
-Dále se ještě blíže specifikuje, zda se jedná o přímý vliv elektromagnetického pole nebo jde o rušení po vedení. Obrázek \ref{obr:emc_emi} znázorňuje rozdíl mezi vyzařováním a šířením rušivých vlivů po napájecím vedení.
+Dále se ještě blíže specifikuje, zda se jedná o přímý vliv elektromagnetického pole nebo jde o rušení po vedení. Obrázek \ref{obr:emc_emi} znázorňuje rozdíl mezi vyzařováním a~šířením rušivých vlivů po napájecím vedení.
 	\begin{enumerate}
 	\item Vyzařováním
 	\item Vedením
@@ -68,10 +69,34 @@ Schopnost odolat vlivu elektromagnetického rušení se sleduje u posledního bl
 \item[kmenové] (Generic Standarts) - definují bližší kritéria na EMI a EMS podle typu prostředí, ve kterém je dané zařízení trvale provozováno.
 \item[výrobků] (Product Standarts) - určují detailní požadavky a testovací metody pro produkty nebo skupiny podobných produktů. Do této kategorie spadají také normy pro elektrickou trakci, které jsou rozepsány v podkapitole \ref{sec:emc_normy_trakce}.
 \end{description}
+
+V tabulce \ref{tab:emc_deleni} je uvedeno další obecnější rozdělení, podle kterého je možné členit normy elektromagnetické kompatility. Pro příslušnou oblast jsou definovány jsou většinou definovány dvě části norem. V první bývají uvedeny mezní hodnoty elektromagnetické kompatibility a v druhé se nacházejí postupy pro testování.
+
+\begin{table}[!h]
+\begin{center}
+  	\caption{Obecné rozdělení norem EMC.}
+  	\label{tab:emc_deleni}
+\begin{tabular}{|ll|l|}
+	\hline
+	{\bf Pokrytá oblast} & & {\bf Části norem} \\
+	\hline
+	\hline
+	Normy rušivého vyzařování & (pro EMI) & mezní (maximální) hodnoty vyzařování \\
+	& & měřící přístroje a metody \\
+	\hline
+	Normy elektromag. odolnosti & (pro EMS) & mezní (minimální) hodnoty odolnosti \\
+	& & zkušební přístroje a metody \\
+	\hline
+	Normy odrušovacích prostředků & & vlastnosti odrušovacích prostředků \\
+	& & zkoušky a přístroje pro měření \\
+	\hline
+\end{tabular}
+\end{center}
+\end{table}
 \newpage
 
 \section{Aktuální normativy v~elektrické trakci} \label{sec:emc_normy_trakce}
-Mezi aktuální normy, související s~elektromagnetickou kompatibilitou v~elektrické trakci, patří především České technické normy s~označením ČSN EN 50121. Jedná se o~překlady, které zajišťuje Český normalizační institut. Mají proto stejný statut jako oficiální verze, kterými jsou evropské normy EN 50121, vydávané Evropským výborem pro normalizaci v~elektrotechnice (CENELEC). 
+Mezi aktuální normy, související s~elektromagnetickou kompatibilitou v~elektrické trakci, patří především České technické normy s~označením ČSN EN 50121 \cite{csn}. Jedná se o~překlady, které zajišťuje Český normalizační institut. Mají proto stejný statut jako oficiální verze, kterými jsou evropské normy EN 50121, vydávané Evropským výborem pro normalizaci v~elektrotechnice (CENELEC). 
 
  Z~řady důvodů, uvedených v podkapitole \ref{sec:emc_trakce},  je elektromagnetická kompatibilita vážným problémem již při konstrukci a výrobě trakčních vozidel. Proto je nutné vytvořit normy, které budou splňovat jak veškeré požadavky Směrnice elektromagnetické kompatibility EC 89/336/EEC, tak i zajišťovat spolehlivost a funkčnost vlastních drážních zařízení.
 
@@ -84,7 +109,7 @@ Soubor norem ČSN EN 50121, vydaný pod společným názvem Drážní zařízen�
 Část 5: Emise a odolnost pevných instalací a zařízení trakční napájecí soustavy\\
 
 \subsection{ČSN EN 50121-1}
-Norma ČSN EN 50121-1: Všeobecně popisuje rozdělení celého vlastního souboru norem, jak je uvedeno v \ref{sec:emc_normy_trakce}. Dále obsahuje postupy pro řízení managementu pro dosažení EMC v~elektrické trakci. Nakonec především stanovuje funkční kritéria, které jsou založeny na evropské normě EN 61000-6-2. S~jejich pomocí se posuzuje funkčnost a schopnost provozu zařízení během zkoušek EMC. V~normě jsou popsána 3 funkční kritéria, označovaná jako A, B a C. Pokud testovaný vzorek není schopen splnit požadavky alespoň jednoho z~uvedených kritérií, posuzuje se jako nevyhovující.
+Norma ČSN EN 50121-1: Všeobecně popisuje rozdělení celého vlastního souboru norem, jak je uvedeno v části \ref{sec:emc_normy_trakce}. Dále obsahuje postupy pro řízení managementu pro dosažení EMC v~elektrické trakci. Nakonec především stanovuje funkční kritéria, které jsou založeny na evropské normě EN 61000-6-2. S~jejich pomocí se posuzuje funkčnost a schopnost provozu zařízení během zkoušek EMC. V~normě jsou definována 3 funkční kritéria, označovaná jako A, B a C. Pokud testovaný vzorek není schopen splnit požadavky alespoň jednoho z~uvedených kritérií, posuzuje se jako nevyhovující.
 
 Funkční kritérium A~ve většině případů nedovoluje žádnou změnu chování zařízení během i následně po skončení zkoušek EMC. Jedinou modifikací může být výrobcem nastavená minimální hranice fungování, případně přípustná mez ztráty funkčnosti, které přesto výrobek během i po testech nesmí překročit.
 
@@ -93,7 +118,7 @@ Funkční kritérium B opět nedovoluje zhoršení funkce, pokud je zařízení 
 Funkční kritérium C popisuje, že u~zkoušeného zařízení je možná dočasná ztráta funkce, pokud je nějakým prostředkem možno zajistit její obnovení.
 
 \subsection{ČSN EN 50121-2}
-Norma ČSN EN 50121 - 2: Emise celého drážního  systému do vnějšího prostředí ustanovuje mezní hodnoty emisí, které mohou být produkovány při provozu drážních vozidel. Dále určuje, jakým způsobem měření lze dané hodnoty ověřit. Dle normy se předpokládá, že elektromagnetické rušení, působené elektrickou trakcí, existuje ve všech místech ve vzdálenosti 10 m od vnější elektrizované troleje nebo 10 m od trakční napájecí stanice. Proto je i stanoveno provádět měření emisí v~této vzdálenosti. Pokud není možné tuto podmínku vzhledem k~místním poměrům na dráze dodržet, existuje v~normě definovaný přepočet pro měření v~jiné ekvivalentní vzdálenosti. 
+Norma označená ČSN EN 50121 - 2: Emise celého drážního  systému do vnějšího prostředí ustanovuje mezní hodnoty emisí, které mohou být produkovány při provozu drážních vozidel. Dále určuje, jakým způsobem měření lze dané hodnoty ověřit. Dle normy se předpokládá, že elektromagnetické rušení, působené elektrickou trakcí, existuje ve všech místech ve vzdálenosti 10 m od vnější elektrizované troleje nebo 10 m od trakční napájecí stanice. Proto je i stanoveno provádět měření emisí v~této vzdálenosti. Pokud není možné tuto podmínku vzhledem k~místním poměrům na dráze dodržet, existuje v~normě definovaný přepočet pro měření v~jiné ekvivalentní vzdálenosti. 
 
 Mezní hodnoty se podle normy rozlišují na vyzařování z~venkovní dráhy při provozu vlaku a samostatně na emise z~trakčních napájecích stanic. Hranice (velikost vrcholové hodnoty) pro jednotlivé napájecí systémy v~elektrické trakci používané v~České republice jsou uvedeny v~grafu na obrázku \ref{obr:emc_emise}.
 
@@ -112,13 +137,13 @@ Vlastní měření intenzity elektromagnetického pole, generovaného drážním
   	\label{tab:emc_fr_rozsah}
 \begin{tabular}{|l|l|l|l|}
 	\hline
-	{\bf Kmitočtový rozsah} & {\bf Pásmo} & {\bf Měřící anténa} & {\bf Měřená veličina} \\
+	{\bf Kmitočtový rozsah} & {\bf Pásmo} & {\bf Měřící anténa} & {\bf Měřená složka pole} \\
 	\hline
 	\hline
-	9 kHz - 150 kHz	& 200 Hz	& smyčková nebo rámová	& magnetická intenzita  H \\
-	150 kHz - 30 MHz	& 9 kHz	& smyčková nebo rámová	& magnetická intenzita H \\
-	30 MHz - 300 MHz	& 120 kHz	& bikónický dipól		& elektrická intenzita E \\
-	300 MHz - 1 GHz	& 120 kHz	& logaritmicko - periodická	& elektrická intenzita E \\
+	9 kHz - 150 kHz	& 200 Hz	& smyčková nebo rámová	& magnetická (intenzita $\vec H$) \\
+	150 kHz - 30 MHz	& 9 kHz	& smyčková nebo rámová	& magnetická \\
+	30 MHz - 300 MHz	& 120 kHz	& bikónický dipól		& elektrická (intenzita $\vec E$) \\
+	300 MHz - 1 GHz	& 120 kHz	& logaritmicko - periodická	& elektrická\\
   	\hline
 \end{tabular}
 \end{center}
@@ -138,7 +163,7 @@ Rozlišují se na několik druhů, hlavní jsou uvedeny na obrázku \ref{obr:emc
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=8cm]{emc_IO.png}
-	\caption{Hlavní druhy vstupů a výstupů zařízení.}
+	\caption{Hlavní druhy vstupů a výstupů zařízení. \cite{csn}}
 	\label{obr:emc_IO}
 \end{figure}
 
@@ -147,7 +172,7 @@ Pro veškerá měřená zařízení se určují funkční kritéria, které jsou
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=8cm]{emc_vf.png}
-	\caption{Hlavní druhy vstupů a výstupů zařízení.}
+	\caption{Zkouška vysokofrekvenčního rušení trakčních měničů.\cite{csn}}
 	\label{obr:emc_vf}
 \end{figure}
 
@@ -183,7 +208,7 @@ Zkoušky odolnosti jsou touto normou specifikovány pro zkoušky postupného tes
 \begin{table}[!h]
 \catcode`\-=12
 \begin{center}
-  	\caption{Další metody zkoušek odolnosti.}
+  	\caption{Metody zkoušek odolnosti pro další vstupy a výstupy.}
   	\label{tab:emc_odolnosti2}
 \begin{tabular}{|p{3,2cm}|p{2,8cm}|p{2,4cm}|p{2,3cm}|p{1,8cm}|}
 	\hline
@@ -201,7 +226,6 @@ Rychlé přechodné jevy & 5/50~$\mu$s 5~kHz $\pm$2~kV ($\pm$1~kV I/O uzemnění
 \end{tabular}
 \end{center}
 \end{table}
-
 Další specifika metod uvedená tabulce \ref{tab:emc_odolnosti2} jsou definovány pro následující vstupy a~výstupy:
 \begin{itemize*}
 \item vztahující se k~baterii  (s~výjimkou na výstupu zdrojů energie)
@@ -215,11 +239,11 @@ Další specifika metod uvedená tabulce \ref{tab:emc_odolnosti2} jsou definová
 \end{itemize*}
 
 \subsection{ČSN EN 50121-4}
-Zjišťováním emisí a odolností zabezpečovacích a sdělovacích zařízení se týká další část, tj.~ČSN EN 50121-4. Tato norma se však zabývá pouze těmi přístroji, které jsou instalovány v~drážním prostředí mimo těch, které jsou umístěny v~trakčních vozidlech. Ty jsou pokryty ČSN EN 50121-3-2. 
+Zjišťováním emisí a odolností zabezpečovacích a sdělovacích zařízení se týká další část, tj.~ČSN EN 50121-4. Tato norma se však zabývá pouze těmi přístroji, které jsou instalovány v~drážním prostředí kromě těch, které jsou umístěny v~trakčních vozidlech. Ty jsou pokryty v ČSN EN 50121-3-2. 
 
-Emise produkované zařízením, kterého se norma týká, musí splňovat maximální hodnoty uvedené ve všeobecné normě EN 61000-6-4. Specifika zkoušky jsou však uvedena zde, jedná se o~definování měřící vzdálenosti a případné přepočty výsledků vzhledem k~této vzdálenosti.
+Emise produkované zařízením, kterého se norma týká, musí splňovat maximální hodnoty uvedené ve všeobecné normě EN 61000-6-4. Specifika zkoušky jsou však uvedena zde, jedná se o~definování měřící vzdálenosti a případné přepočty výsledků.
 
-Z~hlediska odolnosti se používají funkční kritéria uvedená již v~ČSN EN 50121-1. Zkoušky se provádějí metodou postupného testování, jako jednotlivé zkoušky za sebou, viz. tabulka \ref{tab:emc_odolnosti1} a tabulka \ref{tab:emc_odolnosti2}.
+Z~hlediska odolnosti se používají funkční kritéria uvedená již v~ČSN EN 50121-1. Zkoušky se provádějí metodou postupného testování, jako jednotlivé zkoušky za sebou, viz. tabulka \ref{tab:emc_odolnosti1} a \ref{tab:emc_odolnosti2}.
  Měly by být prováděné při typických provozních režimech, kdy je uvažována maximální úroveň rušení v~daném frekvenčním rozsahu. Popis zkušebních metod není v~této normě uveden, je zde opět uveden odkaz na základní normy, zabývající se zkouškami odolnosti. 
 
 \subsection{ČSN EN 50121-5}
@@ -227,6 +251,6 @@ Pro zajištění kompatibilní úrovně elektromagnetické emise a odolnosti pro
 
 Norma definuje emise a odolnosti pro zařízení, která jsou umístěna uvnitř napájecí stanice nebo v~prostoru elektrifikované trati a případně i pro přístroje, které jsou napájené z~trakčního vedení, ale neslouží k~trakčním účelům. Konkrétně se jedná o~prostředky staniční služby (návěstní soustava), nádražní osvětlení, nakládací jeřáby a administrativní budovy.  
 
-Emise se rozlišují na vyzařování z~vlastní trakční stanice do okolí a na generované uvnitř samotných napájecích stanic. Hranice záření do okolí jsou pro kmitočtové pásmo 9 kHz až 1 GHz stanoveny společně normou ČSB EN 50121-2. Pro zařízení umístěné pod zemí se musí provést měření v~rozsahu 9 kHz až 150 kHz v~prostoru na povrchu nad zařízením. Pokud se jedná o~venkovní nebo kabelová vedení mezi napájecí stanicí a dráhou, není zde z~důvodu rozmanitosti možné stanovit mezní hodnoty pro magnetická pole, která vytvářejí. Ze stejného důvodu nejsou určeny meze pro rušení uvnitř trakčních napájecích stanic. 
+Emise se rozlišují na vyzařování z~vlastní trakční stanice do okolí a na generované uvnitř samotných napájecích stanic. Hranice záření do okolí jsou pro kmitočtové pásmo 9 kHz až 1 GHz stanoveny společně normou ČSB EN 50121-2. Pro zařízení umístěné pod zemí se musí provést měření v~rozsahu 9 kHz až 150 kHz v~prostoru na povrchu nad zařízením. Pokud se jedná o~venkovní nebo kabelová vedení mezi napájecí stanicí a~dráhou, není zde z~důvodu rozmanitosti možné stanovit mezní hodnoty pro magnetická pole, která vytvářejí. Ze stejného důvodu nejsou určeny meze pro rušení uvnitř trakčních napájecích stanic. 
 
 Funkční kritéria jsou používány všeobecné, tzn. stejné jako jsou uvedené v~normě ČSN EN 50121-1. Pro zkoušky odolnosti platí to samé jako v~ČSN EN 50121-4, zkušební metody jsou uvedeny v~tabulkách \ref{tab:emc_odolnosti1} a \ref{tab:emc_odolnosti2}.
