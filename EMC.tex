@@ -30,65 +30,50 @@ Základní rozdělení EMC se zabývá:
 \item {\bf EMI} - elektromagnetická interference (zdroj elektromagentického rušení) \\
 Tato oblast se věnuje prvnímu bloku na obr. \ref{obr:emc_retezec}. Zabývá příčinami vzniku rušení, dále například parametry, intenzitou, charakterem a také možnostmi jeho měření. Interferenční zdroje se rozdělují na přírodní a na technické, neboli umělé. U těch se ještě blíže rozlišuje, zda se jedná o požadovanou funkci vysílače nebo nechtěnou. Konkrétních zdrojů, především pak technických, existuje nepřeberné množství, z~nichž některé jsou uvedeny u přenosového řetězce.
 
-Dále se ještě blíže specifikuje, zda se jedná o přímý vliv elektromagnetického pole nebo jde o rušení po vedení. Obrázek \ref{obr:emc_emi} znázorňuje rozdíl mezi vyzařováním a~šířením rušivých vlivů po napájecím vedení.
-	\begin{enumerate}
-	\item Vyzařováním
-	\item Vedením
-	\end{enumerate}
-	\begin{figure}[!h]
-	\centering
-	\includegraphics[width=8cm]{emc_emi.png}
-	\caption{Rozdíl mezi EMI vyzařováním a šířením po vedení.}
-	\label{obr:emc_emi}
-	\end{figure}
-\item {\bf EMS} - elektromagnetická susceptibilita (odolnost rušeného objektu) \\
-Schopnost odolat vlivu elektromagnetického rušení se sleduje u posledního bloku na obr. \ref{obr:emc_retezec}. Tím jsou konkrétní zařízení nebo systémy, které jsou vystaveny přímému vlivu elektromagnetického pole. Případně mohou být ohroženy rušením po napájecím vedení, tak jak je naznačeno na obrázku \ref{obr:emc_ems}.
-	\begin{enumerate}
-	\item Ozařováním
-	\item Po vedení
-	\end{enumerate}
-	\begin{figure}[!h]
-	\centering
-	\includegraphics[width=8cm]{emc_ems.png}
-	\caption{Rozdíl mezi EMS proti ozařování a proti vlivům po vedení .}
-	\label{obr:emc_ems}
-	\end{figure}
-\end{itemize}
+Dále se ještě blíže specifikuje, zda se jedná o přímý vliv elektromagnetického pole nebo jde o rušení po vedení. Levá část obrázku \ref{obr:emc_emi_ems} znázorňuje rozdíl mezi vyzařováním a~šířením rušivých vlivů po napájecím vedení.
 
-Úrovně EMI a EMS jsou rozhodující pro návrh a konstrukci zařízení. Aby daný výrobek byl provozuschopný z hlediska elektromagnetické kompatibility, je potřeba splňovat podobné úrovně rušení jako je nastíněno na obrázku \ref{obr:emc_meze}. To především znamená, že elektromagnetická odolnosti daného zařízení, by měla být dostatečně dimenzovaná, aby ji nepřesáhl nějaký zdroj rušení vyskytující se v daném prostředí. Dle norem jsou navíc definované mezní hodnoty pro EMS a EMI, které představují rezervy pro zajištění elektromagnetické kompatibility.
+\item {\bf EMS} - elektromagnetická susceptibilita (odolnost rušeného objektu) \\
+Schopnost odolat vlivu elektromagnetického rušení se sleduje u posledního bloku na obrázku \ref{obr:emc_retezec}. Tím jsou konkrétní zařízení nebo systémy, které jsou vystaveny přímému vlivu elektromagnetického pole. Případně mohou být ohroženy rušením po napájecím vedení, tak jak je naznačeno na obrázku \ref{obr:emc_emi_ems}.
+\end{itemize}
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=14cm]{emc_meze.png}
+	\includegraphics[width=11.5cm]{emc_emi_ems.png}
+	\caption{EMI a EMS zářením (1.) a šířením po vedení (2.).}
+	\label{obr:emc_emi_ems}
+\end{figure}
+
+Úrovně EMI a EMS jsou rozhodující pro návrh a konstrukci zařízení. Aby daný výrobek byl provozuschopný z hlediska elektromagnetické kompatibility, je potřeba splňovat podobné úrovně rušení jako je nastíněno na obrázku \ref{obr:emc_meze}. To především znamená, že elektromagnetická odolnosti daného zařízení, by měla být dostatečně dimenzovaná, aby ji nepřesáhl nějaký zdroj rušení vyskytující se v daném prostředí. Dle norem jsou definované hodnoty pro EMS a EMI, které představují rezervy pro zajištění EMC.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=11cm]{emc_meze.png}
 	\caption{Vliv úrovní EMI a EMS pro konstrukci zařízení.}
 	\label{obr:emc_meze}
 \end{figure}
 
 Účelem předpisů EMC je hlavně zvýšení elektromagnetické kompatibility systémů. Toho lze dosáhnout právě omezováním zdrojů rušení ze současného zvyšování odolnosti objektů. Civilní normy EMC se dle charakteru rozlišují na:
-\begin{description}
-\item[základní] (Basic Standarts) - specifikují všeobecné podmínky pro dosažení elektromagnetické kompatibility u libovolného technického zařízení.
-\item[kmenové] (Generic Standarts) - definují bližší kritéria na EMI a EMS podle typu prostředí, ve kterém je dané zařízení trvale provozováno.
-\item[výrobků] (Product Standarts) - určují detailní požadavky a testovací metody pro produkty nebo skupiny podobných produktů. Do této kategorie spadají také normy pro elektrickou trakci, které jsou rozepsány v podkapitole \ref{sec:emc_normy_trakce}.
-\end{description}
-
-V tabulce \ref{tab:emc_deleni} je uvedeno další obecnější rozdělení, podle kterého je možné členit normy elektromagnetické kompatility. Pro příslušnou oblast jsou definovány jsou většinou definovány dvě části norem. V první bývají uvedeny mezní hodnoty elektromagnetické kompatibility a v druhé se nacházejí postupy pro testování.
-
+\begin{itemize}
+\item {\bf Základní} (Basic Standarts) - specifikují všeobecné podmínky pro dosažení elektromagnetické kompatibility u libovolného technického zařízení.
+\item {\bf Kmenové} (Generic Standarts) - definují bližší kritéria na EMI a EMS podle typu prostředí, ve kterém je dané zařízení trvale provozováno.
+\item {\bf Výrobků} (Product Standarts) - určují detailní požadavky a testovací metody pro produkty nebo skupiny podobných produktů. Do této kategorie spadají také normy pro elektrickou trakci, které jsou rozepsány v podkapitole \ref{sec:emc_normy_trakce}.
+\end{itemize}
+V tabulce \ref{tab:emc_deleni} je uvedeno další obecnější rozdělení, podle kterého je možné členit normy elektromagnetické kompatility. Pro příslušnou oblast jsou definovány dvě části norem. V~první bývají uvedeny meze EMC a v druhé se nacházejí postupy pro testování.
 \begin{table}[!h]
 \begin{center}
   	\caption{Obecné rozdělení norem EMC.}
   	\label{tab:emc_deleni}
-\begin{tabular}{|ll|l|}
+\begin{tabular}{|l|l|}
 	\hline
-	{\bf Pokrytá oblast} & & {\bf Části norem} \\
+	{\bf Pokrytá oblast}  & {\bf Části norem} \\
 	\hline
 	\hline
-	Normy rušivého vyzařování & (pro EMI) & mezní (maximální) hodnoty vyzařování \\
-	& & měřící přístroje a metody \\
+	Normy rušivého vyzařování  (pro EMI) & mezní (maximální) hodnoty vyzařování \\
+	 & měřící přístroje a metody \\
 	\hline
-	Normy elektromag. odolnosti & (pro EMS) & mezní (minimální) hodnoty odolnosti \\
-	& & zkušební přístroje a metody \\
+	Normy elektromag. odolnosti  (pro EMS) & mezní (minimální) hodnoty odolnosti \\
+	 & zkušební přístroje a metody \\
 	\hline
-	Normy odrušovacích prostředků & & vlastnosti odrušovacích prostředků \\
-	& & zkoušky a přístroje pro měření \\
+	Normy odrušovacích prostředků  & vlastnosti odrušovacích prostředků \\
+	 & zkoušky a přístroje pro měření \\
 	\hline
 \end{tabular}
 \end{center}
@@ -120,12 +105,12 @@ Funkční kritérium C popisuje, že u~zkoušeného zařízení je možná doča
 \subsection{ČSN EN 50121-2}
 Norma označená ČSN EN 50121 - 2: Emise celého drážního  systému do vnějšího prostředí ustanovuje mezní hodnoty emisí, které mohou být produkovány při provozu drážních vozidel. Dále určuje, jakým způsobem měření lze dané hodnoty ověřit. Dle normy se předpokládá, že elektromagnetické rušení, působené elektrickou trakcí, existuje ve všech místech ve vzdálenosti 10 m od vnější elektrizované troleje nebo 10 m od trakční napájecí stanice. Proto je i stanoveno provádět měření emisí v~této vzdálenosti. Pokud není možné tuto podmínku vzhledem k~místním poměrům na dráze dodržet, existuje v~normě definovaný přepočet pro měření v~jiné ekvivalentní vzdálenosti. 
 
-Mezní hodnoty se podle normy rozlišují na vyzařování z~venkovní dráhy při provozu vlaku a samostatně na emise z~trakčních napájecích stanic. Hranice (velikost vrcholové hodnoty) pro jednotlivé napájecí systémy v~elektrické trakci používané v~České republice jsou uvedeny v~grafu na obrázku \ref{obr:emc_emise}.
+Mezní hodnoty se podle normy rozlišují na vyzařování z~venkovní dráhy při provozu vlaku a samostatně na emise z~trakčních napájecích stanic. Hranice (velikost vrcholové případně kvazivrcholové hodnoty) pro jednotlivé napájecí systémy v~elektrické trakci používané v~České republice jsou uvedeny v~grafu na obrázku \ref{obr:emc_emise}.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=12cm]{emc_emise2.png}
-	\caption{Hranice emisí jednotlivých trakčních systémů.}
+	\includegraphics[width=12cm]{emc_emise.png}
+	\caption{Hranice emisí jednotlivých trakčních systémů v pásmu 9 kHz až 1 GHz.}
 	\label{obr:emc_emise}
 \end{figure}
 
@@ -162,12 +147,12 @@ Rozlišují se na několik druhů, hlavní jsou uvedeny na obrázku \ref{obr:emc
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=8cm]{emc_IO.png}
+	\includegraphics[width=11cm]{emc_IO.png}
 	\caption{Hlavní druhy vstupů a výstupů zařízení. \cite{csn}}
 	\label{obr:emc_IO}
 \end{figure}
 
-Pro veškerá měřená zařízení se určují funkční kritéria, které jsou definované v~ČSN EN 50121-1, tj. A, B a C. Norma také definuje postup pro měření vysokofrekvenčního rušení přenášené po přívodním vedení v~pásmu 9 kHz až 30 MHz, které je vytvářeno především napájecími měniči trakčních motorů, obecně přístrojů se spínanými zdroji. Princip zkoušky je naznačen na obrázku \ref{obr:emc_vf}. 
+Pro veškerá měřená zařízení se určují funkční kritéria, které jsou definované v~ČSN EN 50121-1, tj. A, B a C. Norma také definuje postup pro měření vysokofrekvenčního rušení přenášené po přívodním vedení v~pásmu 9 kHz až 30 MHz, které je vytvářeno především napájecími měniči trakčních motorů (obecně přístrojů se spínanými zdroji). Princip zkoušky je naznačen na obrázku \ref{obr:emc_vf}. 
 
 \begin{figure}[!h]
 	\centering

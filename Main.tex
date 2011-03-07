@@ -32,7 +32,7 @@
 % nastaveni tučného bezpatkového písma
 \DeclareMathAlphabet{\mathsfb}{T1}{lcmss}{b}{sl}
 
-\newcommand{\me}{\mathrm{e}} % Eulerovo cislo
+\newcommand{\me}{\mathrm{e\,}} % Eulerovo cislo
 \newcommand{\mi}{\mathrm{i}} % komplexni jednotka
 \newcommand{\mj}{\mathrm{j}} % komplexni jednotka
 \newcommand{\dif}{\,\mathrm{d}} % diferencial
@@ -40,7 +40,7 @@
 \renewcommand{\vec}[1]{\mbox{\boldmath$#1$}} % vektor
 \newcommand{\faz}[1]{{\underline{#1}}} % fazor
 \newcommand{\vecfaz}[1]{\mbox{\underline{\boldmath$#1$}}} % fazor vektoru
-\newcommand*{\unit}[1]{\ensuremath{\mathrm{\,#1}}} % jednotky
+\newcommand*{\unit}[1]{\ensuremath{\mathrm{\ #1}}} % jednotky
 \newcommand{\degree}{\ensuremath{^{\circ}\mathrm{C}}} % stupne Celsia
 \renewcommand{\Re}{\mathrm{Re}} % imaginarni cast
 \renewcommand{\Im}{\mathrm{Im}} % realna cast
@@ -67,6 +67,7 @@
 
 \input{Titul}
 \input{Pred_uvodem}
+\input{Seznam_symbolu}
 \renewcommand\thepage{}
 
 \tableofcontents
