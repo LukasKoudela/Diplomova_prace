@@ -1,21 +1,48 @@
 % !TeX root = Main.tex
 \section{Předpoklady simulace}
-str.108
+Vzhledem k široké problematice elektromagnetických vln je potřeba pro jejich modelování zavést některé zjednodušení. 
+\begin{itemize}
+\item {\bf Harmonická analýza} - první předpokladem je řešení vlnové rovnice v harmonickém tvaru (Helmholtzova rovnice)
+\begin{displaymath}
+	\nabla^{2}\vecfaz E +\faz k^{2}\vecfaz E = 0.
+\end{displaymath}
+\item {\bf Šíření vln v kartézské souřadnicové soustavě ve směru osy z} - touto úvahou předpokládáme složku ve směru osy $z = 0$, výsledek bude 2D charakteru.
+\end{itemize}
 \newpage
 
 \section{Metoda konečných prvků}
+%popis metody, trojúhelníky, ..
+
+\section{Numerické řešení harmonické vlnové rovnice}
+Po zavedení zjednodušujících předpokladů vycházíme z rovnice ve tvaru
+\begin{equation}
+	\nabla^{2}\vecfaz E_{(x,y)} +\faz k^{2}\vecfaz E_{(x,y)} = 0
+	\label{rce:sim_helmholtz_num} 
+\end{equation}
+platné na definované oblasti $\Omega$, na které známe okrajové podmínky a ve které chceme dostat výsledné řešení. Tím může být například vnitřní prostor vlnovodu nebo rezonátoru. Nejprve z rovnice (\ref{rce:sim_helmholtz_num}) vyjádříme reálnou a imaginární složku
+\begin{displaymath}
+	\nabla^{2}(\vec E_R + \mj\vec E_I) + (\omega^{2}\varepsilon\mu - \mj\omega\mu\sigma)(\vec E_R + \mj\vec E_I) = 0,
+\end{displaymath}
+\begin{displaymath}
+	\nabla^{2}\vec E_R + \mj\nabla^{2}\vec E_I + \omega^{2}\varepsilon\mu\vec E_R + \mj\omega^{2}\varepsilon\mu\vec E_I - \mj\omega\mu\sigma\vec E_R + \omega\mu\sigma\vec E_I = 0,
+\end{displaymath}
+kde reálnou část tvoří
+\begin{equation}
+	\Re : \nabla^{2}\vec E_R + \omega^{2}\varepsilon\mu\vec E_R + \mj\omega\mu\sigma\vec E_R = 0,
+	\label{rce:sim_num_real} 
+\end{equation}
+a imaginární je vyjádřena
+\begin{equation}
+	\Im : \nabla^{2}\vec E_I + \omega^{2}\varepsilon\mu\vec E_I - \omega\mu\sigma\vec E_R = 0.
+	\label{rce:sim_num_imag} 
+\end{equation}
+Obě upravené rovnice \ref{rce:sim_num_real} a \ref{rce:sim_num_imag} převedeme do slabých forem, které splňují nulovou Dirichletovu a Neumannovu okrajovou podmínku. Postup 
 
 
-\begin{itemize}
-\item sdaf
-\item sdaf
-\item sdaf
-\item sdaf
-\end{itemize}
+% úprava rovnice pro Ez, vytvoření slabé formy, numerické řešení integrálu - gauss kvadratura
 
-\begin{itemize*}
-\item sdaf
-\item sdaf
-\item sdaf
-\item sdaf
-\end{itemize*}
+\section{Řešení pomocí knihovny Hermes2D}
+% real, imag.... + zápis v Qt
+
+
+
