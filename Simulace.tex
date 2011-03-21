@@ -16,32 +16,49 @@ Vzhledem k široké problematice elektromagnetických vln je potřeba pro jejich
 \section{Numerické řešení harmonické vlnové rovnice}
 Po zavedení zjednodušujících předpokladů vycházíme z rovnice ve tvaru
 \begin{equation}
-	\nabla^{2}\vecfaz E_{(x,y)} +\faz k^{2}\vecfaz E_{(x,y)} = 0
+	\nabla^{2}\faz E_{(z)} +\faz k^{2}\faz E_{(z)} = 0
 	\label{rce:sim_helmholtz_num} 
 \end{equation}
-platné na definované oblasti $\Omega$, na které známe okrajové podmínky a ve které chceme dostat výsledné řešení. Tím může být například vnitřní prostor vlnovodu nebo rezonátoru. Nejprve z rovnice (\ref{rce:sim_helmholtz_num}) vyjádříme reálnou a imaginární složku
+platné na definované oblasti $\Omega$, na které známe okrajové podmínky a ve které chceme dostat výsledné řešení. Tím může být například vnitřní prostor vlnovodu nebo rezonátoru. Nejprve rovnici (\ref{rce:sim_helmholtz_num}) rozepíšeme na reálnou a imaginární složku
 \begin{displaymath}
-	\nabla^{2}(\vec E_R + \mj\vec E_I) + (\omega^{2}\varepsilon\mu - \mj\omega\mu\sigma)(\vec E_R + \mj\vec E_I) = 0,
+	\nabla^{2}(E_R + \mj E_I) + (\omega^{2}\varepsilon\mu - \mj\omega\mu\sigma)(E_R + \mj E_I) = 0,
 \end{displaymath}
 \begin{displaymath}
-	\nabla^{2}\vec E_R + \mj\nabla^{2}\vec E_I + \omega^{2}\varepsilon\mu\vec E_R + \mj\omega^{2}\varepsilon\mu\vec E_I - \mj\omega\mu\sigma\vec E_R + \omega\mu\sigma\vec E_I = 0,
+	\nabla^{2} E_R + \mj\nabla^{2} E_I + \omega^{2}\varepsilon\mu E_R + \mj\omega^{2}\varepsilon\mu E_I - \mj\omega\mu\sigma E_R + \omega\mu\sigma E_I = 0,
 \end{displaymath}
 kde reálnou část tvoří
 \begin{equation}
-	\Re : \nabla^{2}\vec E_R + \omega^{2}\varepsilon\mu\vec E_R + \mj\omega\mu\sigma\vec E_R = 0,
+	\Re : \nabla^{2} E_R + \omega^{2}\varepsilon\mu E_R + \omega\mu\sigma E_I = 0,
 	\label{rce:sim_num_real} 
 \end{equation}
 a imaginární je vyjádřena
 \begin{equation}
-	\Im : \nabla^{2}\vec E_I + \omega^{2}\varepsilon\mu\vec E_I - \omega\mu\sigma\vec E_R = 0.
+	\Im : \nabla^{2} E_I + \omega^{2}\varepsilon\mu E_I - \omega\mu\sigma E_R = 0.
 	\label{rce:sim_num_imag} 
 \end{equation}
-Obě upravené rovnice \ref{rce:sim_num_real} a \ref{rce:sim_num_imag} převedeme do slabých forem, které splňují nulovou Dirichletovu a Neumannovu okrajovou podmínku. Postup 
+Obě upravené rovnice (\ref{rce:sim_num_real}) a (\ref{rce:sim_num_imag}) převedeme do slabých forem, které splňují nulovou Dirichletovu a Neumannovu okrajovou podmínku. Postup převodu spočívá ve vynásobení parciálních diferenciálních rovnic testovací funkcí $v$ a v následné integraci přes oblast řešení $\Omega$ 
+\begin{equation}
+	\Re : \int_{\Omega}\nabla^{2} E_R\cdot v \dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_R\cdot v\dif S + \omega\mu\sigma\int_{\Omega} E_I\cdot v\dif S = 0,
+	\label{rce:sim_weak_odv_real} 
+\end{equation}
+\begin{equation}
+	\Im : \int_{\Omega}\nabla^{2} E_I\cdot v\dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_I\cdot v\dif S - \omega\mu\sigma\int_{\Omega} E_R\cdot v\dif S = 0.
+	\label{rce:sim_weak_odv_imag} 
+\end{equation}
+V dalším kroku se aplikuje 1. Greenova identita \cite[příloha A.2]{num} (integrace po částech pro vyšší řády) a tím se získají slabé formy k původním rovnicím (\ref{rce:sim_num_real}) a (\ref{rce:sim_num_imag})
+\begin{equation}
+	\Re : \int_{\Gamma}\nabla E_R\cdot v\dif l-\int_{\Omega}\nabla E_R\cdot\nabla v \dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_R\cdot v\dif S + \omega\mu\sigma\int_{\Omega} E_I\cdot v\dif S = 0,
+	\label{rce:sim_weak_real} 
+\end{equation}
+\begin{equation}
+	\Im : \int_{\Gamma}\nabla E_I\cdot v\dif l-\int_{\Omega}\nabla E_I\cdot\nabla v\dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_I\cdot v\dif S - \omega\mu\sigma\int_{\Omega} E_R\cdot v\dif S = 0.
+	\label{rce:sim_weak_imag} 
+\end{equation}
+První člen $\int_{\Gamma}\nabla E_R\cdot v\dif l$ respektive $\int_{\Gamma}\nabla E_I\cdot v\dif l$ vyjadřuje Neumanovu okrajovou podmínku. Pokud je podmínka nulová, tak i tyto členy budou nulové.
 
+\subsection{Gaussova kvadratura}
 
-% úprava rovnice pro Ez, vytvoření slabé formy, numerické řešení integrálu - gauss kvadratura
-
-\section{Řešení pomocí knihovny Hermes2D}
+\section{Řešení vlnové rovnice pomocí knihovny Hermes2D}
 % real, imag.... + zápis v Qt
 
 
