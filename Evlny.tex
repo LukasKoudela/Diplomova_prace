@@ -539,7 +539,7 @@ Postup této metody je blíže vysvětlen na příkladu v \cite[str. 103 - 104]{
 Pro tři prostředí (dle obrázku \ref{obr:evlny_vrstvene_rada}) dostaneme soustavu čtyř rovnic o pěti neznámých. Aby ji bylo možné vyřešit, je potřeba znát alespoň jednu z postupných nebo odražených vln. Ve většině případů je známá dopadající vlna $\vecfaz E_{i}$. 
 
 \subsubsection*{2. Maticová metoda}
-Je jasné, že první uvedená metoda bude s nárůstem počtu vrstev čím dál více složitější. Postup další varianty řešení je opět rozebrán v \cite[str. 105]{emp}. Tato metoda, jak už název napovídá, využívá matic. Pokud dopadají na rozhraní vlny z obou stran podle obrázku !!! je možné odvodit následující maticový tvar
+Je jasné, že první uvedená metoda bude s nárůstem počtu vrstev čím dál více složitější. Postup další varianty řešení je opět rozebrán v \cite[str. 105]{emp}. Tato metoda, jak už název napovídá, využívá matic. Pokud dopadají na rozhraní vlny z obou stran podle obrázku \ref{obr:evlny_maticova_metoda1} je možné odvodit následující maticový tvar
 \begin{equation}
 \left[ \begin{array}{c}
 \faz E_{1}^{+} \\
@@ -558,7 +558,15 @@ Je jasné, že první uvedená metoda bude s nárůstem počtu vrstev čím dál
 \end{array} \right]
 \label{rce:evlny_maticova_rozhrani}
 \end{equation}
-kde $\faz R_{12}$ představuje činitel odrazu a $\faz T_ {12}$ činitel prostupu při dopadu vlny z prostředí 1 do 2. Pokud bude vlna procházet vrstvou o tloušťce $d$ popsanou konstantou šíření $\faz k$, podle situace na obrázku !!! lze opět získat maticový zápis
+kde $\faz R_{12}$ představuje činitel odrazu a $\faz T_ {12}$ činitel prostupu při průchodu elektromagnetické vlny z prostředí 1 do 2. 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=5.5cm]{evlny_maticova_metoda1.png}
+	\caption{Vlny dopadající na rozhraní z obou stran.\cite{emp}}
+	\label{obr:evlny_maticova_metoda1}
+\end{figure}
+
+Pokud bude vlna procházet vrstvou o tloušťce $d$ popsanou konstantou šíření $\faz k$, podle situace na obrázku \ref{obr:evlny_maticova_metoda2} lze opět získat maticový zápis
 \begin{equation}
 \left[ \begin{array}{c}
 \faz E_{2}^{+} \\
@@ -576,8 +584,14 @@ kde $\faz R_{12}$ představuje činitel odrazu a $\faz T_ {12}$ činitel prostup
 \end{array} \right].
 \label{rce:evlny_maticova_pruchod}
 \end{equation}
-V případě vícevrstvenného prostředí se využívá odvozených vztahů (\ref{rce:evlny_maticova_rozhrani}) a (\ref{rce:evlny_maticova_pruchod}). Postupně se za sebou násobí takové matice, podle toho na jaké rozhraní a jakým prostředím elektromagnetická vlna prochází. Příklad šíření je uveden na obrázku !!!!. Vlna šířící se z prostředí 1 do prostředí 4 projde přes dvě další oblasti o tloušťce $d_{1}$, $d_{2}$ a tři rozhraní. Pro výslednou sestavu matic bude platit
-\newpage
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=8cm]{evlny_maticova_metoda2.png}
+	\caption{Vlna procházející prostředím o tloušťce $d$.\cite{emp}}
+	\label{obr:evlny_maticova_metoda2}
+\end{figure}
+
+V případě složité kombinace několika vrstev prostředí se využívá odvozených vztahů (\ref{rce:evlny_maticova_rozhrani}) a (\ref{rce:evlny_maticova_pruchod}) tak, že se postupně za sebou násobí takové matice, podle toho na jaké rozhraní elektromagnetická vlna dopadá a jakým prostředím prochází. Příklad šíření je uveden na obrázku \ref{obr:evlny_maticova_metoda3} Vlna šířící se z prostředí 1 do prostředí 4 projde přes dvě další oblasti o tloušťce $d_{1}$, $d_{2}$ a tři rozhraní $r_{12}$, $r_{23}$ a $r_{34}$. Pro výslednou sestavu matic platí 
 \begin{displaymath}
 \left[ \begin{array}{c}
 \faz E_{1}^{+} \\
@@ -621,11 +635,17 @@ V případě vícevrstvenného prostředí se využívá odvozených vztahů (\r
 0 \\
 \end{array} \right].
 \end{equation} 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=8cm]{evlny_maticova_metoda3.png}
+	\caption{Příklad vlny procházející přes dvě oblasti $d_{1}$ a $d_{2}$.}
+	\label{obr:evlny_maticova_metoda3}
+\end{figure}
 
 \subsubsection*{3. Transformace vlnových impedancí}
 Další možnost pro řešení vícevrstvých rozhraní vychází z postupů, které se používají v teorii vedení. Principem této metody je v každém kroku výpočtu transformovat vlnovou impedanci posledního prostředí do místa rozhraní s předcházející vrstvou. 
 Odvození používaných vzorců se nachází v \cite[str. 106]{emp}.
-Pro situaci na obrázku !!!! bude prvním krokem transformace impedance $\faz Z_{3}$ a $\faz Z_{4}$ na rozhraní $r_{23}$ podle vztahu
+Pro situaci na obrázku \ref{obr:evlny_maticova_metoda3} bude prvním krokem transformace impedance $\faz Z_{3}$ a $\faz Z_{4}$ na rozhraní $r_{23}$ podle vztahu
 \begin{equation}
 	\faz Z_{c3}(r_{23}) = \faz Z_{3}\frac{\faz Z_{4}\cos(\faz k_{3}d_{2})+\mj\faz Z_{3}\sin(\faz k_{3}d_{2})}{\faz Z_{3}\cos(\faz k_{3}d_{2})+\mj\faz Z_{4}\sin(\faz k_{3}d_{2})}.
 	\label{rce:elvny_vrstvene_transformace1}

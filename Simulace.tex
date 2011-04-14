@@ -1,4 +1,6 @@
 % !TeX root = Main.tex
+Programový kód, kterým je realizována simulace šíření elektromagnetického pole, je proveden jako modul pro aplikaci Agros2D. Využívá proto její preprocesor pro zadávání dat a také postprocesor pro zobrazení výsledků ve 2D a 3D zobrazení. Vlastní numerické řešení zajišťuje knihovna Hermes2D. V této kapitole jsou popsány výpočetní části programu daného modulu, které se týkají především řešení vlnových rovnic a specifikace okrajových podmínek. 
+
 \section{Předpoklady simulace}
 Vzhledem k široké problematice elektromagnetických vln je potřeba pro jejich modelování zavést některé zjednodušení. 
 \begin{itemize}
@@ -6,20 +8,22 @@ Vzhledem k široké problematice elektromagnetických vln je potřeba pro jejich
 \begin{displaymath}
 	\nabla^{2}\vecfaz E +\faz k^{2}\vecfaz E = 0.
 \end{displaymath}
-\item {\bf Šíření vln v kartézské souřadnicové soustavě ve směru osy z} - touto úvahou předpokládáme složku ve směru osy $z = 0$, výsledek bude 2D charakteru.
+\item {\bf Šíření vln v kartézské souřadnicové soustavě ve směru osy z} - tento předpoklad platí pro planární problém.
+\item {\bf Šíření vln v polární souřadnicové soustavě ve směru $\alpha$} - pro osově symetrický problém uvažujeme pouze tangenciální složku.
 \end{itemize}
 \newpage
 
 \section{Metoda konečných prvků}
+Základem samotné knihovny Hermes2D je numerické řešení pomocí tzv. metody konečných prvků.
 %popis metody, trojúhelníky, ..
 
-\section{Numerické řešení harmonické vlnové rovnice}
+\section{Numerické řešení harmonické vlnové rovnice v kartézské souřadné soustavě}
 Po zavedení zjednodušujících předpokladů vycházíme z rovnice ve tvaru
 \begin{equation}
 	\nabla^{2}\faz E_{(z)} +\faz k^{2}\faz E_{(z)} = 0
-	\label{rce:sim_helmholtz_num} 
+	\label{rce:sim_kar_helmholtz_num} 
 \end{equation}
-platné na definované oblasti $\Omega$, na které známe okrajové podmínky a ve které chceme dostat výsledné řešení. Tím může být například vnitřní prostor vlnovodu nebo rezonátoru. Nejprve rovnici (\ref{rce:sim_helmholtz_num}) rozepíšeme na reálnou a imaginární složku
+platné na definované oblasti $\Omega$, na které známe okrajové podmínky a ve které chceme dostat výsledné řešení. Tím může být například vnitřní prostor vlnovodu nebo rezonátoru. Nejprve rovnici (\ref{rce:sim_kar_helmholtz_num}) rozepíšeme na reálnou a imaginární složku
 \begin{displaymath}
 	\nabla^{2}(E_R + \mj E_I) + (\omega^{2}\varepsilon\mu - \mj\omega\mu\sigma)(E_R + \mj E_I) = 0,
 \end{displaymath}
@@ -29,37 +33,71 @@ platné na definované oblasti $\Omega$, na které známe okrajové podmínky a 
 kde reálnou část tvoří
 \begin{equation}
 	\Re : \nabla^{2} E_R + \omega^{2}\varepsilon\mu E_R + \omega\mu\sigma E_I = 0,
-	\label{rce:sim_num_real} 
+	\label{rce:sim_kar_num_real} 
 \end{equation}
 a imaginární je vyjádřena
 \begin{equation}
 	\Im : \nabla^{2} E_I + \omega^{2}\varepsilon\mu E_I - \omega\mu\sigma E_R = 0.
-	\label{rce:sim_num_imag} 
+	\label{rce:sim_kar_num_imag} 
 \end{equation}
-Obě upravené rovnice (\ref{rce:sim_num_real}) a (\ref{rce:sim_num_imag}) převedeme do slabých forem, které splňují nulovou Dirichletovu a Neumannovu okrajovou podmínku. Postup převodu spočívá ve vynásobení parciálních diferenciálních rovnic testovací funkcí $v$ a v následné integraci přes oblast řešení $\Omega$ 
+Obě upravené rovnice (\ref{rce:sim_kar_num_real}) a (\ref{rce:sim_kar_num_imag}) převedeme do slabých forem, které splňují nulovou Dirichletovu a Neumannovu okrajovou podmínku. Postup převodu spočívá ve vynásobení parciálních diferenciálních rovnic testovací funkcí $v$ a v následné integraci přes oblast řešení $\Omega$ 
 \begin{equation}
 	\Re : \int_{\Omega}\nabla^{2} E_R\cdot v \dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_R\cdot v\dif S + \omega\mu\sigma\int_{\Omega} E_I\cdot v\dif S = 0,
-	\label{rce:sim_weak_odv_real} 
+	\label{rce:sim_kar_weak_odv_real} 
 \end{equation}
 \begin{equation}
 	\Im : \int_{\Omega}\nabla^{2} E_I\cdot v\dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_I\cdot v\dif S - \omega\mu\sigma\int_{\Omega} E_R\cdot v\dif S = 0.
-	\label{rce:sim_weak_odv_imag} 
+	\label{rce:sim_kar_weak_odv_imag} 
 \end{equation}
-V dalším kroku se aplikuje 1. Greenova identita \cite[příloha A.2]{num} (integrace po částech pro vyšší řády) a tím se získají slabé formy k původním rovnicím (\ref{rce:sim_num_real}) a (\ref{rce:sim_num_imag})
+V dalším kroku se aplikuje 1. Greenova identita \cite[příloha A.2]{num} (integrace po částech pro vyšší řády) a tím se získají slabé formy k původním rovnicím (\ref{rce:sim_kar_num_real}) a (\ref{rce:sim_kar_num_imag})
 \begin{equation}
 	\Re : \int_{\Gamma}\nabla E_R\cdot v\dif l-\int_{\Omega}\nabla E_R\cdot\nabla v \dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_R\cdot v\dif S + \omega\mu\sigma\int_{\Omega} E_I\cdot v\dif S = 0,
-	\label{rce:sim_weak_real} 
+	\label{rce:sim_kar_weak_real} 
 \end{equation}
 \begin{equation}
 	\Im : \int_{\Gamma}\nabla E_I\cdot v\dif l-\int_{\Omega}\nabla E_I\cdot\nabla v\dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_I\cdot v\dif S - \omega\mu\sigma\int_{\Omega} E_R\cdot v\dif S = 0.
-	\label{rce:sim_weak_imag} 
+	\label{rce:sim_kar_weak_imag} 
 \end{equation}
 První člen $\int_{\Gamma}\nabla E_R\cdot v\dif l$ respektive $\int_{\Gamma}\nabla E_I\cdot v\dif l$ vyjadřuje Neumanovu okrajovou podmínku. Pokud je podmínka nulová, tak i tyto členy budou nulové.
 
-\subsection{Gaussova kvadratura}
 
-\section{Řešení vlnové rovnice pomocí knihovny Hermes2D}
-% real, imag.... + zápis v Qt
+
+\subsection{Gaussova kvadratura}
+\subsection{Řešení vlnové rovnice pomocí knihovny Hermes2D}
+
+\section{Numerické řešení harmonické vlnové rovnice v polární souřadné soustavě}
+Řešení vlnové rovnice v polárních souřadnicích vychází z rovnice
+\begin{equation}
+	\nabla\times(\nabla\times\vecfaz E) +\faz k^{2}\vecfaz E = 0.
+	\label{rce:sim_pol_helmholtz_num} 
+\end{equation}
+Po zavedení zjednodušení, že výsledné řešení má pouze tangenciální složku, můžeme rovnici \ref{rce:sim_pol_helmholtz_num} snadno upravit. Nejprve vyjádříme vnitřní rotaci
+\begin{displaymath}
+	\nabla\times \frac{1}{r}\Bigg|
+	\begin{array}{ccc}
+\hat{r} & r\cdot\hat{\alpha} & \hat{z} \\
+\frac{\partial}{\partial r} & \frac{\partial}{\partial \alpha} & \frac{\partial}{\partial z} \\
+0 & r\cdot \faz E_{\alpha} & 0\\
+\end{array}\Bigg| +\faz k^{2}\faz E_{\alpha} = 0,
+\end{displaymath}
+\begin{equation}
+\nabla\times \Bigg[\hat{r}\bigg(-\frac{1}{r}\frac{\partial r\cdot\faz E_{\alpha}}{\partial z}\bigg) + r\cdot\hat{\alpha}\bigg(0\bigg) + \hat{z}\bigg(\frac{1}{r}\frac{\partial r\cdot\faz E_{\alpha}}{\partial r}\bigg) \Bigg]+\faz k^{2}\faz E_{\alpha} = 0.
+	\label{rce:sim_pol_rotace1}
+\end{equation}
+Analogickým způsobem upravíme vnější rotaci ve vztahu (\ref{rce:sim_pol_rotace1})
+\begin{displaymath}
+	\frac{1}{r}\Bigg|
+	\begin{array}{ccc}
+\hat{r} & r\cdot\hat{\alpha} & \hat{z} \\
+\frac{\partial}{\partial r} & \frac{\partial}{\partial \alpha} & \frac{\partial}{\partial z} \\
+-\frac{1}{r}\frac{\partial r\cdot\faz E_{\alpha}}{\partial z} & 0 & \frac{1}{r}\frac{\partial r\cdot\faz E_{\alpha}}{\partial r}\\
+\end{array}\Bigg| +\faz k^{2}\faz E_{\alpha} = 0,
+\end{displaymath}
+\begin{equation}
+\Bigg[\hat{r}\bigg(\frac{1}{r^{2}}\frac{\partial^{2} r\cdot\faz E_{\alpha}}{\partial r\cdot\partial\alpha}\bigg) + r\cdot\hat{\alpha}\bigg(-\frac{1}{r^{2}}\frac{\partial^{2}r\cdot\faz E_{\alpha}}{\partial r^{2}} - \frac{1}{r}\frac{\partial^{2}r\cdot\faz E_{\alpha}}{\partial z^{2}}\bigg) + \hat{z}\bigg(0\bigg) \Bigg]+\faz k^{2}\faz E_{\alpha} = 0.
+	\label{rce:sim_pol_rotace2}
+\end{equation}
+Ve výsledném vztahu (\ref{rce:sim_pol_rotace2}) zanedbáme všechny ostatní složky kromě té, která respektuje souřadnici $\hat{\alpha}$.
 
 
 
