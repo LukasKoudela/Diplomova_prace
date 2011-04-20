@@ -69,20 +69,21 @@ V sousvislosti s existencí materiálových parametrů určitého prostředí, v
 \end{displaymath}
 Jde o komplexní parametr, který ovlivňuje charakter šíření elektromagnetické vlny. V literatuře se dají nalézt odlišnost v označení reálné a imaginární  části tohoto komplexního čísla. V \cite{emp} a také v zahraniční literatuře se užívá tento typ označení 
 \begin{equation}
-	\faz k = \beta - \mj\alpha.
+	\faz k = \beta - \mj\alpha\unit{[m^{-1}]}.
 	\label{rce:evlny_alphabeta}
 \end{equation}
 \begin{description}
 \item[$\beta$]\unit[dB/m]-- se nazývá {\bf fázová konstanta}, která určuje fázi šířící se harmonické vlny
 \item[$\alpha$]\unit[rad/m] -- je označován {\bf měrný útlum}, vyjadřující změnu amlitudy vlny
 \end{description}
-
-Podle \cite[str. 33]{emp} existují dva možné přístupy k~řešení polí, související s~časovou proměnností pole. Tato práce se zabývá odvození rovnice a řešení elektromagentického pole nestacionárního.
-\begin{itemize}
-\item {\bf Stacionární pole} - určují se všechny zdroje a následně ke každému z~nich jejich prostorové rozložení pole. Výsledkem je superpozice všech polí.
-\item {\bf Nestacionární pole} - sestaví se diferenciální rovnice pro některý z~vektorů pole. Po nalezení obecného řešení se dle okrajových podmínek vybere nejvhodnější. 
-\end{itemize}
-
+Dalším používaným parametrem, kterým je možné popsat dané prostředí, se označuje jako {\bf vlnová (charakteristická) impedance}  $\faz Z$. Lze jí definovat vztahem
+\begin{displaymath}
+	\faz Z = \frac{\omega\mu}{\faz k} = \sqrt{\frac{\mj\omega\mu}{\mj\omega\varepsilon + \sigma}}\unit{[\Omega]}
+\end{displaymath}
+Tato komplexní veličina popisuje vztah mezi intenzitami magnetického a elektrického pole v daném prostředí
+\begin{displaymath}
+	\vecfaz E = \faz Z \cdot \vecfaz H.
+\end{displaymath}
 
 \subsubsection*{Obecná vlnové rovnice diferenciálního charakteru.}
  Podrobné odvození vlnových rovnic pro vektory pole $\vec E$ a $\vec B$, pro časově konstantní parametry prostředí, se nachází v~příloze \ref{sec:Odvozeni_CasPole}
@@ -669,6 +670,9 @@ Nakonec je možné definovat činitele prostupu (\ref{rce:evlny_cin_prostupu}) a
 \newpage
 
 \section{Vlnovody}
+
+
+
 \subsection{Klasifikace vln}
 str.112 - TEM, TE, TM, HE, EH\\
 str.108 - obecně\\
