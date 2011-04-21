@@ -82,9 +82,9 @@ template<typename Real, typename Scalar>
 Scalar rf_matrix_form_real_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
                                     Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
 {
-   return - int_grad_u_grad_v<Real, Scalar>(n, wt, u, v)
-   + sqr(2 * M_PI * frequency) * (rfLabel[e->elem_marker].permeability * MU0)
-   * (rfLabel[e->elem_marker].permittivity * EPS0) * int_u_v<Real, Scalar>(n, wt, u, v);
+    return - int_grad_u_grad_v<Real, Scalar>(n, wt, u, v)
+    + sqr(2 * M_PI * frequency) * (rfLabel[e->elem_marker].permeability * MU0)
+    * (rfLabel[e->elem_marker].permittivity * EPS0) * int_u_v<Real, Scalar>(n, wt, u, v);
 }
 \end{verbatim}
 Obdobným způsobem postupujeme u druhé složky bilineární části vyjádřené pomocí $E_I$. Index funkce v programu se změní na \uv{real\_imag}
@@ -98,8 +98,8 @@ template<typename Real, typename Scalar>
 Scalar rf_matrix_form_real_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
                                      Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
 {
-   return + 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) 
-   * rfLabel[e->elem_marker].conductivity * int_u_v<Real, Scalar>(n, wt, u, v);
+    return + 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) 
+    * rfLabel[e->elem_marker].conductivity * int_u_v<Real, Scalar>(n, wt, u, v);
 }
 \end{verbatim}
 
@@ -155,12 +155,12 @@ Scalar rf_vector_form_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v
 \end{verbatim}
 Zmíněné funkce pro řešení Helmholtzovy rovnice (\ref{rce:sim_kar_helmholtz_num}) je dále potřeba zaregistrovat ve třídě \textsc{WeakForm} následujícím způsobem
 \begin{verbatim}
-  wf->add_matrix_form(0, 0, callback(rf_matrix_form_real_real));
-  wf->add_matrix_form(0, 1, callback(rf_matrix_form_real_imag));
-  wf->add_matrix_form(1, 0, callback(rf_matrix_form_imag_real));
-  wf->add_matrix_form(1, 1, callback(rf_matrix_form_imag_imag));
-  wf->add_vector_form(0, callback(rf_vector_form_real))
-  wf->add_vector_form(1, callback(rf_vector_form_imag));
+wf->add_matrix_form(0, 0, callback(rf_matrix_form_real_real));
+wf->add_matrix_form(0, 1, callback(rf_matrix_form_real_imag));
+wf->add_matrix_form(1, 0, callback(rf_matrix_form_imag_real));
+wf->add_matrix_form(1, 1, callback(rf_matrix_form_imag_imag));
+wf->add_vector_form(0, callback(rf_vector_form_real))
+wf->add_vector_form(1, callback(rf_vector_form_imag));
 \end{verbatim}
 
 \subsection{Polární souřadná soustava}
@@ -259,7 +259,7 @@ Pro řešení diferenciálních rovnic popisující chování elektromagnetické
 Při řešení problémů vztahující se k elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v dialogu \uv{new boundary condition}. Ten je možné zpřístupnit po pravém kliknutí na pracovní plochu a vybrání daného odkazu, případně je možné se na něj dostat klávesovou zkratkou Alt + B. Po zadání označení se vybere v rozbalovacím menu některá z definovaných okrajových podmínek.
 
 \subsubsection*{Electric field}
-První možností je zadat Dirichletovu podmínka na určité hranici $\Gamma$. Hodnotu okrajové podmínky zadáme jako komplexní číslo ve formátu reálné a imaginární složky, jak je znázorněno na obrázku \ref{obr:sim_BC_electric_field} pro číslo $0 + \mj 0$.
+První možností je zadat Dirichletovu podmínka na určité hranici $\Gamma$. Hodnotu okrajové podmínky zadáme jako komplexní číslo ve formátu reálné a imaginární složky, jak je znázorněno na obrázku \ref{obr:sim_BC_electric_field} pro číslo $0 + \mj 0$. Tato konkrétní okrajová podmínka se v oboru vysokofrekvenční techniky označuje jako \uv{perfect electric conductor}.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=7cm]{sim_BC_electric_field.png}
@@ -267,15 +267,155 @@ První možností je zadat Dirichletovu podmínka na určité hranici $\Gamma$. 
 	\label{obr:sim_BC_electric_field}
 \end{figure}
 
+Programový kód, který přísluší k této okrajové podmínce, je v modulu zapsán nastavením tříd \textsc{BCTypes} a \textsc{BCValues} následovně
+\begin{verbatim}
+BCTypes bcTypesReal, bcTypesImag;
+bcTypesReal.add_bc_dirichlet(i+1);
+bcTypesImag.add_bc_dirichlet(i+1);
+                
+BCValues bcValuesReal, bcValuesImag;
+bcValuesReal.add_const(i+1, edgeRFMarker->value_real.number);
+bcValuesImag.add_const(i+1, edgeRFMarker->value_imag.number);
+\end{verbatim}
+
 \subsubsection*{Magnetic field}
+Touto volbou zadáváme hodnotu normálové derivace funkce $\frac{\partial E_{(z)}}{\partial n}$, jenž představuje Neumannovu okrajovou podmínku na hranici $\Gamma$. Opět má charakter komplexní veličiny, ve slabých formách vyjádřených v (\ref{rce:sim_kar_weak_real} ) a (\ref{rce:sim_kar_weak_imag}) podmínka představuje členy $\int_{\Gamma}\frac{\partial E_R}{\partial n}\cdot v\dif l$, případně $\int_{\Gamma}\frac{\partial E_I}{\partial n}\cdot v\dif l$. Příslušný kód je zapsán třídou \textsc{BCTypes}
+\begin{verbatim}
+BCTypes bcTypesReal, bcTypesImag;
+bcTypesReal.add_bc_neumann(i+1);
+bcTypesImag.add_bc_neumann(i+1);               
+\end{verbatim}
+a funkcí vracející povrchovou lineární formu Neumannovy okrajové podmínky. V případě nulové Neumannovy okrajové podmínky však lze danou funkci vynechat, tak jako v tomto případě.
+
 \subsubsection*{Matched boundary}
+Pokud chceme na určené hranici zvolit impedanční přizpůsobení, učiníme tak v dialogu pro výběr následující možností dle obrázku \ref{obr:sim_BC_matched_boundary}. 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=7cm]{sim_BC_matched_boundary.png}
+	\caption{Zadání impedančního přizpůsobení.}
+	\label{obr:sim_BC_matched_boundary}
+\end{figure}
+Je zde možné zadat výšku hranice na kterou chceme aplikovat impedanční přizpůsobení pro výpočet konstatny $\beta$ ve vztahu (\ref{rce:sim_BC_matched_boundary}). V případě, že výšku nezadáme, bude výpočet impedančního přizpůsobení vycházet z vlnové impedance prostředí $Z = \frac{\omega\mu}{\beta}$. Ve výpočtu se tedy jedná se o Newtonovu okrajovou podmínku ve tvaru
+\begin{equation}
+	\bigg(\frac{\partial E_{(z)}}{\partial n} - \mj\beta E_{(z)}\bigg)|_{\Gamma} = 0.
+	\label{rce:sim_BC_matched_boundary}
+\end{equation}
+Pro její implementaci je potřeba nastavit třídu \textsc{BCTypes} následovně
+\begin{verbatim}
+BCTypes bcTypesReal, bcTypesImag;
+bcTypesReal.add_bc_newton(i+1);
+bcTypesImag.add_bc_newton(i+1);              
+\end{verbatim}
+a také zapsat funkce pro povrchové bilineární formy. Pro reálnou složku odpovídá 
+\begin{verbatim}
+template<typename Real, typename Scalar>
+Scalar rf_matrix_form_surf_imag_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
+                                         Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
+{
+    if (!(rfEdge[e->edge_marker].type == PhysicFieldBC_RF_MatchedBoundary ||
+          rfEdge[e->edge_marker].type == PhysicFieldBC_RF_Port))
+    return 0.0;
+
+    double mu = rfLabel[e->elem_marker].permeability * MU0;
+    double eps = rfLabel[e->elem_marker].permittivity * EPS0;
+    double height = rfEdge[e->edge_marker].height;
+    double beta = 0.0;
+    double Z = 0.0;
+
+    if(!rfEdge[e->edge_marker].height == 0)
+    {
+        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps - sqr(1 * M_PI / height));
+        return beta * int_u_v<Real, Scalar>(n, wt, u, v);
+    }
+    else
+    {
+        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps);
+        Z = ((2 * M_PI * frequency) * mu ) / beta;
+        return Z * int_u_v<Real, Scalar>(n, wt, u, v);
+    }
+}
+\end{verbatim}
+Pro imaginární část okrajové podmínky platí
+\begin{verbatim}
+template<typename Real, typename Scalar>
+Scalar rf_matrix_form_surf_real_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
+                                         Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
+{
+    if (!(rfEdge[e->edge_marker].type == PhysicFieldBC_RF_MatchedBoundary ||
+          rfEdge[e->edge_marker].type == PhysicFieldBC_RF_Port))
+    return 0.0;
+
+    double mu = rfLabel[e->elem_marker].permeability * MU0;
+    double eps = rfLabel[e->elem_marker].permittivity * EPS0;
+    double height = rfEdge[e->edge_marker].height;
+    double beta = 0.0;
+    double Z = 0.0;
+
+    if(!rfEdge[e->edge_marker].height == 0)
+    {
+        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps - sqr(1 * M_PI / height));
+        return beta * int_u_v<Real, Scalar>(n, wt, u, v);
+    }
+    else
+    {
+        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps);
+        Z = ((2 * M_PI * frequency) * mu ) / beta;
+        return Z * int_u_v<Real, Scalar>(n, wt, u, v);
+    }
+}
+\end{verbatim}
+Lineární část je u vztahu (\ref{rce:sim_BC_matched_boundary}) nulová, proto lze funkci pro její zápis vynechat.
+Nakonec je potřeba výše uvedené funkce zaregistrovat ve třídě \textsc{WeakForm} takto
+\begin{verbatim}
+wf->add_vector_form_surf(0, callback(rf_vector_form_surf_real));
+wf->add_vector_form_surf(1, callback(rf_vector_form_surf_imag));           
+\end{verbatim}
+                
 \subsubsection*{Port}
 
+
 \section{Vlastnosti prostředí}
+V řešené rovnici (\ref{rce:sim_kar_helmholtz_num}) vystupují také materiálové konstatny prostředí, ve kterém se elektromagnetická vlna šíří. Pro jejich specifikaci je potřeba vytvořit materiál s těmito konstantami a vhodně jej přiřadit k příslušným značkám oblastí. Zpřístupnit dialog pro výběr lze opět pravým kliknutím na pracovní plochu a vybráním možnosti \uv{new material}, eventuelně zkratkou Alt + M. 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=7cm]{sim_material.png}
+	\caption{Vytvoření materiálu vzduchu zadáním konstant prostředí.}
+	\label{obr:sim_material}
+\end{figure}
+Parametry $\varepsilon_r$ a $\mu_r$ představují klasicky relativní hodnoty permitivity a permeability. Pomocí $\si
+gma$ zadáme vodivost v daném prostředí. Poslední parametr $J_{ext}$ představuje vnucený proud do oblasti, která je reprezentovaná danou značkou.
 
 
-\section{Postup řešení úloh v aplikaci Agros2D}
 
-\section{Zobrazení výsledků řešení}
+
+\section{Typický postup řešení úloh v aplikaci Agros2D}
+\begin{enumerate}
+\item Vytvoření a nastavení nového problému - volba řešeného fyzikálního pole, typu problému, druhu analýzy, zapnutí $h$, $p$ nebo $hp$ adaptivity, parametrů diskretizační sítě a frekvence
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=9cm]{sim_problem_properties.png}
+	\caption{Dialog vlastností problému programu Agros2d.}
+	\label{obr:sim_problem_properties}
+\end{figure}
+\item Nakreslení struktury - pomocí vložení uzlů, zakreslení hranic mezi nimi a specifikování značek oblastí
+\begin{itemize}
+\item Nový uzel: po výběru nástroje \uv{operation on nodes} je možné vložit uzel přidržením Ctrl a levým kliknutém myši (případně pomocí dialogu vyvolaném stisknutím Alt + N)
+\item Nová hrana: nástrojem \uv{operation on edges} se hranice vytvoří opět držením Ctrl a kliknutím mezi dva již vytvořené uzly (další možnost je kombinace Alt + E)
+\item Nová značka oblastí: tu lze zadat nástrojem \uv{operation on labels} po držení Ctrl a kliku na požadované místo (Alt + L)
+\end{itemize}
+\item Vytvoření a bližší specifikace okrajových podmínek v dialogu \uv{new boundary condition} (klávesová zkratka Alt + B)
+\item Přiřazení vytvořených podmínek na příslušnou hranu - to je možné po dvojkliku na hranu nebo kliknutím vybrat více hran a po stisku mezerníku zadat podmínku hromadně
+\item Vytvoření materiálů a nastavení jejich parametrů v dialogu \uv{new material} (Alt + M)
+\item Přiřazení vytvořených značek k dané ohraničené oblasti - lze také po dvojkliku na značku oblastí případně je to možné kombinací výběru myší a mezerníku
+\item Diskretizace oblasti - globální úroveň lze nastavit při specifikaci problému, lokální nastavení lze provést u vlastností hrany nebo u značky oblasti 
+\item Spuštění řešení
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=3cm]{sim_spusteni_reseni.png}
+\end{figure}
+\item Volba vhodného zobrazení výsledků pomocí vlastností postprocesoru
+\end{enumerate}
+
+\section{Zobrazení výsledků řešení elektromagnetického pole}
 
 
