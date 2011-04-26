@@ -4,7 +4,7 @@ Programový kód, kterým je realizována simulace šíření elektromagnetické
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=14cm]{sim_agros2d.png}
-	\caption{Prostředí programu Agros2D s dialogem pro specifikaci řešeného problému.}
+	\caption{Základní pracovní rostředí programu Agros2D.}
 	\label{obr:sim_agros2d}
 \end{figure}
 
@@ -22,10 +22,49 @@ Vzhledem k široké problematice elektromagnetických vln je potřeba pro jejich
 \end{itemize}
 
 \section{Metoda konečných prvků}
-Základem samotné knihovny Hermes2D je numerické řešení pomocí tzv. metody konečných prvků.
-%popis metody, trojúhelníky, ..diskretizace
+Základem samotné knihovny Hermes2D je numerické řešení pomocí tzv. metody konečných prvků neboli FEM (Finite Element Method). Historie spadá do první poloviny 20. století, kdy byly základy FEM popsány v práci a Richarda Couranta (1943). Až v roce 1953 byly rovnice popsány v maticovém tvaru, což umožnilo řešení na počítačích a v té době se FEM využívala v leteckém průmyslu. K jejímu šiřšímu využití v dalších oborech však došlo až s nástupem modernější výpočetní techniky v průběhu 60. a 70. let. Například na problémy týkající se elektromagnetismu nebyla FEM použita dříve než v roce 1968. V současné době se však pomocí FEM výhodně řeší fyzikální problémy z oborů statiky, dynamiky, akustiky, tepla, elektromagnetického pole, proudění, elektrostatiky a z dalších vědeckých disciplín. 
 
-\section{Řešení harmonické vlnové rovnice knihovnou Hermes2D}
+Ačkoliv existují také jiné numerické metody řešení, například metoda konečných diferencí (FDM) nebo momentová metoda (MOM), které nejsou tak náročné na programovou implementaci, tak právě FEM je metodou nejvíce používanou. Důvodem je její všestrannost a výkonnost. Dalším aspektem je to, že programy vyvinuté pro konkrétní problémy mohou být snadno použity k řešení příkladů v naprosto jiném oboru po drobných nebo žádných změnách.
+
+\subsection{Kroky řešení pomocí FEM}
+Analýza jakéhokoliv problému prostřednictvím metody konečných prvků zahrnuje v podstatě čtyři kroky:
+\begin{itemize}
+\item {Diskretizace oblasti na konečný počet prvků}
+\item {Vyjádření rovnic pro konkrétní prvek}
+\item {Sestavení prvků v řešené oblasti}
+\item {Řešení získaných rovnic}
+\end{itemize}
+Princip řešení a odvození rovnic vychází z \cite[kap. 6.2]{num} pro jednoduchost reprezentován na Laplaceově rovnici $\nabla^{2}V = 0$.
+
+\subsection*{Diskretizace}
+Prvním krokem, shodným pro libovolnou, numericky řešenou rovnici, je rozdělení nekonečného objemu řešené oblasti na konečný počet prvků, tak jak je to naznačeno na obrázku \ref{obr:sim_diskretizace}.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=8cm]{sim_diskretizace.png}
+	\caption{Rozdělení řešené oblasti (a) na konečný počet diskretizačních prvků (b).\cite{num}}
+	\label{obr:sim_diskretizace}
+\end{figure}
+Vlastní prvky, na které je oblast rozčleněna mohou mít libovolný tvar, ale typické tvary pro dvojdimenzionální problém jsou jsou naznačeny na obrázku \ref{obr:sim_prvky}.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=9cm]{sim_prvky.png}
+	\caption{Prvky diskterizace.\cite{num}}
+	\label{obr:sim_prvky}
+\end{figure}
+
+\subsection*{Vyjádření rovnic pro aproximaci řešení}
+V další části předpokládáme aproximaxi řešení na celé oblasti 
+\begin{displaymath}
+V(x,y) \simeq \sum_{e=1}^{N}V_e(x,y),
+\end{displaymath}
+kde N je počet prvků, do kterých je řešená oblast rozdělena. Aproximované řešení lze zapsat jako lineární kombinaci bázových funkcí s neznámými koeficienty, například $a$, $b$ a $c$
+\begin{displaymath}
+V_e(x,y) = a + bx + cy.
+\end{displaymath}
+
+
+
+\section{Řešení harmonické vlnové rovnice knihovnou Hermes2D} \label{sec:sim_hermes2d}
 \subsection{Kartézská souřadná soustava} \label{subsec:sim_kar}
 Po zavedení zjednodušujících předpokladů vycházíme z rovnice ve tvaru
 \begin{equation}
@@ -237,6 +276,23 @@ pro \uv{imag\_real}, což je opět ze stejného důvodu identické s kartézskou
 Vzhledem k nulové pravé straně řešené výchozí rovnice (\ref{rce:sim_pol_helmholtz_upravena}) bude lineární člen  v tomto případě opět nulový.
 
 \subsection{Numerická integrace}
+Výpočet určitých interálů, který se v řešených vztazích vyskytují, je analyticky možný pouze v určitých jednoduchých případech. Pro obecné funkce se integrace provádí numericky. Jednou z možností je výpočet pomocí Gaussovy kvadratury.
+
+Účelem je vypočítat numericky hodnodutu integrálu obecné funkce $g(\xi)$ na intervalu $x\in\langle a, b\rangle$,  pomocí aproximace výrazem
+\begin{displaymath}
+\sum_{i=0}^{n}\mathrm{w}_{t}[i]f(x_{i}),
+\end{displaymath}
+který se nazývá kvadraturní formule. Číslo $n$ představuje počet integračních bodů, hodnoty $\mathrm{w}_{t}[i]$ jsou příslušné váhové koeficienty uvedeného kvadraturního vzorce a $x_{i}$ se nazývají jeho uzly. 
+
+Při výpočtu integrálu pomocí kvadraturní formule záleží tedy na volbě dělících bodů $x_{i}$ i koeficientů $\mathrm{w}_{t}[i]$. Právě princip Gaussovy kvadratury spočívá v tom, jak vhodně zvolit $x_{i}$ a následně dopočítat $\mathrm{w}_{t}[i]$. Hodnoty uzlových bodů se pro jednorozměrný případ volí jako kořeny Legendrových polynomů
+\begin{displaymath}
+	P_{n}(x) = \frac{1}{2^{n}\cdot n!}\frac{\dif^{n}}{\dif x^{n}}[(x^{2} - 1)^{n}]
+\end{displaymath}
+a koeficienty $\mathrm{w}_{t}[i]$ jsou definovány
+\begin{displaymath}
+\mathrm{w}_{t}[i] = \frac{-2}{(n+2)P_{n+2}(x_i)P'_{n+1}(x_i)}
+\end{displaymath}
+Více o této metodě Gaussovy kvadratury je možné zjistit v \cite{gk_tichy} nebo v \cite{gk_kaw}.
 
 \section{Okrajové podmínky}
 Pro řešení diferenciálních rovnic popisující chování elektromagnetického pole v dané oblasti $\Omega$ je třeba znát okrajové podmínky na hranicích. Účelem je specifikovat chování výsledné funkce, případně derivace této funkce, v daných bodech ležících na okraji řešené oblasti. Při popisu fyzikálních polí pomocí diferenciálních rovnic se užívá Dirichletova, Neumannova nebo Newtonova (smíšená) okrajová podmínka.
@@ -382,13 +438,62 @@ V řešené rovnici (\ref{rce:sim_kar_helmholtz_num}) vystupují také materiál
 	\caption{Vytvoření materiálu vzduchu zadáním konstant prostředí.}
 	\label{obr:sim_material}
 \end{figure}
-Parametry $\varepsilon_r$ a $\mu_r$ představují klasicky relativní hodnoty permitivity a permeability. Pomocí $\si
-gma$ zadáme vodivost v daném prostředí. Poslední parametr $J_{ext}$ představuje vnucený proud do oblasti, která je reprezentovaná danou značkou.
+Parametry $\varepsilon_r$ a $\mu_r$ představují, tak jak je běžně používané, relativní hodnoty permitivity a permeability. Pomocí $\sigma$ zadáme vodivost v daném prostředí. Poslední parametr $J_{ext}$ představuje vnucený proud do oblasti, která je reprezentovaná danou značkou.
 
+Programová implementace $J_{ext}$ spočívá v řešení Helmholtzovy rovnice (\ref{rce:sim_kar_helmholtz_num}) v případě nenulové pravé strany. Ta po převedení rovnice na slabou formu představuje její lineární část a je tak potřeba s ní nakládat. Vstupní rovnice pro implemetaci vnucené proudové hustoty je tedy
+\begin{displaymath}
+	\nabla^{2}\vecfaz E +\faz k^{2}\vecfaz E = \mathrm{grad}\frac{\rho}{\varepsilon} + \mj\omega\mu J_{ext}.
+\end{displaymath}
+Člen $\mathrm{grad}\frac{\rho}{\varepsilon}$ je možné zanedbat, vzhledem k předpokladu rovnoměrného rozložení náboje $\rho$. Při této úvaze bude hodnota gradientu nulová. Při převodu na slabou formu vyjádříme samostatně reálnou a imaginární složku vnější proudové husototy.
+\begin{displaymath}
+	\nabla^{2}(E_R + \mj E_I) + (\omega^{2}\varepsilon\mu - \mj\omega\mu\sigma)(E_R + \mj E_I) = \mj\omega\mu (J_{ext R} + \mj J_{ext I}). 
+\end{displaymath}
+Po rozdělení a převodu na slabé formy stejným způsobem jako v podkapitole \ref{sec:sim_hermes2d} dostaneme vztahy, ve kterých na pravé straně vystupují lineární členy 
+\begin{equation}
+	\Re : -\int_{\Omega}\nabla E_R\cdot\nabla v \dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_R\cdot v\dif S + \omega\mu\sigma\int_{\Omega} E_I\cdot v\dif S = -\omega\mu J_{ext I},
+	\label{rce:sim_jext_real} 
+\end{equation}
+\begin{equation}
+	\Im : -\int_{\Omega}\nabla E_I\cdot\nabla v\dif S + \omega^{2}\varepsilon\mu\int_{\Omega} E_I\cdot v\dif S - \omega\mu\sigma\int_{\Omega} E_R\cdot v\dif S = \omega\mu J_{ext R}.
+	\label{rce:sim_jext_imag} 
+\end{equation}
+Programový kód pro řešení lineární části rovnic a je zapsán funkcemi, které vracející příslušnou lineární formu. Pro reálnou část v (\ref{rce:sim_jext_real}) je to
+\begin{verbatim}
+template<typename Real, typename Scalar>
+Scalar rf_vector_form_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v,
+                                              Geom<Real> *e, ExtData<Scalar> *ext)
+{
+    Scalar result = 0 ;
+    int u = 0;
+    for (int i = 0; i < n; i++)
+        result += wt[i] * (rfLabel[e->elem_marker].current_density_imag * v->val[i]);
 
+    return - 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) * result;
+}
+\end{verbatim}
+a pro imaginární člen pravé strany v rovnici (\ref{rce:sim_jext_imag}) platí
+\begin{verbatim}
+template<typename Real, typename Scalar>
+Scalar rf_vector_form_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v,
+                                              Geom<Real> *e, ExtData<Scalar> *ext)
+{
+    Scalar result = 0 ;
+    int u = 0;
+    for (int i = 0; i < n; i++)
+        result += wt[i] * (rfLabel[e->elem_marker].current_density_real * v->val[i]);
 
+    return 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) * result;
+}
+\end{verbatim}
 
-\section{Typický postup řešení úloh v aplikaci Agros2D}
+\section{Typický postup řešení úloh v aplikaci Agros2D} 
+Analýza fyzikálního pole ve všech programech zabývajících se touto problematikou bývá zpravidla rozdělena do třech základních etap. Toto obecné rozdělení je aplikované i v programu Agros2D.
+\begin{itemize}
+\item {\bf PreProcessing} - Prvním krokem je vytvoření modelu a definování jeho geometrických rozměrů. Dále je potřeba zvolit materiálové vlastnosti, nastavit parametry generování diskretizační sítě a typ analýzy.
+\item {\bf Solution} - V další části probíhá vlastní řešení požadovaným řešičem.
+\item {\bf PostProcessing} - Nakonec se provádí vyhodnocení řešeného problému.
+\end{itemize}
+Následující postup podrobněji rozepisuje kroky, které vedou k řešení konkrétních fyzikálních problémů.
 \begin{enumerate}
 \item Vytvoření a nastavení nového problému - volba řešeného fyzikálního pole, typu problému, druhu analýzy, zapnutí $h$, $p$ nebo $hp$ adaptivity, parametrů diskretizační sítě a frekvence
 \begin{figure}[!h]
@@ -419,3 +524,4 @@ gma$ zadáme vodivost v daném prostředí. Poslední parametr $J_{ext}$ předst
 \section{Zobrazení výsledků řešení elektromagnetického pole}
 
 
+ 
