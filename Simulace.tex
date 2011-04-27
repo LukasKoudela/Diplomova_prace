@@ -34,13 +34,13 @@ Analýza jakéhokoliv problému prostřednictvím metody konečných prvků zahr
 \item {Sestavení prvků v řešené oblasti}
 \item {Řešení získaných rovnic}
 \end{itemize}
-Princip řešení a odvození rovnic vychází z \cite[kap. 6.2]{num} pro jednoduchost reprezentován na Laplaceově rovnici $\nabla^{2}V = 0$.
+Vlatní princip řešení a odvození příslušných rovnic je možné nalézt v  \cite[kap. 6.2]{num}, kde je FEM pro jednoduchost reprezentována na Laplaceově rovnici $\nabla^{2}V = 0$ .
 
 \subsection*{Diskretizace}
-Prvním krokem, shodným pro libovolnou, numericky řešenou rovnici, je rozdělení nekonečného objemu řešené oblasti na konečný počet prvků, tak jak je to naznačeno na obrázku \ref{obr:sim_diskretizace}.
+Prvním krokem pro numerické řešení rovnic je rozdělení nekonečného objemu řešené oblasti na konečný počet prvků, tak jak je to naznačeno na obrázku \ref{obr:sim_diskretizace}.
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=8cm]{sim_diskretizace.png}
+	\includegraphics[width=13cm]{sim_diskretizace.png}
 	\caption{Rozdělení řešené oblasti (a) na konečný počet diskretizačních prvků (b).\cite{num}}
 	\label{obr:sim_diskretizace}
 \end{figure}
@@ -48,21 +48,48 @@ Vlastní prvky, na které je oblast rozčleněna mohou mít libovolný tvar, ale
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=9cm]{sim_prvky.png}
-	\caption{Prvky diskterizace.\cite{num}}
+	\caption{Prvky diskterizace 2D oblasti.\cite{num}}
 	\label{obr:sim_prvky}
 \end{figure}
 
-\subsection*{Vyjádření rovnic pro aproximaci řešení}
-V další části předpokládáme aproximaxi řešení na celé oblasti 
+\subsection*{Aproximované řešení}
+Pro řešení diferenciální rovnice druhého řádu na obecné oblasti $\Omega$ je potřeba nejprve odvodit slabou formu. Ta představuje vynásobení rovnice testovací funkcí $v$ a poté integraci přes oblast řešení $\Omega$. Podrobný postup převodu pro Helmholtzovu rovnici (\ref{rce:sim_kar_helmholtz_num}) je blíže popsán v podkapitole \ref{sec:sim_hermes2d}. Slabou formu výchozí řešené rovnice lze rozčlenit na bilineární a lineární členy. Bilineární člen $b(E_z,v)$ představuje levou stranu rovnic ve slabé formě a lineární člen $l(v)$ reprezentuje stranu pravou.
+Aproximovaným řešením výchozí rovnice (\ref{rce:sim_kar_helmholtz_num}) je pak funkce $E_z$, pro kterou platí 
+\begin{equation}
+	b(E_z,v) = l(v),\qquad \mathrm{pro}\ E_z, v \in V_{n}(\Omega),
+	\label{rce:sim_aprox_reseni}
+\end{equation}
+kde $V_{n}(\Omega)$ představuje podprostor Hilbertova prostoru funkcí $H_{0}^{1}(\Omega)$. Řešení rovnice (\ref{rce:sim_aprox_reseni}) je možné zapsat jako lineární kombinaci bázových funkcí s neznámými koeficienty, které je pro řešení potřeba nalézt
 \begin{displaymath}
-V(x,y) \simeq \sum_{e=1}^{N}V_e(x,y),
+	E_z = \sum_{i=1}^{N}y_i v_i.
 \end{displaymath}
-kde N je počet prvků, do kterých je řešená oblast rozdělena. Aproximované řešení lze zapsat jako lineární kombinaci bázových funkcí s neznámými koeficienty, například $a$, $b$ a $c$
+Při položení bázových funkcí stejných jako testovací a dosazením do rovnice  (\ref{rce:sim_aprox_reseni}) obdržíme vztah
+\begin{equation}
+	\sum_{i=1}^{N}b(v_i,v_j)\cdot y_i = l(v_j)
+	\label{rce:sim_aprox_reseni2}
+\end{equation}
+ze kterého vznikne systém algebraických rovnic s neznámými koeficienty bázových funkcí, které aproximují řešení výchozí diferenciální rovnice na oblasti $\Omega$
+\begin{equation}
+	\vec S \cdot \vec Y = \vec G.
+	\label{rce:sim_aprox_matice}
+\end{equation}
+Matice $\vec S$ se označuje jako \uv{matice tuhosti}. Název má spojitost s historií a pochází z teorie elastických deformací. V rovnici (\ref{rce:sim_aprox_matice}) je definována
 \begin{displaymath}
-V_e(x,y) = a + bx + cy.
+	\vec S = \{b(v_i,v_j) \}_{i,j = 1}^{N}.
 \end{displaymath}
-
-
+Vektor pravých stran lze zapsat
+\begin{displaymath}
+	\vec G = \{l(v_j) \}_{j = 1}^{N}
+\end{displaymath}
+a vektor neznámých koeficientů
+\begin{displaymath}
+	\vec Y = \{y_j \}_{j = 1}^{N}
+\end{displaymath}
+Je zřejmé, že nalezení hledaných koeficientů $y_j$ spočívá v řešení maticové rovnice ve tvaru
+\begin{equation}
+	\vec Y = \vec S ^{-1}\cdot \vec G.
+	\label{rce:sim_aprox_inv_matice}
+\end{equation}
 
 \section{Řešení harmonické vlnové rovnice knihovnou Hermes2D} \label{sec:sim_hermes2d}
 \subsection{Kartézská souřadná soustava} \label{subsec:sim_kar}
@@ -521,7 +548,140 @@ Následující postup podrobněji rozepisuje kroky, které vedou k řešení kon
 \item Volba vhodného zobrazení výsledků pomocí vlastností postprocesoru
 \end{enumerate}
 
-\section{Zobrazení výsledků řešení elektromagnetického pole}
+\section{Možnosti zobrazení výsledků řešení}
+Vlastnosti postprocessingu zobrazení v programu Agors2D jsou velmi obsáhlé. Pomocí levého panelu v pracovním okně (patrné na obrázku \ref{obr:sim_agros2d}) je možné vybrat zobrazení ve 2D nebo 3D prostoru. Dále je možno aktivovat nebo skrýt geometrii,  diskretizační síť, kontury zobrazení a také odpovídající vektory. V bloku týkající se skalárního pole lze vybrat zobrazení požadovaných veličin, které se týkají řešení daného fyzikálního pole. Příslušné vztahy pro interpretaci výsledků je však potřeba implemetovat v samostatném modulu, patřící k jednotlivým polím.
 
-
+\subsection{Vztahy pro zobrazení veličin elektromagnetického pole}
+V případě elektromagnetického pole nás bude zajímat především rozložení elektrického a magnetického pole, magnetické indukce, Poyntingova vektoru a ztrát. Zobrazení těchto  veličin a jejich odpovídajících složek lze vybrat z rozbalovacího menu, které je patrné na obrázku \ref{obr:sim_zobrazeni}.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=4cm]{sim_zobrazeni.png}
+	\caption{Volba veličiny pro zobrazení.}
+	\label{obr:sim_zobrazeni}
+\end{figure}
  
+\subsection*{Electric field}
+Programová implementace pro elektrickou složku pole v kartézských souřanicích je v modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu
+\begin{verbatim}
+node->values[0][0][i] = sqrt(sqr(value1[i]) + sqr(value2[i]));
+\end{verbatim}
+kde je patrná reálná složka elektrického pole, jejíž samostatný zápis v modulu je
+\begin{verbatim}
+node->values[0][0][i] = value1[i];
+\end{verbatim}
+a obdobně imaginární složka 
+\begin{verbatim}
+node->values[0][0][i] = value2[i];
+\end{verbatim}
+
+\subsection*{Magnetic flux density}
+Odvození vztahů pro zobrazení magnetické indukce vychází z druhého Maxwellova zákona (\ref{rce:1MaxwR}), který má pro harmonické pole tvar
+\begin{displaymath}
+	rot\vec E = -\mj\omega\vec B.
+\end{displaymath}
+Po úpravě rotace na levé straně výrazu pro jedinou složku $E_z$ dostaneme vztah
+\begin{equation}
+	\frac{\partial E_z}{\partial y}\cdot\overrightarrow{\vec{i}} - \frac{\partial E_z}{\partial y}\cdot\overrightarrow{\vec{j}} + 0\cdot\overrightarrow{\vec{k}} = -\mj\omega B_x\cdot\overrightarrow{\vec{i}} - \mj\omega B_y\cdot\overrightarrow{\vec{j}} - \mj\omega B_z\cdot\overrightarrow{\vec{k}},
+	\label{rce:sim_zobrazeni_flux}
+\end{equation}
+ze kterého lze vyjádřit $x$-ová a $y$-ová složka magnetické indukce. $B_z$ je podle rovnice (\ref{rce:sim_zobrazeni_flux}) nulová. Pro $B_x$ tedy platí
+\begin{displaymath}
+	B_x = -\frac{1}{\mj\omega}\frac{\partial E_z}{\partial y},
+\end{displaymath}
+kde po dosazení za $E_z$ můžeme vyjádřit reálnou a imaginární složku magnetické indukce ve směru x a ty pak implemetovat do modulu. Reálné části odpovídá 
+\begin{equation}
+	B_{x\Re} = -\frac{1}{\mj\omega}\frac{\partial E_I}{\partial y},
+	\label{rce:sim_flux_x_re}
+\end{equation}
+a její programový kód ve funkci \texttt{ViewScalarFilterRF}
+\begin{verbatim}
+case PhysicFieldVariable_RF_MagneticFluxDensityXReal:
+{
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = -(1/(w)) * dudy2[i];
+}
+\end{verbatim}
+Analogickým způsobem platí pro imaginární část
+\begin{equation}
+	B_{x\Im} = \frac{1}{\mj\omega}\frac{\partial E_R}{\partial y}.
+	\label{rce:sim_flux_x_im}
+\end{equation}
+\begin{verbatim}
+case PhysicFieldVariable_RF_MagneticFluxDensityXImag:
+{
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = (1/(w)) * dudy1[i];
+}    
+\end{verbatim}
+Z rovnice (\ref{rce:sim_zobrazeni_flux}) je pak dále možné stejným způsobem odvodit vztahy pro obě složky indukce ve směru $y$, která je označná $B_y$, včetně její implementace
+\begin{equation}
+	B_{y\Re} = \frac{1}{\mj\omega}\frac{\partial E_I}{\partial x},
+	\label{rce:sim_flux_y_re}
+\end{equation}
+\begin{verbatim}
+case PhysicFieldVariable_RF_MagneticFluxDensityYReal:
+{
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = (1/(w)) * dudx2[i];
+}
+\end{verbatim}
+\begin{equation}
+	B_{y\Im} = -\frac{1}{\mj\omega}\frac{\partial E_R}{\partial x},
+	\label{rce:sim_flux_y_im}
+\end{equation}
+\begin{verbatim}
+case PhysicFieldVariable_RF_MagneticFluxDensityYImag:
+{
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = -(1/(w)) * dudx1[i];
+}
+\end{verbatim}
+Nakonec zbývá vyjádřit rozložení vektoru magnetické indukce. Pro jeho velikost platí
+\begin{displaymath}
+	B = \sqrt{B_{x}^{2} + B_{y}^{2}} = \sqrt{B_{x\Re}^{2} + B_{x\Im}^{2} + B_{y\Re}^{2} + B_{y\Im}^{2}}
+\end{displaymath}
+což je možné v programovém kódu zapsat takto
+\begin{verbatim}
+case PhysicFieldVariable_RF_MagneticFluxDensity:
+{
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = sqrt(sqr(-(1/(w)) * dudy2[i]) + sqr((1/(w)) * dudy1[i])
+                               + sqr((1/(w)) * dudx2[i]) + sqr(-(1/(w)) * dudx1[i]));
+}
+\end{verbatim}
+
+\subsection*{Magnetic field}
+Vztahy pro zobrazení magnetického pole s výhodou vycházejí z již vyjádřené magnetické indukce, neboť platí
+\begin{displaymath}
+H = \frac{1}{\mu}\cdot B.
+\end{displaymath}
+Je zřejmé, že veškeré výše odvozené vztahy (\ref{rce:sim_flux_x_re}) až (\ref{rce:sim_flux_y_im}) lze pouze podělit hodnotou permeability, která se v nachází na řešené oblasti. Pro úplnost je níže uveden kód pro reálnou složku intenzity magnetického pole ve směru $x$, tj. $H_{x\Re}$
+\begin{verbatim}
+case PhysicFieldVariable_RF_MagneticFieldXReal:
+{
+    double mu = marker->permeability.number * MU0;
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = -(1/(w*mu)) * dudy2[i];
+}
+\end{verbatim}
+
+\subsection*{Poyntingův vektor}
+Vektor vyjádřený vektorovým součinem intenzit elektrického a magnetického pole představuje plošnou hustotu výkonu na řešené oblasti $\Omega$
+\begin{displaymath}
+	\vec N = \vec E \times\vec H.
+\end{displaymath}
+Programový zápis  
+
+\subsection*{Ztráty}
+Rozložení ztrát v řešené oblasti odpovídá součinu proudové husoty a intenzity elektrického pole 
+\begin{displaymath}
+	P_j = J \cdot E = \sigma E^{2} = \sigma \sqrt{E_{R}^{2} + E_{I}^{2}}.
+\end{displaymath}
+Zápis kódu má následující charakter
+\begin{verbatim}
+case PhysicFieldVariable_RF_PowerLosses:
+{
+    double sigma = (marker->conductivity.number);
+    node->values[0][0][i] = 0.5 * (sqr(value1[i]) + sqr(value2[i])) * sigma;
+}
+\end{verbatim}
