@@ -659,6 +659,7 @@ Je zřejmé, že veškeré výše odvozené vztahy (\ref{rce:sim_flux_x_re}) až
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFieldXReal:
 {
+    SceneMaterialRF *marker = dynamic_cast<SceneMaterialRF *>(material);
     double mu = marker->permeability.number * MU0;
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
     node->values[0][0][i] = -(1/(w*mu)) * dudy2[i];
@@ -670,7 +671,48 @@ Vektor vyjádřený vektorovým součinem intenzit elektrického a magnetického
 \begin{displaymath}
 	\vec N = \vec E \times\vec H.
 \end{displaymath}
-Programový zápis  
+Programový kód pro rozložení Poyntingova vektoru ve směru $x$ vychází ze vztahu
+\begin{displaymath}
+	N_x = \frac{E_I H_{y\Im} + E_R H_{y\Re}}{2}
+\end{displaymath}
+je v modulu zapsán takto
+\begin{verbatim}
+case PhysicFieldVariable_RF_PoyntingVectorX:
+{
+    SceneMaterialRF *marker = dynamic_cast<SceneMaterialRF *>(material);
+    double mu = marker->permeability.number * MU0;
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = - 0.5 * ((value2[i] * 1/(w*mu) * dudx1[i]) - (value1[i] * 1/(w*mu) * dudx2[i]));
+}
+\end{verbatim}
+Pro Poyntingův vektor ve směru $y$ analogicky platí
+\begin{displaymath}
+	N_y = \frac{E_I H_{x\Im} + E_R H_{x\Re}}{2}
+\end{displaymath}
+\begin{verbatim}
+case PhysicFieldVariable_RF_PoyntingVectorY:
+{
+    SceneMaterialRF *marker = dynamic_cast<SceneMaterialRF *>(material);
+    double mu = marker->permeability.number * MU0;
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = 0.5 * ((value2[i] * 1/(w*mu) * dudy1[i]) - (value1[i] * 1/(w*mu) * dudy2[i]));
+}
+\end{verbatim}
+Pro výslednou hodnotu Poyntingova vektoru na řešené oblasti $\Omega$ platí
+\begin{displaymath}
+	N = \sqrt{N_{x}^{2} + N_{y}^{2}} = \frac{1}{2}\cdot\sqrt{(E_I H_{y\Im} + E_R H_{y\Re})^{2} + (E_I H_{x\Im} + E_R H_{x\Re})^{2}}.
+\end{displaymath}
+\begin{verbatim}
+case PhysicFieldVariable_RF_PoyntingVector:
+{
+    double mu = marker->permeability.number * MU0;
+    double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
+    node->values[0][0][i] = 0.5 * sqrt(sqr(((value2[i] * 1/(w*mu) * dudx1[i]) 
+                                          - (value1[i] * 1/(w*mu) * dudx2[i]))) 
+                                     + sqr(((value2[i] * 1/(w*mu) * dudy1[i]) 
+                                          - (value1[i] * 1/(w*mu) * dudy2[i]))));
+}
+\end{verbatim}
 
 \subsection*{Ztráty}
 Rozložení ztrát v řešené oblasti odpovídá součinu proudové husoty a intenzity elektrického pole 
