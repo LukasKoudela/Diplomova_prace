@@ -10,7 +10,7 @@ $\vec D$ & $\unit{[C/m^{2}]}$ & elektrická indukce\\
 $\vec B$ & $\unit{[Wb/m^{2}],[T]}$ & magnetická indukce\\
 $\vec H$ & $\unit{[A/m]}$ & intenzita magnetického pole\\
 \end{tabular}\bigskip \\
-Pro řešení pole ve vakuu nebo v~prostředí se známými materiálovými konstantami postačuje jakákoliv dvojice vektorů, kdy jeden je vektorem elektrického pole a druhý magnetického pole. To znamená, že libovolná dvojice z~variant $\vec E\vec B$, $\vec E\vec H$, $\vec D\vec H$ a~$\vec D\vec B$ postačuje po popis a řešení elektromagnetického pole.
+Pro řešení pole ve vakuu nebo v~prostředí se známými materiálovými konstantami postačuje jakákoliv dvojice vektorů, kdy jeden je vektorem elektrického pole a druhý magnetického pole. To znamená, že libovolná dvojice z~variant $\vec E\vec B$, $\vec E\vec H$, $\vec D\vec H$ a~$\vec D\vec B$ je dostatečná po popis a řešení elektromagnetického pole.
 Relace mezi vektory indukce a~intenzity příslušných polí popisují parametry prostředí 
 
 \begin{equation}
@@ -162,7 +162,7 @@ Pro analýzu libovolného obecného typu vln je nejprve potřeba zvolit vhodnou 
 	\nabla^{2}\vecfaz E + \faz k^{2}\vecfaz E = 0.
 	\label{rce:evlny_VlnR_ElPole_harm_BezZdroju}
 \end{equation}
-Aplikací operátoru $\nabla^{2}$ na vektor $\vecfaz E$ dostaneme opět vektor, který lze v~kartézské soustavě vyjádřit jako $\nabla^{2}\faz E_{x}\overrightarrow{\vec i} + \nabla^{2} \faz E_{y}\overrightarrow{\vec j} + \nabla^{2}\faz E_{z}\overrightarrow{\vec k}$. To způsobí rozpad vektorové rovnice (\ref{rce:evlny_VlnR_ElPole_harm_BezZdroju}) na skalární rovnice pro jednotlivé složky
+Aplikací operátoru $\nabla^{2}$ na vektor $\vecfaz E$ dostaneme opět vektor, který lze v~kartézské soustavě vyjádřit jako $\nabla^{2}\faz E_{x}\overrightarrow{\mathrm{i}} + \nabla^{2} \faz E_{y}\overrightarrow{\mathrm{j}} + \nabla^{2}\faz E_{z}\overrightarrow{\mathrm{k}}$. To způsobí rozpad vektorové rovnice (\ref{rce:evlny_VlnR_ElPole_harm_BezZdroju}) na skalární rovnice pro jednotlivé složky
 \begin{displaymath}
 	\nabla^{2} \faz E_{x} +\faz k^{2} \faz E_{x} = 0,
 \end{displaymath}
@@ -185,7 +185,7 @@ Aplikací operátoru $\nabla^{2}$ na vektor $\vecfaz E$ dostaneme opět vektor, 
 	\frac{\partial ^{2} \faz E_{z}}{\partial x^{2}} + \frac{\partial ^{2} \faz E_{z}}{\partial y^{2}} + \frac{\partial ^{2} \faz E_{z}}{\partial z^{2}} + \faz k^{2} \faz E_{z} = 0.
 	\label{rce:evlny_skalarni3}	
 \end{equation}
-Je výhodné zvolit souřadnicovou soustavu tak, aby se vlna šířila ve směru jedné z os. Poté bude platit, že vlnoplocha je rovina kolmá na tuto osu, tak jak je naznačeno na obrázku \ref{obr:evlny_vlnoplocha}. Současně uvažujeme pro zjednodušení vektor intenzity elektrického pole pouze ve směru osy $x$. Je možné jej také vyjádřit jako $\vecfaz E = \faz E_{x}\overrightarrow{\vec {i}}$.
+Je výhodné zvolit souřadnicovou soustavu tak, aby se vlna šířila ve směru jedné z os. Poté bude platit, že vlnoplocha je rovina kolmá na tuto osu, tak jak je naznačeno na obrázku \ref{obr:evlny_vlnoplocha}. Současně uvažujeme pro zjednodušení vektor intenzity elektrického pole pouze ve směru osy $x$. Je možné jej také vyjádřit jako $\vecfaz E = \faz E_{x}\overrightarrow{\mathrm{i}}$.
 
 \begin{figure}[!h]
 	\centering
@@ -291,7 +291,7 @@ Tento případ by se z hlediska matematického popisu dal nazvat jako téměř i
 
 Po popis šíření se výhodně využívá tzv. vlnový vektor $\vec k_{vln}$. S jeho pomocí lze snadno názorně popsat směry šíření vln na rozhraní. Vlnový vektor představuje to, v jakém směru se šíří vlnoplocha. Dle obrázku \ref{obr:evlny_vlnovy_vektor} jej lze pomocí konstanty šíření $\faz k$ definovat
 \begin{equation}
-	\vec k_{vln} = \faz k \vec n_{0} = k_{x}\overrightarrow{\vec{i}} + k_{y}\overrightarrow{\vec{j}} + k_{z}\overrightarrow{\vec{k}}.
+	\vec k_{vln} = \faz k \vec n_{0} = k_{x}\overrightarrow{\mathrm{i}} + k_{y}\overrightarrow{\mathrm{j}} + k_{z}\overrightarrow{\mathrm{k}}.
 	\label{rce:evlny_vlnovy_vektor}
 \end{equation}
 
@@ -355,24 +355,24 @@ V konkrétním případě, dle obrázku \ref{obr:evlny_dielektricke_rozhrani}, j
 
 Vlny, které dopadají na rozhraní, lze zapsat vztahy pro vektory intezity elektrického pole $\vecfaz E_{i}$ a magnetického $\vecfaz H_{i}$ v závislosti na souřadnici $z$
 \begin{displaymath}
-	\vecfaz E_{i}(z) = \faz E_{i0}\me^{-\mj\faz k_{1}z}\overrightarrow{\vec{i}},
+	\vecfaz E_{i}(z) = \faz E_{i0}\me^{-\mj\faz k_{1}z}\overrightarrow{\mathrm{i}},
 \end{displaymath}
 \begin{displaymath}
-	\vecfaz H_{i}(z) = \frac{\faz E_{i0}}{\faz Z_{1}}\me^{-\mj\faz k_{1}z}\overrightarrow{\vec{j}}.
+	\vecfaz H_{i}(z) = \frac{\faz E_{i0}}{\faz Z_{1}}\me^{-\mj\faz k_{1}z}\overrightarrow{\mathrm{j}}.
 \end{displaymath}
 Pro odraženou vlnu platí
 \begin{displaymath}
-	\vecfaz E_{r}(z) = \faz E_{r0}\me^{\mj\faz k_{1}z}\overrightarrow{\vec{i}},
+	\vecfaz E_{r}(z) = \faz E_{r0}\me^{\mj\faz k_{1}z}\overrightarrow{\mathrm{i}},
 \end{displaymath}
 \begin{displaymath}
-	\vecfaz H_{r}(z) = - \frac{\faz E_{r0}}{\faz Z_{1}}\me^{\mj\faz k_{1}z}\overrightarrow{\vec{j}}.
+	\vecfaz H_{r}(z) = - \frac{\faz E_{r0}}{\faz Z_{1}}\me^{\mj\faz k_{1}z}\overrightarrow{\mathrm{j}}.
 \end{displaymath}
 A nakonec pro prostupující vlnu
 \begin{displaymath}
-	\vecfaz E_{t}(z) = \faz E_{t0}\me^{-\mj\faz k_{2}z}\overrightarrow{\vec{i}},
+	\vecfaz E_{t}(z) = \faz E_{t0}\me^{-\mj\faz k_{2}z}\overrightarrow{\mathrm{i}},
 \end{displaymath}
 \begin{displaymath}
-	\vecfaz H_{t}(z) = \frac{\faz E_{t0}}{\faz Z_{2}}\me^{-\mj\faz k_{2}z}\overrightarrow{\vec{j}}.
+	\vecfaz H_{t}(z) = \frac{\faz E_{t0}}{\faz Z_{2}}\me^{-\mj\faz k_{2}z}\overrightarrow{\mathrm{j}}.
 \end{displaymath}
 Podle podmínek na rozhraní ($z = 0$) se určí závislosti komplexních amplitud. Vychází se z~uvedených vztahů pro dopadající, odraženou a pronikající vlnu.
 Pro vektor intenzity elektrického pole platí
@@ -380,7 +380,7 @@ Pro vektor intenzity elektrického pole platí
 	\vecfaz E_{i}(0) + \vecfaz E_{r}(0)  = \vecfaz E_{t}(0),
 \end{displaymath}
 \begin{displaymath}
-	 \faz E_{i0}\me^{-j\faz k_{1}0}\overrightarrow{\vec{i}} + \faz E_{r0}\me^{j\faz k_{1}0}\overrightarrow{\vec{i}}  = \faz E_{t0}\me^{-j\faz k_{2}0}\overrightarrow{\vec{i}},
+	 \faz E_{i0}\me^{-j\faz k_{1}0}\overrightarrow{\vec{i}} + \faz E_{r0}\me^{j\faz k_{1}0}\overrightarrow{\mathrm{i}}  = \faz E_{t0}\me^{-j\faz k_{2}0}\overrightarrow{\mathrm{i}},
 \end{displaymath}
 \begin{equation}
 	\faz E_{i0} + \faz E_{r0}  = \faz E_{t0}.
@@ -665,24 +665,62 @@ Nakonec je možné definovat činitele prostupu (\ref{rce:evlny_cin_prostupu}) a
 	\faz T = \frac{2\faz Z_{c2}(r_{12})}{\faz Z_{1} + \faz Z_{c2}(r_{12})}
 	\label{rce:elvny_vrstvene_transf_T}.
 \end{equation}
-
-
 \newpage
 
 \section{Vlnovody}
-
-
+Během šíření vln ve volném prostředí od zdroje k přijímací anténě dochází přirozeně k rozptylu energie do prostoru. Anténou je tak zachycena pouze její část. To platí i pro směrové vysílací antény, pokud přenos probíhá na velké vzdálenosti. Pro zvýšení jeho efektivity je potřeba použít nějakého z prostředků, které způsobující vedení energie. To je možné zprostředkovat právě pomocí vlnovodů, jejichž nejběžnější konstrukce jsou na obrázku \ref{obr:evlny_vlnovody_konstrukce}. 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=7cm]{evlny_vlnovody_konstrukce.png}
+	\caption{Nejběžnější konstrukce vlnovodů.}
+	\label{obr:evlny_vlnovody_konstrukce}
+\end{figure}
+Výhody vlnovodů jsou, kromě malých ztrát přenosu, v nízké úrovni vyzařování do okolí  . Nevýhodou může být jejich cena a výroba pro velmi vysoké kmitočty. Další možnost pro přenos energie poskytují vedení, například dvouvodičnové, koaxiální nebo mikropáskové, které jsou popsané v \cite{emp}.
 
 \subsection{Klasifikace vln}
-str.112 - TEM, TE, TM, HE, EH\\
-str.108 - obecně\\
-str.131 - TE, Ez = 0, TM Hz = 0\\
+Vedené vlny lze rozlišit na několik druhů. Toto dělení se děje podle podélných složek pole, kterými jsou $\faz E_{z}$ a $\faz H_{z}$.
+
+\subsubsection*{TEM vlny}
+U TEM, nebo-li transverzálně elektromagnetických, vln jsou obě složky pole nulové.
+\subsubsection*{TM vlny}
+Transverzálně magnetické nebo také elektrické vlny mají nulovou složku magnetického pole $\faz H_{z}$. Složka elektrického pole $\faz E_{z}$ je nenulová. Řešení pole vychází z vlnové rovnice ve tvaru
+\begin{displaymath}
+	\nabla^{2} \faz E_{z} + \faz k^{2}\faz E_{z} = 0,
+\end{displaymath}
+kde $\faz k$ představuje konstatnu šíření. Ta se skládá z podélné $(\faz k_z)$ a příčné $(\faz k_p)$ konstatny šíření. Mezi sebou jsou vázány vztahem $\faz k^{2} = \faz k_z^{2} + \faz k_p^{2}$.
+\subsubsection*{TE vlny}
+TE označuje vlny transverzálně elektrické. To jsou takové, které mají $\faz E_{z} = 0$. Příslušná vlnová rovnice má tvar
+\begin{displaymath}
+	\nabla^{2} \faz H_{z} + \faz k^{2}\faz H_{z} = 0.
+\end{displaymath} 
+
+\subsubsection*{EH a HE vlny}
 str.143 - Snell\\
-\subsection{Kritická frekvence}
-str.132
+
+\subsection{Parametry vlnovodů}
+
+\subsection*{Mezní (kritická) frekvence}
+Aby mohla být elektromagnetická vlna vedena vlnovodem, je potřeba, aby její kmitočet byl vyšší než mezní (kritický), který je definován
+\begin{equation}
+f_{m} = \frac{c}{2\pi\sqrt{\varepsilon_{r}\mu_{r}}}\cdot\sqrt{\bigg(\frac{\pi}{a}\bigg)^{2}}. 
+	\label{rce:evlny_vlnovody_mezni_frekvence}
+\end{equation}
+\subsection*{Mezní (kritická) vlnová délka}
+Pro vedení vlny musí být vlnová délka menší než mezní
+\begin{equation}
+f_{m} = \frac{c}{f_{m}} = \frac{2\pi\sqrt{\varepsilon_{r}\mu_{r}}}{\sqrt{\big(\frac{\pi}{a}\big)^{2}}}. 
+	\label{rce:evlny_vlnovody_mezni_vlnova_delka}
+\end{equation}
+
+
+? str.132
+
 \newpage
+
 
 \section{Dutinové rezonátory}
 str.150\\
 str.151 - rez. kmitočet\\
+\subsection{Parametry rezonátorů}
+
 \newpage

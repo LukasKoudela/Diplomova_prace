@@ -10,7 +10,7 @@ Dle \cite{emc_trakce} je na problematiku EMC v elektrické trakci nahlíženo ko
 
 \medskip
 {\bf Nízkofrekvenční rušení} - frekvenční pásmo 0 až 2500 Hz \\
-Zdrojem rušení představují především polovodičové měniče. Ty během své činnosti vytvářejí vyšší harmonické proudy. Vzhledem k rozsahu provozovaných výkonů se jedná o nezanedbatelnou složku v trakčním napájecím vedení. Důsledkem tohoto typu rušení je zvýšení odběru jalového a deformačního výkonu, čímž dochází k souvisejícímu zhoršení celkového účiníku $\lambda$ (často označovaný jako \uv{power factor}). Vliv vyšších harmonických nelze nikdy úplně odstranit, ale lze snížit jejich účinky. To se týká především omezením velikostí proudů konstrukcí měničů, metodami řízení, doplňkovou výbavou či dalšími kompenzačními zařízeními a filtry. O~daných prostředcích je blíže pojednáno v~\cite{nfr}.
+Zdrojem rušení představují především polovodičové měniče. Ty během své činnosti vytvářejí vyšší harmonické proudy. Vzhledem k rozsahu provozovaných výkonů se jedná o nezanedbatelnou složku v trakčním napájecím vedení. Důsledkem tohoto typu rušení je zvýšení odběru jalového a deformačního výkonu, čímž dochází k souvisejícímu zhoršení celkového účiníku $\lambda$ (často označovaný jako \uv{power factor}). Vliv vyšších harmonických proudů nelze nikdy úplně odstranit, ale je možné snížit jejich účinky. To se týká především omezením velikostí proudů konstrukcí měničů, metodami řízení, doplňkovou výbavou či dalšími kompenzačními zařízeními a filtry. O~daných prostředcích je blíže pojednáno v~\cite{nfr}.
 
 \medskip
 {\bf Vysokofrekvenční a impulsní rušení} - frekvenční pásmo 9 kHz až 1 GHz \\
@@ -30,7 +30,7 @@ Základní rozdělení EMC se zabývá:
 \item {\bf EMI} - elektromagnetická interference (zdroj elektromagentického rušení) \\
 Tato oblast se věnuje prvnímu bloku na obr. \ref{obr:emc_retezec}. Zabývá příčinami vzniku rušení, dále například parametry, intenzitou, charakterem a také možnostmi jeho měření. Interferenční zdroje se rozdělují na přírodní a na technické, neboli umělé. U těch se ještě blíže rozlišuje, zda se jedná o požadovanou funkci vysílače nebo nechtěnou. Konkrétních zdrojů, především pak technických, existuje nepřeberné množství, z~nichž některé jsou uvedeny u přenosového řetězce.
 
-Dále se ještě blíže specifikuje, zda se jedná o přímý vliv elektromagnetického pole nebo jde o rušení po vedení. Levá část obrázku \ref{obr:emc_emi_ems} znázorňuje rozdíl mezi vyzařováním a~šířením rušivých vlivů po napájecím vedení.
+Dále se musí blíže specifikovat, zda se jedná o přímý vliv elektromagnetického pole nebo jde o rušení po vedení. Levá část obrázku \ref{obr:emc_emi_ems} znázorňuje rozdíl mezi vyzařováním a~šířením rušivých vlivů po napájecím vedení.
 
 \item {\bf EMS} - elektromagnetická susceptibilita (odolnost rušeného objektu) \\
 Schopnost odolat vlivu elektromagnetického rušení se sleduje u posledního bloku na obrázku \ref{obr:emc_retezec}. Tím jsou konkrétní zařízení nebo systémy, které jsou vystaveny přímému vlivu elektromagnetického pole. Případně mohou být ohroženy rušením po napájecím vedení, tak jak je naznačeno na obrázku \ref{obr:emc_emi_ems}.
@@ -42,7 +42,7 @@ Schopnost odolat vlivu elektromagnetického rušení se sleduje u posledního bl
 	\label{obr:emc_emi_ems}
 \end{figure}
 
-Úrovně EMI a EMS jsou rozhodující pro návrh a konstrukci zařízení. Aby daný výrobek byl provozuschopný z hlediska elektromagnetické kompatibility, je potřeba splňovat podobné úrovně rušení jako je nastíněno na obrázku \ref{obr:emc_meze}. To především znamená, že elektromagnetická odolnosti daného zařízení, by měla být dostatečně dimenzovaná, aby ji nepřesáhl nějaký zdroj rušení vyskytující se v daném prostředí. Dle norem jsou definované hodnoty pro EMS a EMI, které představují rezervy pro zajištění EMC.
+Úrovně EMI a EMS jsou rozhodující pro návrh a konstrukci zařízení. Aby daný výrobek byl provozuschopný z hlediska elektromagnetické kompatibility, je potřeba splňovat podobné úrovně rušení jako je nastíněno na obrázku \ref{obr:emc_meze}. To především znamená, že elektromagnetická odolnost daného zařízení, by měla být dostatečně dimenzovaná, aby ji nepřesáhl nějaký zdroj rušení vyskytující se v daném prostředí. Dle norem jsou definované hodnoty pro EMS a EMI, které představují rezervy pro zajištění EMC.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=11cm]{emc_meze.png}
@@ -96,9 +96,9 @@ Soubor norem ČSN EN 50121, vydaný pod společným názvem Drážní zařízen�
 \subsection{ČSN EN 50121-1}
 Norma ČSN EN 50121-1: Všeobecně popisuje rozdělení celého vlastního souboru norem, jak je uvedeno v části \ref{sec:emc_normy_trakce}. Dále obsahuje postupy pro řízení managementu pro dosažení EMC v~elektrické trakci. Nakonec především stanovuje funkční kritéria, které jsou založeny na evropské normě EN 61000-6-2. S~jejich pomocí se posuzuje funkčnost a schopnost provozu zařízení během zkoušek EMC. V~normě jsou definována 3 funkční kritéria, označovaná jako A, B a C. Pokud testovaný vzorek není schopen splnit požadavky alespoň jednoho z~uvedených kritérií, posuzuje se jako nevyhovující.
 
-Funkční kritérium A~ve většině případů nedovoluje žádnou změnu chování zařízení během i následně po skončení zkoušek EMC. Jedinou modifikací může být výrobcem nastavená minimální hranice fungování, případně přípustná mez ztráty funkčnosti, které přesto výrobek během i po testech nesmí překročit.
+Funkční kritérium A~ve většině případů nedovoluje žádnou změnu chování zařízení během i následně po skončení zkoušek EMC. Jedinou modifikací může být výrobcem nastavená minimální hranice fungování, případně přípustná mez ztráty funkčnosti, které výrobek, během testů a po nich, přesto nesmí překročit.
 
-Funkční kritérium B opět nedovoluje zhoršení funkce, pokud je zařízení používáno podle svého určení, avšak pouze po ukončení zkoušek. Během testů je akceptovatelné zhoršení činnosti za předpokladu, že se nezmění současný provozní stav a nedojde ke ztrátě dat v~paměti zařízení.
+Funkční kritérium B nedovoluje zhoršení funkce po ukončení zkoušek, pokud je zařízení používáno podle svého určení. Během testů je však akceptovatelné zhoršení činnosti. To lze za předpokladu, že se nezmění současný provozní stav a nedojde ke ztrátě dat v~paměti zařízení.
 
 Funkční kritérium C popisuje, že u~zkoušeného zařízení je možná dočasná ztráta funkce, pokud je nějakým prostředkem možno zajistit její obnovení.
 
@@ -142,7 +142,7 @@ Zkoušky emisí jsou vykonávány při provozních stavech, při kterých se př
 Zkoušky odolnosti se neprovádějí, normou je pouze stanovena pevná hranice 20~V/m v~kmitočtovém rozsahu 0,15 MHz – 2 GHz , do které se považuje vozidlo za odolné.
 
 \subsection{ČSN EN 50121-3-2}
-Normativ ČSN EN 51231-3-2: Drážní vozidla – Zařízení definuje elektromagnetické poměry pro veškerá zařízení, které je možné používat na trakčním vozidle, tak aby bylo zajištěna bezproblémová činnost při všech provozních stavech. Je zde definována řada specifických požadavků. Například tato norma neplatí pro přechodné emise při vypnutí nebo zapnutí zařízení. Zvláštní požadavek platí pro prostředky radiokomunikací, pro které emise a odolnosti uvedené v~této normě neplatí. Pokud se jedná o~komponentu, kterou je potřeba připojit do systému vlastního vozidla, provádějí se veškeré zkoušky v~zapojeném stavu. Měření se navíc provádí pro všechny příslušné vstupy a výstupy. 
+Normativ ČSN EN 51231-3-2: Drážní vozidla – Zařízení definuje elektromagnetické poměry pro veškerá zařízení, které je možné používat na trakčním vozidle, tak aby byla zajištěna bezproblémová činnost při všech provozních stavech. Je zde definována řada specifických požadavků. Například tato norma neplatí pro přechodné emise při vypnutí nebo zapnutí zařízení. Zvláštní požadavek platí pro prostředky radiokomunikací, pro které emise a odolnosti uvedené v~této normě neplatí. Pokud se jedná o~komponentu, kterou je potřeba připojit do systému vlastního vozidla, provádějí se veškeré zkoušky v~zapojeném stavu. Měření se navíc provádí pro všechny příslušné vstupy a výstupy. 
 Rozlišují se na několik druhů, hlavní jsou uvedeny na obrázku \ref{obr:emc_IO}.
 
 \begin{figure}[!h]

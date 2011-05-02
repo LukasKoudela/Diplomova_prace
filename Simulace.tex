@@ -238,7 +238,7 @@ Odvození vztahů pro zobrazení magnetické indukce vychází z druhého Maxwel
 \end{displaymath}
 Po úpravě rotace na levé straně výrazu pro jedinou složku $E_z$ dostaneme vztah
 \begin{equation}
-	\frac{\partial E_z}{\partial y}\cdot\overrightarrow{\vec{i}} - \frac{\partial E_z}{\partial y}\cdot\overrightarrow{\vec{j}} + 0\cdot\overrightarrow{\vec{k}} = -\mj\omega B_x\cdot\overrightarrow{\vec{i}} - \mj\omega B_y\cdot\overrightarrow{\vec{j}} - \mj\omega B_z\cdot\overrightarrow{\vec{k}},
+	\frac{\partial E_z}{\partial y}\cdot\overrightarrow{\mathrm{i}} - \frac{\partial E_z}{\partial y}\cdot\overrightarrow{\mathrm{j}} + 0\cdot\overrightarrow{\mathrm{k}} = -\mj\omega B_x\cdot\overrightarrow{\mathrm{i}} - \mj\omega B_y\cdot\overrightarrow{\mathrm{j}} - \mj\omega B_z\cdot\overrightarrow{\mathrm{k}},
 	\label{rce:sim_zobrazeni_flux}
 \end{equation}
 ze kterého lze vyjádřit $x$-ová a $y$-ová složka magnetické indukce. $B_z$ je podle rovnice (\ref{rce:sim_zobrazeni_flux}) nulová. Pro $B_x$ tedy platí
@@ -275,7 +275,7 @@ Vektor vyjádřený vektorovým součinem intenzit elektrického a magnetického
 \end{equation}
 Úpravou rovnice (\ref{rce:sim_poynting_vec}) dostaneme vyjádření pro rozložení jednotlivé složky Poyntingova vektoru
 \begin{equation}
-	N_x \cdot\overrightarrow{\vec{i}} + N_y \cdot\overrightarrow{\vec{j}} + N_z \cdot\overrightarrow{\vec{k}} = (-E_z H_y) \cdot\overrightarrow{\vec{i}} + E_z H_x \cdot\overrightarrow{\vec{j}} + 0 \cdot\overrightarrow{\vec{k}}.
+	N_x \cdot\overrightarrow{\mathrm{i}} + N_y \cdot\overrightarrow{\mathrm{j}} + N_z \cdot\overrightarrow{\mathrm{k}} = (-E_z H_y) \cdot\overrightarrow{\mathrm{i}} + E_z H_x \cdot\overrightarrow{\mathrm{j}} + 0 \cdot\overrightarrow{\mathrm{k}}.
 	\label{rce:sim_poynting_vec_rozepsany}
 \end{equation}
 Je zřejmé, že $N_z$ je dle výrazu (\ref{rce:sim_poynting_vec_rozepsany}) nulový. Pro $x$-ovou složku platí
@@ -287,7 +287,7 @@ Je zřejmé, že $N_z$ je dle výrazu (\ref{rce:sim_poynting_vec_rozepsany}) nul
 \end{displaymath}
 což ve výsledku vede na vztah
 \begin{displaymath}
-	N_x = E_\Re H_{y\Re} - E_\Im H_{y\Im} + \mj (E_\Re H_{y\Im} + E_\Im H_{y\Re}).
+	N_x = E_\Im H_{y\Im} - E_\Re H_{y\Re} - \mj (E_\Re H_{y\Im} + E_\Im H_{y\Re}).
 \end{displaymath}
 Pro Poyntingův vektor ve směru $y$ analogicky vychází
 \begin{displaymath}
@@ -298,7 +298,7 @@ Pro Poyntingův vektor ve směru $y$ analogicky vychází
 \end{displaymath}
 Pro výslednou hodnotu Poyntingova vektoru na řešené oblasti $\Omega$ platí
 \begin{displaymath}
-	N = \sqrt{N_{x}^{2} + N_{y}^{2}} = \sqrt{(E_\Im H_{y\Im} + E_\Re H_{y\Re})^{2} + (E_\Im H_{x\Im} + E_\Re H_{x\Re})^{2}}.
+	N = \sqrt{N_{x}^{2} + N_{y}^{2}} = \sqrt{(E_\Im H_{y\Im} - E_\Re H_{y\Re})^{2} + (E_\Im H_{x\Im} - E_\Re H_{x\Re})^{2}}.
 \end{displaymath}
 
 \subsection*{Jouleovy ztráty}

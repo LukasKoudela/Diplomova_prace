@@ -1,13 +1,8 @@
 % !TeX root = Main.tex
 \chapter{Programový kód simulačního modulu} \label{kap:Program_kod}
-\subsubsection*{Kód k řešení bilineární části rovnice (\ref{rce:sim_kar_weak_real})}
-Pro zápis programového kódu vztahující se k rovnici (\ref{rce:sim_kar_weak_real}) rozdělíme bilineární část na složky reprezentované $E_{R}$ a $E_{I}$. První vyjádříme zápis, který je v programu označen indexem \uv{real\_real}. Rozepsáním operátoru $\nabla$ a numerickým řešením integrálů obdržíme výraz
-\begin{equation}
-	-\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_R}{\partial x}\cdot \frac{\partial v}{\partial x} + \frac{\partial E_R}{\partial y}\cdot \frac{\partial v}{\partial y} \bigg) + \omega^{2}\varepsilon\mu\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_R\cdot v\bigg),
-	\label{rce:sim_kar_weak_real_real_num} 
-\end{equation}
-Vlastní programový kód, který implemetuje bilineární část (\ref{rce:sim_kar_weak_real_real_num}), je následující
-
+\section{Řešení Helmholtzovy rovnice (\ref{rce:sim_kar_helmholtz_num}) knihovnou Hermes2D}
+\subsubsection*{Reálná část (\ref{rce:sim_kar_weak_real})}
+Implementace bilineární části odpovídá následujícím zápisům
 \begin{verbatim}
 template<typename Real, typename Scalar>
 Scalar rf_matrix_form_real_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
@@ -17,14 +12,7 @@ Scalar rf_matrix_form_real_real(int n, double *wt, Func<Real> *u_ext[], Func<Rea
     + sqr(2 * M_PI * frequency) * (rfLabel[e->elem_marker].permeability * MU0)
     * (rfLabel[e->elem_marker].permittivity * EPS0) * int_u_v<Real, Scalar>(n, wt, u, v);
 }
-\end{verbatim}
-Obdobným způsobem postupujeme u druhé složky bilineární části vyjádřené pomocí $E_I$. Index funkce v programu se změní na \uv{real\_imag}
-\begin{equation}
- \omega\mu\sigma\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_I\cdot v\bigg)
-	\label{rce:sim_kar_weak_real_imag_num} 
-\end{equation}
-Vztah \ref{rce:sim_kar_weak_real_imag_num} se analogicky zapíše jako
-\begin{verbatim}
+
 template<typename Real, typename Scalar>
 Scalar rf_matrix_form_real_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
                                      Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
@@ -32,14 +20,25 @@ Scalar rf_matrix_form_real_imag(int n, double *wt, Func<Real> *u_ext[], Func<Rea
     return + 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) 
     * rfLabel[e->elem_marker].conductivity * int_u_v<Real, Scalar>(n, wt, u, v);
 }
+
+\end{verbatim}
+Lineární člen na pravé straně rovnice je potřeba zapsat ve tvaru
+\begin{verbatim}
+template<typename Real, typename Scalar>
+Scalar rf_vector_form_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v,
+                                              Geom<Real> *e, ExtData<Scalar> *ext)
+{
+    Scalar result = 0 ;
+    int u = 0;
+    for (int i = 0; i < n; i++)
+        result += wt[i] * (rfLabel[e->elem_marker].current_density_imag * v->val[i]);
+
+    return - 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) * result;
+}
 \end{verbatim}
 
-\subsubsection*{Kód k řešení bilineární části rovnice (\ref{rce:sim_kar_weak_imag})}
-Postup je naprosto totožný jako u slabé formy reálné složky výchozí rovnice. Tudíž opět rozdělíme bilineární část na 2 části dle $E_R$ a $E_I$. Dále zavedeme numerickou integraci a zapíšeme vzniklé výrazy do programového kódu. Pro index \uv{imag\_real} platí
-\begin{equation}
- -\omega\mu\sigma\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_I\cdot v\bigg)
-	\label{rce:sim_kar_weak_imag_real_num} 
-\end{equation}
+\subsubsection*{Imaginární část (\ref{rce:sim_kar_weak_imag})}
+Složky kódu s indexy \uv{imag\_real} a \uv{imag\_imag} jsou zapsána
 \begin{verbatim}
 template<typename Real, typename Scalar>
 Scalar rf_matrix_form_imag_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
@@ -48,13 +47,7 @@ Scalar rf_matrix_form_imag_real(int n, double *wt, Func<Real> *u_ext[], Func<Rea
     return - 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) 
     * rfLabel[e->elem_marker].conductivity * int_u_v<Real, Scalar>(n, wt, u, v);
 }
-\end{verbatim}
-Nakonec pro označení \uv{imag\_imag}
-\begin{equation}
-	-\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_I}{\partial x}\cdot \frac{\partial v}{\partial x} + \frac{\partial E_I}{\partial y}\cdot \frac{\partial v}{\partial y} \bigg) + \omega^{2}\varepsilon\mu\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_I\cdot v\bigg),
-	\label{rce:sim_kar_weak_imag_imag_num} 
-\end{equation}
-\begin{verbatim}
+
 template<typename Real, typename Scalar>
 Scalar rf_matrix_form_imag_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
                                     Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
@@ -64,26 +57,21 @@ Scalar rf_matrix_form_imag_imag(int n, double *wt, Func<Real> *u_ext[], Func<Rea
     * (rfLabel[e->elem_marker].permittivity * EPS0) * int_u_v<Real, Scalar>(n, wt, u, v);
 }
 \end{verbatim}
-
-\subsubsection*{Zápis lineárních členů rovnic (\ref{rce:sim_kar_weak_real}) a (\ref{rce:sim_kar_weak_imag}).}
-Lineární členy jsou vyjádřeny jako pravé strany rovnic (\ref{rce:sim_kar_weak_real}) a (\ref{rce:sim_kar_weak_imag}). Jsou tudíž nulové, ale pro vlastní numerické řešení je potřeba tuto informaci doplnit do programového kódu. Vzhledem k tomu, že řešená rovnice je komplexního charakteru je potřeba doplnit tyto dvě funkce 
-
+Nakonec lineární člen imaginární části řešené rovnice je implemetován zápisem
 \begin{verbatim}
 template<typename Real, typename Scalar>
-Scalar rf_vector_form_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v,
-                                               Geom<Real> *e, ExtData<Scalar> *ext)
-{
-    return 0.0;
-}
-\end{verbatim}
-\begin{verbatim}
-template<typename Real, typename Scalar>
-Scalar rf_vector_form_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v, 
+Scalar rf_vector_form_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v,
                                               Geom<Real> *e, ExtData<Scalar> *ext)
 {
-    return 0.0;
+    Scalar result = 0 ;
+    int u = 0;
+    for (int i = 0; i < n; i++)
+        result += wt[i] * (rfLabel[e->elem_marker].current_density_real * v->val[i]);
+
+    return 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) * result;
 }
 \end{verbatim}
+\subsubsection*{Registrace forem}
 Zmíněné funkce pro řešení Helmholtzovy rovnice (\ref{rce:sim_kar_helmholtz_num}) je dále potřeba zaregistrovat ve třídě \textsc{WeakForm} následujícím způsobem
 \begin{verbatim}
 wf->add_matrix_form(0, 0, callback(rf_matrix_form_real_real));
@@ -94,63 +82,11 @@ wf->add_vector_form(0, callback(rf_vector_form_real))
 wf->add_vector_form(1, callback(rf_vector_form_imag));
 \end{verbatim}
 
-\subsubsection*{Numerické řešení rovnice (\ref{rce:sim_pol_helmholtz_upravena})}
-Bilineární člen dané slabé formy s indexem \uv{real\_real} lze po zavedení numerické integrace zapsat jako
-\begin{displaymath}
--\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_{\alpha R}}{\partial z}\cdot \frac{\partial v}{\partial z} + \frac{\partial E_{\alpha R}}{\partial r}\cdot \frac{\partial v}{\partial r} \bigg) - \frac{1}{r}\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_{\alpha R}}{\partial r}\cdot v\bigg) +
-\end{displaymath}
-\begin{equation}
-	 + \frac{1}{r^{2}}\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{\alpha R}\cdot v\bigg) + \omega^{2}\varepsilon\mu\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{\alpha R}\cdot v\bigg).
-	\label{rce:sim_pol_bilinear_real_real} 
-\end{equation}
-Je zřejmé, že forma označená \uv{real\_imag} vyjde identicky jako v případě kartézské souřadné soustavy, neboť člen $+\faz k^{2}\faz E_{\alpha}$ v rovnici (\ref{rce:sim_pol_helmholtz_upravena}) je formálně stejný se vztahem (\ref{rce:sim_kar_helmholtz_num}). Platí tedy
-\begin{equation}
- \omega\mu\sigma\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{\alpha I}\cdot v\bigg).
-	\label{rce:sim_pol_bilinear_real_imag} 
-\end{equation}
-Slabým formám vycházející z imaginární části z původní rovnice (\ref{rce:sim_pol_helmholtz_upravena}) odpovídá vyjádření
-\begin{equation}
- -\omega\mu\sigma\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{\alpha R}\cdot v\bigg)
-	\label{rce:sim_pol_bilinear_imag_imag} 
-\end{equation}
-pro \uv{imag\_real}, což je opět ze stejného důvodu identické s kartézskou souřadnou soustvou. Nakonec indexu \uv{imag\_imag} odpovídá
-\begin{displaymath}
--\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_{\alpha I}}{\partial z}\cdot \frac{\partial v}{\partial z} + \frac{\partial E_{\alpha I}}{\partial r}\cdot \frac{\partial v}{\partial r} \bigg) - \frac{1}{r}\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_{\alpha I}}{\partial r}\cdot v\bigg) +
-\end{displaymath}
-\begin{equation}
-	 + \frac{1}{r^{2}}\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{\alpha I}\cdot v\bigg) + \omega^{2}\varepsilon\mu\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{\alpha I}\cdot v\bigg).
-	\label{rce:sim_pol_bilinear_real_real} 
-\end{equation}
-Vzhledem k nulové pravé straně řešené výchozí rovnice (\ref{rce:sim_pol_helmholtz_upravena}) bude lineární člen  v tomto případě opět nulový.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\subsection{Okrajové podmínky v simulačním modulu}
-Při řešení problémů vztahující se k elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v dialogu \uv{new boundary condition}. Ten je možné zpřístupnit po pravém kliknutí na pracovní plochu a vybrání daného odkazu, případně je možné se na něj dostat klávesovou zkratkou Alt + B. Po zadání označení se vybere v rozbalovacím menu některá z definovaných okrajových podmínek.
+\subsection{Kód okrajových podmínek}
+Při řešení problémů vztahující se k elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v dialogu \uv{new boundary condition}. 
 
 \subsubsection*{Electric field}
-První možností je zadat Dirichletovu podmínka na určité hranici $\Gamma$. Hodnotu okrajové podmínky zadáme jako komplexní číslo ve formátu reálné a imaginární složky, jak je znázorněno na obrázku \ref{obr:sim_BC_electric_field} pro číslo $0 + \mj 0$. Tato konkrétní okrajová podmínka se v oboru vysokofrekvenční techniky označuje jako \uv{perfect electric conductor}.
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=7cm]{sim_BC_electric_field.png}
-	\caption{Zadání Dirichletovy podmínky $0 + \mj 0$ pro elektrickou složku pole.}
-	\label{obr:sim_BC_electric_field}
-\end{figure}
-
-Programový kód, který přísluší k této okrajové podmínce, je v modulu zapsán nastavením tříd \textsc{BCTypes} a \textsc{BCValues} následovně
+Programový kód, který přísluší k zadáni Dirichletovy podmínky na hranici $\Gamma$, je v modulu zapsán nastavením tříd \textsc{BCTypes} a \textsc{BCValues} následovně
 \begin{verbatim}
 BCTypes bcTypesReal, bcTypesImag;
 bcTypesReal.add_bc_dirichlet(i+1);
@@ -171,14 +107,7 @@ bcTypesImag.add_bc_neumann(i+1);
 a funkcí vracející povrchovou lineární formu Neumannovy okrajové podmínky. V případě nulové Neumannovy okrajové podmínky však lze danou funkci vynechat, tak jako v tomto případě.
 
 \subsubsection*{Matched boundary}
-Pokud chceme na určené hranici zvolit impedanční přizpůsobení, učiníme tak v dialogu pro výběr následující možností dle obrázku \ref{obr:sim_BC_matched_boundary}. 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=7cm]{sim_BC_matched_boundary.png}
-	\caption{Zadání impedančního přizpůsobení.}
-	\label{obr:sim_BC_matched_boundary}
-\end{figure}
-Je zde možné zadat výšku hranice na kterou chceme aplikovat impedanční přizpůsobení pro výpočet konstatny $\beta$ ve vztahu (\ref{rce:sim_BC_matched_boundary}). V případě, že výšku nezadáme, bude výpočet impedančního přizpůsobení vycházet z vlnové impedance prostředí $Z = \frac{\omega\mu}{\beta}$. Ve výpočtu se tedy jedná se o Newtonovu okrajovou podmínku ve tvaru
+Ve výpočtu se tedy jedná se o Newtonovu okrajovou podmínku ve tvaru
 \begin{equation}
 	\bigg(\frac{\partial E_{(z)}}{\partial n} - \mj\beta E_{(z)}\bigg)|_{\Gamma} = 0.
 	\label{rce:sim_BC_matched_boundary}
@@ -256,7 +185,7 @@ wf->add_vector_form_surf(1, callback(rf_vector_form_surf_imag));
                 
 \subsubsection*{Port}
 
-\section{Programový zápis pro zobrazení výsledků řešení}
+\subsection{Programový zápis pro zobrazení výsledků řešení}
 \subsection*{Electric field}
 Programová implementace pro elektrickou složku pole v kartézských souřanicích je v modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu, neboť se jedná o přímé řešení výchozí rovnice (\ref{rce:sim_helmholtz_vychozi} )
 \begin{verbatim}
@@ -342,7 +271,8 @@ case PhysicFieldVariable_RF_PoyntingVectorX:
     SceneMaterialRF *marker = dynamic_cast<SceneMaterialRF *>(material);
     double mu = marker->permeability.number * MU0;
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
-    node->values[0][0][i] = - 0.5 * ((value2[i] * 1/(w*mu) * dudx1[i]) - (value1[i] * 1/(w*mu) * dudx2[i]));
+    node->values[0][0][i] = - 0.5 * ((value2[i] * 1/(w*mu) * dudx1[i]) 
+                                   - (value1[i] * 1/(w*mu) * dudx2[i]));
 }
 \end{verbatim}
 Pro Poyntingův vektor ve směru $y$ analogicky platí
@@ -352,7 +282,8 @@ case PhysicFieldVariable_RF_PoyntingVectorY:
     SceneMaterialRF *marker = dynamic_cast<SceneMaterialRF *>(material);
     double mu = marker->permeability.number * MU0;
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
-    node->values[0][0][i] = 0.5 * ((value2[i] * 1/(w*mu) * dudy1[i]) - (value1[i] * 1/(w*mu) * dudy2[i]));
+    node->values[0][0][i] = 0.5 * ((value2[i] * 1/(w*mu) * dudy1[i]) 
+                                 - (value1[i] * 1/(w*mu) * dudy2[i]));
 }
 \end{verbatim}
 Pro výslednou hodnotu Poyntingova vektoru na řešené oblasti $\Omega$ platí
