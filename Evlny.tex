@@ -85,7 +85,7 @@ Tato komplexní veličina popisuje vztah mezi intenzitami magnetického a elektr
 	\vecfaz E = \faz Z \cdot \vecfaz H.
 \end{displaymath}
 
-\subsubsection*{Obecná vlnové rovnice diferenciálního charakteru.}
+\subsubsection*{Obecné vlnové rovnice diferenciálního charakteru.}
  Podrobné odvození vlnových rovnic pro vektory pole $\vec E$ a $\vec B$, pro časově konstantní parametry prostředí, se nachází v~příloze \ref{sec:Odvozeni_CasPole}
 \begin{equation}
 	\nabla^{2}\vec E -\mu\sigma\frac{\partial\vec E}{\partial t}-\mu\varepsilon\frac{\partial^{2}\vec E}{\partial t^{2}} = \grad\frac{\rho}{\varepsilon}+\mu\frac{\partial\vec J_{\mathrm{vn}}}{\partial t},
@@ -97,7 +97,7 @@ Tato komplexní veličina popisuje vztah mezi intenzitami magnetického a elektr
 \end{equation}
 
 \subsection{Harmonické pole}
-Vztahy (\ref{rce:evlny_VlnR_ElPole}) a (\ref{rce:evlny_VlnR_MagPole}), eventualně vztahy uvedené v příloze \ref{sec:Odvozeni_CasPole}, jsou platné pro obecnou časovo závislost zdrojových funkcí $\rho$ a $\vec J_{\mathrm{vn}}$. Pro řešení polí, především numerického charakteru, se využívají harmonické funkce ($\sin$ nebo $\cos$). Důvodem je komplikované až nemožné analytické řešení rovnic (\ref{rce:VlnR_ElPole}) a (\ref{rce:VlnR_MagPole}). Dále proto, že harmonické pole je možné snadno generovat a řada zařízení je založena na jejich využití. 
+Vztahy (\ref{rce:evlny_VlnR_ElPole}) a (\ref{rce:evlny_VlnR_MagPole}), eventuálně vztahy uvedené v příloze \ref{sec:Odvozeni_CasPole}, jsou platné pro obecnou časovou závislost zdrojových funkcí $\rho$ a $\vec J_{\mathrm{vn}}$. Pro řešení polí, především numerického charakteru, se využívají harmonické funkce ($\sin$ nebo $\cos$). Důvodem je komplikované až nemožné analytické řešení rovnic (\ref{rce:VlnR_ElPole}) a (\ref{rce:VlnR_MagPole}). Dále proto, že harmonické pole je možné snadno generovat a řada zařízení je založena na jejich využití. 
 
 Pro časově proměnné harmonické pole je možné využít tzv. symbolicko - komplexní metodu. Její aplikace spočívá ve vyjádření daného vektoru pole pomocí fázoru vektoru. Ten totiž je závislý jen na prostorových souřadnicích a není časově proměnný.
 
@@ -107,12 +107,12 @@ Pokud se bude například intenzita elektrického pole $\vec E(x,y,z,t)$ měnit 
 \end{displaymath}
 V daném poli je možné vyjádřit vektor intenzity elektrického pole pomocí fázoru\footnote{Fázory jsou znázorněny podtržením písmene.} vektoru $\vecfaz E(x,y,z)$. Z něj je možné vytvořit rotující fázor vektoru
 \begin{equation}
-	\vecfaz E_{rot}(x,y,z) = \vecfaz E(x,y,z)\me^{\mj\omega t}.
+	\vecfaz E_{\rot}(x,y,z) = \vecfaz E(x,y,z)\me^{\mj\omega t}.
 	\label{rce:rotujici_fazor_vektoru}
 \end{equation}
 Nakonec lze určit časovou závislost vektoru pole pomocí vztahu
 \begin{equation}
-	\vec E(x,y,z,t) = \Im\Big\{ \vecfaz E_{rot}(x,y,z)\Big\} = \Im\Big\{ \vecfaz E(x,y,z)\me^{\mj\omega t}\Big\}.
+	\vec E(x,y,z,t) = \Im\Big\{ \vecfaz E_{\rot}(x,y,z)\Big\} = \Im\Big\{ \vecfaz E(x,y,z)\me^{\mj\omega t}\Big\}.
 	\label{rce:casova_zavislost}
 \end{equation}
 Z rovnice (\ref{rce:casova_zavislost}) vyplývají pro reprezentaci časově proměnného vektoru pole $\vec E(x,y,z,t)$ fázorem $\vecfaz E(x,y,z)$ následující vlastnosti pro obrazy derivace a integrálu. Ty jsou využity při odvození vlnových rovnic v harmonickém prostředí v příloze \ref{sec:Odvozeni_HarmPole}
@@ -231,13 +231,13 @@ který má jednoduchou fyzikální interpretaci. Podle obrázku \ref{obr:evlny_v
 
 První člen $ \faz E_{0}^{+}\me^{-\mj\faz k z}$ přestavuje funkci vlny šířící se v kladném směru osy $z$ a označuje se jako {\bf postupná vlna}. Druhý člen $\faz E_{0}^{-}\me^{\mj\faz k z}$ popisuje funkci vlny pohybující se v opačném směru, tzn. {\bf vlna odražená}.
 
-Komplexní konstanty $\faz E_{0}^{+}$ a $\faz E_{0}^{-}$ je možné dále blíže rozepsat na část představující modul $E_{0mod}$ a část pro reprezentaci fáze $\me^{j\varphi}$. S využitím této vlastnosti upravíme rovnici (\ref{rce:evlny_reseni2}). Současně aplikujeme vztah konstanty šíření (\ref{rce:evlny_alphabeta}), tj. $\faz k = \beta - j\alpha$,
+Komplexní konstanty $\faz E_{0}^{+}$ a $\faz E_{0}^{-}$ je možné dále blíže rozepsat na část představující modul $E_{0\mathrm{mod}}$ a část pro reprezentaci fáze $\me^{j\varphi}$. S využitím této vlastnosti upravíme rovnici (\ref{rce:evlny_reseni2}). Současně aplikujeme vztah konstanty šíření (\ref{rce:evlny_alphabeta}), tj. $\faz k = \beta - \mj\alpha$,
 \begin{displaymath}
-	\faz E_{x}(z) = E_{0mod}^{+}\me^{\mj\varphi^{+}}\me^{-\mj(\beta - \mj\alpha)z} + E_{0mod}^{-}\me^{\mj\varphi^{-}}\me^{\mj(\beta-\mj\alpha)z}.
+	\faz E_{x}(z) = E_{0\mathrm{mod}}^{+}\me^{\mj\varphi^{+}}\me^{-\mj(\beta - \mj\alpha)z} + E_{0\mathrm{mod}}^{-}\me^{\mj\varphi^{-}}\me^{\mj(\beta-\mj\alpha)z}.
 \end{displaymath}
 Pro určení časové závislosti se nejprve užije vztah (\ref{rce:rotujici_fazor_vektoru}) pro rotující fázor
 \begin{displaymath}
-	\faz E_{x\,rot}(z) = E_{0mod}^{+}\me^{\mj\varphi^{+}}\me^{-\mj\beta z}\me^{-\alpha z}\me^{\mj\omega t} + E_{0mod}^{-}\me^{\mj\varphi^{-}}\me^{\mj\beta z}\me^{\alpha z}\me^{\mj\omega t}.
+	\faz E_{x\,\rot}(z) = E_{0\mathrm{mod}}^{+}\me^{\mj\varphi^{+}}\me^{-\mj\beta z}\me^{-\alpha z}\me^{\mj\omega t} + E_{0\mathrm{mod}}^{-}\me^{\mj\varphi^{-}}\me^{\mj\beta z}\me^{\alpha z}\me^{\mj\omega t}.
 \end{displaymath}
 Nakonec se podle předpisu (\ref{rce:casova_zavislost}) vyjádří okamžitá hodnota časově proměnné intenzity elektrického pole. Výsledný vztah reprezentuje okamžitou hodnotu postupné a odražené složky rovinné vlny v harmonickém prostředí
 \begin{equation}
@@ -261,7 +261,7 @@ Pro odvození fázové rychlosti postupné vlny zderivujeme výraz $\omega t - \
 \begin{displaymath}
 	v_{f} = \frac{\dif z}{\dif t} = \frac{\omega}{\beta}\unit{[m/s]}.
 \end{displaymath}
-Analogickým odvození z výrazu pro odraženou vlnu  $\omega t + \beta z + \varphi^{-} = \mathrm{konst.}$ dostaneme vztah, který potvrzuje skutečnost, že odražená vlna se šíří podle osy $z$ v opačném směru 
+Analogickým odvozením z výrazu pro odraženou vlnu  $\omega t + \beta z + \varphi^{-} = \mathrm{konst.}$ dostaneme vztah, který potvrzuje skutečnost, že odražená vlna se šíří podle osy $z$ v opačném směru 
 \begin{displaymath}
 	v_{f} = - \frac{\omega}{\beta}\unit{[m/s]}.
 \end{displaymath}
@@ -280,7 +280,7 @@ Podrobné odvození je rozepsáno v \cite[str. 50]{emp}. Řešení je ve tvaru s
 Všechny neznámé konstanty se určují na základě okrajových podmínek. Komplexní konstanty $\faz C_{1,\ldots,6}$ udávají amlitudu a fázi rovinných vln, složky konstanty šíření $k_{x}$, $k_{y}$ a $k_{z}$ určují směry šíření. Pomocí součtu určitého množství rovinných vln je tedy možné sestavit v kartézské souřadné soustavě libovolnou vlnu.
 
 \section{Rozhraní dvou prostředí} \label{sec:evlny_rozhrani_dvou_prostredi}
-Podkapitola \ref{sec:evlny_volne_prostredi} se věnuje šíření elektromagnetických vln ve volném neohraničeném prostředí. Avšak pro reálnější popis je potřeba uvažovat také vliv překážek v prostorově omezené oblasti. Důležitým stavebním kamenem pro formulování tohoto problém je, jak napovídá název podkapitoly, chování vln na rozhraní mezi odlišnými prostředími.
+Podkapitola \ref{sec:evlny_volne_prostredi} se věnuje šíření elektromagnetických vln ve volném neohraničeném prostředí. Avšak pro reálnější popis je potřeba zvažovat také vliv překážek v prostorově omezené oblasti. Důležitým stavebním kamenem pro formulování tohoto problém je, jak napovídá název podkapitoly, chování vln na rozhraní mezi odlišnými prostředími.
 
 Při dopadu elektromagnetické vlny na materiálově odlišný objekt může dojít k několika událostem, kterými jsou odraz, lom nebo prostup vlny. V praxi se přirozeně nejedná striktně o jeden typ chování. Častěji dojde k jejich kombinaci, ve které mají jednotlivé složky určité zastoupení. Fyzikální vysvětlení spočívá v existenci vodivých a posuvných proudů, které vzniknou právě při dopadu elektromagnetické vlny. Proudy představují zdroje pro vznik dalších vln, které se superponují k původní vlně a ovlivní její vlastnosti. 
 
@@ -289,7 +289,7 @@ Matematický popis je možný u některých příkladů po zavedení určitých 
 \subsection*{Chování rovinné vlny na rovinném rozhraní}
 Tento případ by se z hlediska matematického popisu dal nazvat jako téměř ideální. V reálných variantách bude situace přirozeně jiná, ale i na tomto jednoduchém příkladu je možné popsat jevy, které nastanou po dopadu elektromagnetické vlny. 
 
-Po popis šíření se výhodně využívá tzv. vlnový vektor $\vec k_{vln}$. S jeho pomocí lze snadno názorně popsat směry šíření vln na rozhraní. Vlnový vektor představuje to, v jakém směru se šíří vlnoplocha. Dle obrázku \ref{obr:evlny_vlnovy_vektor} jej lze pomocí konstanty šíření $\faz k$ definovat
+Pro popis šíření se výhodně využívá tzv. vlnový vektor $\vec k_{vln}$. S jeho pomocí lze snadno názorně popsat směry šíření vln na rozhraní. Vlnový vektor představuje to, v jakém směru se šíří vlnoplocha. Dle obrázku \ref{obr:evlny_vlnovy_vektor} jej lze pomocí konstanty šíření $\faz k$ definovat
 \begin{equation}
 	\vec k_{vln} = \faz k \vec n_{0} = k_{x}\overrightarrow{\mathrm{i}} + k_{y}\overrightarrow{\mathrm{j}} + k_{z}\overrightarrow{\mathrm{k}}.
 	\label{rce:evlny_vlnovy_vektor}
@@ -344,7 +344,7 @@ Vzhledem k shodnosti prostředí, ve kterém se nachází postupná a odražená
 \end{equation}
 
 \subsection{Kolmý dopad rovinné vlny na rozhraní} \label{subsec:kolmy_dopad}
-V konkrétním případě, dle obrázku \ref{obr:evlny_dielektricke_rozhrani}, je naznačen dopad rovinné homogenní vlny na rovinné rozhraní mezi dvěmi prostředími. Ty jsou popsány obecně materiálovými parametry $\varepsilon_{1,2}$, $\mu_{1,2}$ a $\sigma_{1,2}$. Z nich je možné vztahem $\faz Z=\sqrt{\frac{\mj\omega\mu}{\mj\omega\varepsilon + \sigma}}$ vyjádřit vlnové impedance pro jednotlivé prostředí.
+V konkrétním případě, dle obrázku \ref{obr:evlny_dielektricke_rozhrani}, je naznačen dopad rovinné homogenní vlny na rovinné rozhraní mezi dvěma prostředími. Ty jsou popsány obecně materiálovými parametry $\varepsilon_{1,2}$, $\mu_{1,2}$ a $\sigma_{1,2}$. Z nich je možné vztahem $\faz Z=\sqrt{\frac{\mj\omega\mu}{\mj\omega\varepsilon + \sigma}}$ vyjádřit vlnové impedance pro jednotlivé prostředí.
 
 \begin{figure}[!h]
 	\centering
@@ -426,7 +426,7 @@ V (\ref{rce:evlny_cin_prostupu_odvozeni}) je opět zřejmý činitel prostupu
 Vztahy pro oba činitele (\ref{rce:evlny_cin_prostupu}) a (\ref{rce:evlny_cin_odrazu}) jsou na sobě závislé a řídí se vztahem $1 + \faz R = \faz T$.
 
 \subsection{Dopad rovinné vlny pod obecným úhlem}
-Při analýze chování dopadající rovinné vlny pod jiným úhlem, než aby se jednalo o kolmý dopad, se rozlišuje, zda se jedná o kolmou (horizontální) nebo rovnoběžnou (vertikální) polarizaci vlny. Orientace se určiuje podle vektoru intenzity elektrického pole $\vecfaz E$.
+Při analýze chování dopadající rovinné vlny pod jiným úhlem, než aby se jednalo o kolmý dopad, se rozlišuje, zda se jedná o kolmou (horizontální) nebo rovnoběžnou (vertikální) polarizaci vlny. Orientace se určuje podle vektoru intenzity elektrického pole $\vecfaz E$.
 \subsubsection*{Kolmá polarizace}
 Vektor $\vecfaz E$ je v tomto případě kolmý na rovinu dopadu, tj. $xz$, podle obrázku \ref{obr:evlny_kolma_polarizace}.
 \begin{figure}[!h]

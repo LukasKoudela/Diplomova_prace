@@ -82,7 +82,7 @@ wf->add_vector_form(0, callback(rf_vector_form_real))
 wf->add_vector_form(1, callback(rf_vector_form_imag));
 \end{verbatim}
 
-\subsection{Kód okrajových podmínek}
+\section{Kód okrajových podmínek}
 Při řešení problémů vztahující se k elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v dialogu \uv{new boundary condition}. 
 
 \subsubsection*{Electric field}
@@ -185,7 +185,7 @@ wf->add_vector_form_surf(1, callback(rf_vector_form_surf_imag));
                 
 \subsubsection*{Port}
 
-\subsection{Programový zápis pro zobrazení výsledků řešení}
+\section{Programový zápis pro zobrazení výsledků řešení}
 \subsection*{Electric field}
 Programová implementace pro elektrickou složku pole v kartézských souřanicích je v modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu, neboť se jedná o přímé řešení výchozí rovnice (\ref{rce:sim_helmholtz_vychozi} )
 \begin{verbatim}
