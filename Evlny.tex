@@ -668,59 +668,112 @@ Nakonec je možné definovat činitele prostupu (\ref{rce:evlny_cin_prostupu}) a
 \newpage
 
 \section{Vlnovody}
-Během šíření vln ve volném prostředí od zdroje k přijímací anténě dochází přirozeně k rozptylu energie do prostoru. Anténou je tak zachycena pouze její část. To platí i pro směrové vysílací antény, pokud přenos probíhá na velké vzdálenosti. Pro zvýšení jeho efektivity je potřeba použít nějakého z prostředků, které způsobující vedení energie. To je možné zprostředkovat právě pomocí vlnovodů, jejichž nejběžnější konstrukce jsou na obrázku \ref{obr:evlny_vlnovody_konstrukce}. 
+Během šíření vln ve volném prostředí od zdroje k přijímací anténě dochází přirozeně k rozptylu energie do prostoru. Anténou je tak zachycena pouze její část. To platí i pro směrové vysílací antény, pokud přenos probíhá na velké vzdálenosti. Pro zvýšení jeho efektivity je potřeba použít nějakého z prostředků, které způsobující vedení energie. 
+
+To je možné zprostředkovat právě pomocí vlnovodů, jejichž nejběžnější konstrukce jsou na obrázku \ref{obr:evlny_vlnovody_konstrukce}. Vlnovody představují přípravek, ve kterém se elektromagnetická vlna šíří podélně ve směru osy $z$. V příčném směru (tj. podle os $x$ a $y$) vzniká tzv. stojaté vlnění.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=7cm]{evlny_vlnovody_konstrukce.png}
 	\caption{Nejběžnější konstrukce vlnovodů.}
 	\label{obr:evlny_vlnovody_konstrukce}
 \end{figure}
-Výhody vlnovodů jsou, kromě malých ztrát přenosu, v nízké úrovni vyzařování do okolí  . Nevýhodou může být jejich cena a výroba pro velmi vysoké kmitočty. Další možnost pro přenos energie poskytují vedení, například dvouvodičnové, koaxiální nebo mikropáskové, které jsou popsané v \cite{emp}.
+Výhody vlnovodů jsou, kromě malých ztrát přenosu, v nízké úrovni vyzařování do okolí  . Nevýhodou může být jejich cena a výroba pro velmi vysoké kmitočty. 
+
+Další možnost pro přenos energie poskytují vedení, například dvouvodičnové, koaxiální nebo mikropáskové, které jsou popsané v \cite{emp}.
 
 \subsection{Klasifikace vln}
-Vedené vlny lze rozlišit na několik druhů. Toto dělení se děje podle podélných složek pole, kterými jsou $\faz E_{z}$ a $\faz H_{z}$.
+Vedené vlny lze rozlišit na několik druhů. Toto dělení se děje podle podélných složek pole, kterými jsou $\faz E_{z}$ a $\faz H_{z}$. V případě vlnovodů se vnitřním prostorem šíří vlny typu TM a TE.
 
 \subsubsection*{TEM vlny}
-U TEM, nebo-li transverzálně elektromagnetických, vln jsou obě složky pole nulové.
+U TEM, nebo-li transverzálně elektromagnetických vln jsou obě podélné složky pole nulové. Pro příčné složky, označené indexem $\perp$, platí dle \cite{emp} vztahy
+\begin{displaymath}
+	\nabla^{2}_{\perp} \vecfaz E_{\perp} = 0,
+\end{displaymath}
+\begin{displaymath}
+	\nabla^{2}_{\perp} \vecfaz E_{\perp} = 0.
+\end{displaymath}
+Charakterem odpovídají tyto rovnice elektrostatickému poli, proto i rozložení pole pro TEM vlny bude obdobné.
+
 \subsubsection*{TM vlny}
 Transverzálně magnetické nebo také elektrické vlny mají nulovou složku magnetického pole $\faz H_{z}$. Složka elektrického pole $\faz E_{z}$ je nenulová. Řešení pole vychází z vlnové rovnice ve tvaru
 \begin{displaymath}
 	\nabla^{2} \faz E_{z} + \faz k^{2}\faz E_{z} = 0,
 \end{displaymath}
-kde $\faz k$ představuje konstatnu šíření. Ta se skládá z podélné $(\faz k_z)$ a příčné $(\faz k_p)$ konstatny šíření. Mezi sebou jsou vázány vztahem $\faz k^{2} = \faz k_z^{2} + \faz k_p^{2}$.
+kde $\faz k$ představuje konstatnu šíření ve volném prostoru. Ta se skládá z podélné $\faz k_z$ a příčné $\faz k_p$ konstanty šíření. Mezi sebou jsou vázány vztahem $\faz k^{2} = \faz k_z^{2} + \faz k_p^{2}$. Pro impedanci vlnovodu $\faz Z_{V}$ platí pro TM vlny vztah
+\begin{displaymath}
+   \faz Z_{V}^{TM} = \frac{\faz k_z}{\omega\varepsilon}.
+\end{displaymath}
+
 \subsubsection*{TE vlny}
 TE označuje vlny transverzálně elektrické. To jsou takové, které mají $\faz E_{z} = 0$. Příslušná vlnová rovnice má tvar
 \begin{displaymath}
 	\nabla^{2} \faz H_{z} + \faz k^{2}\faz H_{z} = 0.
+\end{displaymath}
+Impedance vlnovodu pro TE vlny je
+\begin{displaymath}
+	\faz Z_{V}^{TE} = \frac{\omega\mu}{\faz k_z}.
 \end{displaymath} 
-
 \subsubsection*{EH a HE vlny}
-str.143 - Snell\\
+Tento typ vln se vyskytuje ve vlnovodech složených z několika dielektrik. Mají obě podélné složky pole nenulové a někdy se také označují jako vlny hybridní. Podle poměru $\frac{\faz E_z}{\faz H_z}$ se rozlišuje označení EH nebo HE.
 
-\subsection{Parametry vlnovodů}
+\subsection{Parametry vlnovodů obdélníkových průřezů}
+Tento typ vlnovodu patří k nejběžněji používaným. 
+Pro příčnou konstantu $\faz k_p$ platí 
+\begin{displaymath}
+	k_p = \sqrt{\bigg(\frac{m\pi}{a}\bigg)^{2} + \bigg(\frac{n\pi}{b}\bigg)^{2}},
+\end{displaymath}
+kde $m, n = 1, 2, 3,\cdots$. Hodnoty pro $a$ a $b$ představují geometrii vlnovodu.
 
 \subsection*{Mezní (kritická) frekvence}
 Aby mohla být elektromagnetická vlna vedena vlnovodem, je potřeba, aby její kmitočet byl vyšší než mezní (kritický), který je definován
 \begin{equation}
-f_{m} = \frac{c}{2\pi\sqrt{\varepsilon_{r}\mu_{r}}}\cdot\sqrt{\bigg(\frac{\pi}{a}\bigg)^{2}}. 
+f_{m} = \frac{c}{2\pi\sqrt{\varepsilon_{r}\mu_{r}}}\cdot k_p = \frac{c}{2\sqrt{\varepsilon_{r}\mu_{r}}}\cdot \sqrt{\bigg(\frac{m}{a}\bigg)^{2} + \bigg(\frac{n}{b}\bigg)^{2}}. 
 	\label{rce:evlny_vlnovody_mezni_frekvence}
 \end{equation}
+Tato hodnota je stejná jak pro TM, tak i pro TE vlny.
 \subsection*{Mezní (kritická) vlnová délka}
-Pro vedení vlny musí být vlnová délka menší než mezní
+Pro vedení vlny musí být vlnová délka menší než mezní, pro kterou platí
 \begin{equation}
-f_{m} = \frac{c}{f_{m}} = \frac{2\pi\sqrt{\varepsilon_{r}\mu_{r}}}{\sqrt{\big(\frac{\pi}{a}\big)^{2}}}. 
+\lambda_{m} = \frac{c}{f_{m}} = \frac{2\sqrt{\varepsilon_{r}\mu_{r}}}{\sqrt{\big(\frac{m}{a}\big)^{2} + \big(\frac{n}{b}\big)^{2}}}. 
 	\label{rce:evlny_vlnovody_mezni_vlnova_delka}
 \end{equation}
-
-
-? str.132
-
-\newpage
-
+Vztah je opět stejný pro TM a TE vlny.
+\subsection*{Impedance vlnovodu}
+Velikost impedance vlnovodu závisí na typu šířících se vln. V případě transverzálně magnetických platí
+\begin{displaymath}
+Z_{V}^{TM} = \frac{k_z}{\omega\varepsilon} = \frac{\sqrt{k^{2} - \big(\frac{m}{a}\big)^{2} - \big(\frac{n}{b}\big)^{2}}}{\omega\varepsilon},
+\end{displaymath}
+a pro TE vlny náleží vztah
+\begin{displaymath}
+	Z_{V}^{TE} = \frac{\omega\mu}{k_z} = \frac{\omega\mu}{\sqrt{k^{2} - \big(\frac{m}{a}\big)^{2} - \big(\frac{n}{b}\big)^{2}}}.
+\end{displaymath}
 
 \section{Dutinové rezonátory}
-str.150\\
-str.151 - rez. kmitočet\\
-\subsection{Parametry rezonátorů}
+V elektrotechnice se běžně používají systémy, založené na principu rezonance. Pro nízké frekvence je lze zrealizovat pomocí vhodné kombinace indukčnosti L, kapacity C a odporu R. Ve vysokofrekvenční oblasti tento přístup není možný a funkci těchto systémů plní dutinové rezonátory. 
 
+Významnou skupinu mezi představují rezonátory vytvořené z vlnovodů, kterým se uzavře vstupní a výstupní brána. Obecně se jedná o objem dielektrika libovolného tvaru, který je uzavřen dobře vodivým pláštěm. V praxi se však upřednostňují rezonátory jednoduchých geometrických forem, například pravoúhlé (obrázek \ref{obr:evlny_rezonator}), cylindrické nebo toroidiální. 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=7cm]{evlny_rezonator.png}
+	\caption{Pravoúhlý dutinový rezonátor.}
+	\label{obr:evlny_rezonator}
+\end{figure}
+
+Vzhledem k skutečnosti, že rezonátory jsou uzavřený útvar, nedochází zde k šíření vlny v žádném směru. Mezi všemi stěnami se vyskytuje, podobně jako u vlnovodů ve směru os $x$ a $y$, stojaté vlnění. U rezonátorů tedy oproti vlnovodům existuje toto vlnění navíc i podél $z$-ové souřadnice. 
+
+Analýzu jednotlivých typů rezonátorů je možné nalézt v \cite{emp} nebo \cite{tripak}.
+
+\subsection{Parametry rezonátorů}
+Obdobně jako u rezonanční systémy vytvořené z R, L a C prvků, tak i u dutinové rezonátory je možné charakterizovat několika parametry.
+\subsection*{Rezonanční kmitočet}
+\begin{displaymath}
+	f_r = \frac{c}{2\sqrt{\varepsilon_r \mu_r}}\sqrt{\bigg(\frac{m}{a}\bigg)^{2} + \bigg(\frac{n}{b}\bigg)^{2} + \bigg(\frac{p}{d}\bigg)^{2}},
+\end{displaymath}
+kde $m, n, p = 1, 2, 3,\cdots$. Hodnoty $a$,$b$ a $d$ představují geometrii rezonátoru.
+\subsection*{Kvalita (Jakost) rezonátoru}
+Dalším důležitým parametrem rezonátoru se nazývá kvalita, případně jakost. Představuje míru ztrát energie za jednu periodu a je dána vztahem
+\begin{displaymath}
+	Q_0 = \omega_r \frac{W_{r}}{P},
+\end{displaymath}
+kde $\omega_r$ je úhlový rezonanční kmitočet, $W_r$ představuje nahromaděnou  energii a $P$ jsou výkonové ztráty v rezonátoru.
 \newpage
