@@ -29,7 +29,7 @@ Scalar rf_vector_form_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v
                                               Geom<Real> *e, ExtData<Scalar> *ext)
 {
     Scalar result = 0 ;
-    int u = 0;
+    int u~= 0;
     for (int i = 0; i < n; i++)
         result += wt[i] * (rfLabel[e->elem_marker].current_density_imag * v->val[i]);
 
@@ -38,7 +38,7 @@ Scalar rf_vector_form_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v
 \end{verbatim}
 
 \subsubsection*{Imaginární část (\ref{rce:sim_kar_weak_imag})}
-Složky kódu s indexy \uv{imag\_real} a \uv{imag\_imag} jsou zapsána
+Složky kódu s~indexy \uv{imag\_real} a \uv{imag\_imag} jsou zapsána
 \begin{verbatim}
 template<typename Real, typename Scalar>
 Scalar rf_matrix_form_imag_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
@@ -64,7 +64,7 @@ Scalar rf_vector_form_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v
                                               Geom<Real> *e, ExtData<Scalar> *ext)
 {
     Scalar result = 0 ;
-    int u = 0;
+    int u~= 0;
     for (int i = 0; i < n; i++)
         result += wt[i] * (rfLabel[e->elem_marker].current_density_real * v->val[i]);
 
@@ -83,10 +83,10 @@ wf->add_vector_form(1, callback(rf_vector_form_imag));
 \end{verbatim}
 
 \section{Kód okrajových podmínek}
-Při řešení problémů vztahující se k elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v dialogu \uv{new boundary condition}. 
+Při řešení problémů vztahující se k~elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v~dialogu \uv{new boundary condition}. 
 
 \subsubsection*{Electric field}
-Programový kód, který přísluší k zadáni Dirichletovy podmínky na hranici $\Gamma$, je v modulu zapsán nastavením tříd \textsc{BCTypes} a \textsc{BCValues} následovně
+Programový kód, který přísluší k~zadáni Dirichletovy podmínky na hranici $\Gamma$, je v~modulu zapsán nastavením tříd \textsc{BCTypes} a \textsc{BCValues} následovně
 \begin{verbatim}
 BCTypes bcTypesReal, bcTypesImag;
 bcTypesReal.add_bc_dirichlet(i+1);
@@ -98,16 +98,16 @@ bcValuesImag.add_const(i+1, edgeRFMarker->value_imag.number);
 \end{verbatim}
 
 \subsubsection*{Magnetic field}
-Touto volbou zadáváme hodnotu normálové derivace funkce $\frac{\partial E_{(z)}}{\partial n}$, jenž představuje Neumannovu okrajovou podmínku na hranici $\Gamma$. Opět má charakter komplexní veličiny, ve slabých formách vyjádřených v (\ref{rce:sim_kar_weak_real} ) a (\ref{rce:sim_kar_weak_imag}) podmínka představuje členy $\int_{\Gamma}\frac{\partial E_R}{\partial n}\cdot v\dif l$, případně $\int_{\Gamma}\frac{\partial E_I}{\partial n}\cdot v\dif l$. Příslušný kód je zapsán třídou \textsc{BCTypes}
+Touto volbou zadáváme hodnotu normálové derivace funkce $\frac{\partial E_{(z)}}{\partial n}$, jenž představuje Neumannovu okrajovou podmínku na hranici $\Gamma$. Opět má charakter komplexní veličiny, ve slabých formách vyjádřených v~(\ref{rce:sim_kar_weak_real} ) a (\ref{rce:sim_kar_weak_imag}) podmínka představuje členy $\int_{\Gamma}\frac{\partial E_R}{\partial n}\cdot v\dif l$, případně $\int_{\Gamma}\frac{\partial E_I}{\partial n}\cdot v\dif l$. Příslušný kód je zapsán třídou \textsc{BCTypes}
 \begin{verbatim}
 BCTypes bcTypesReal, bcTypesImag;
 bcTypesReal.add_bc_neumann(i+1);
 bcTypesImag.add_bc_neumann(i+1);               
 \end{verbatim}
-a funkcí vracející povrchovou lineární formu Neumannovy okrajové podmínky. V případě nulové Neumannovy okrajové podmínky však lze danou funkci vynechat, tak jako v tomto případě.
+a funkcí vracející povrchovou lineární formu Neumannovy okrajové podmínky. V~případě nulové Neumannovy okrajové podmínky však lze danou funkci vynechat, tak jako v~tomto případě.
 
 \subsubsection*{Matched boundary}
-Ve výpočtu se tedy jedná se o Newtonovu okrajovou podmínku ve tvaru
+Ve výpočtu se tedy jedná se o~Newtonovu okrajovou podmínku ve tvaru
 \begin{equation}
 	\bigg(\frac{\partial E_{(z)}}{\partial n} - \mj\beta E_{(z)}\bigg)|_{\Gamma} = 0.
 	\label{rce:sim_BC_matched_boundary}
@@ -132,7 +132,7 @@ Scalar rf_matrix_form_surf_imag_real(int n, double *wt, Func<Real> *u_ext[], Fun
     double eps = rfLabel[e->elem_marker].permittivity * EPS0;
     double height = rfEdge[e->edge_marker].height;
     double beta = 0.0;
-    double Z = 0.0;
+    double Z~= 0.0;
 
     if(!rfEdge[e->edge_marker].height == 0)
     {
@@ -142,8 +142,8 @@ Scalar rf_matrix_form_surf_imag_real(int n, double *wt, Func<Real> *u_ext[], Fun
     else
     {
         beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps);
-        Z = ((2 * M_PI * frequency) * mu ) / beta;
-        return Z * int_u_v<Real, Scalar>(n, wt, u, v);
+        Z~= ((2 * M_PI * frequency) * mu ) / beta;
+        return Z~* int_u_v<Real, Scalar>(n, wt, u, v);
     }
 }
 \end{verbatim}
@@ -161,7 +161,7 @@ Scalar rf_matrix_form_surf_real_imag(int n, double *wt, Func<Real> *u_ext[], Fun
     double eps = rfLabel[e->elem_marker].permittivity * EPS0;
     double height = rfEdge[e->edge_marker].height;
     double beta = 0.0;
-    double Z = 0.0;
+    double Z~= 0.0;
 
     if(!rfEdge[e->edge_marker].height == 0)
     {
@@ -171,12 +171,12 @@ Scalar rf_matrix_form_surf_real_imag(int n, double *wt, Func<Real> *u_ext[], Fun
     else
     {
         beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps);
-        Z = ((2 * M_PI * frequency) * mu ) / beta;
-        return Z * int_u_v<Real, Scalar>(n, wt, u, v);
+        Z~= ((2 * M_PI * frequency) * mu ) / beta;
+        return Z~* int_u_v<Real, Scalar>(n, wt, u, v);
     }
 }
 \end{verbatim}
-Lineární část je u vztahu (\ref{rce:sim_BC_matched_boundary}) nulová, proto lze funkci pro její zápis vynechat.
+Lineární část je u~vztahu (\ref{rce:sim_BC_matched_boundary}) nulová, proto lze funkci pro její zápis vynechat.
 Nakonec je potřeba výše uvedené funkce zaregistrovat ve třídě \textsc{WeakForm} takto
 \begin{verbatim}
 wf->add_vector_form_surf(0, callback(rf_vector_form_surf_real));
@@ -187,14 +187,14 @@ wf->add_vector_form_surf(1, callback(rf_vector_form_surf_imag));
 
 \section{Programový zápis pro zobrazení výsledků řešení}
 \subsection*{Electric field}
-Programová implementace pro elektrickou složku pole v kartézských souřanicích je v modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu, neboť se jedná o přímé řešení výchozí rovnice (\ref{rce:sim_helmholtz_vychozi} )
+Programová implementace pro elektrickou složku pole v~kartézských souřanicích je v~modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu, neboť se jedná o~přímé řešení výchozí rovnice (\ref{rce:sim_helmholtz_vychozi} )
 \begin{verbatim}
 case PhysicFieldVariable_RF_ElectricField:
 {
     node->values[0][0][i] = sqrt(sqr(value1[i]) + sqr(value2[i]));
 }    
 \end{verbatim}
-kde je patrná reálná složka elektrického pole, jejíž samostatný zápis v modulu je
+kde je patrná reálná složka elektrického pole, jejíž samostatný zápis v~modulu je
 \begin{verbatim}
 case PhysicFieldVariable_RF_ElectricFieldReal:
 {
@@ -241,7 +241,7 @@ case PhysicFieldVariable_RF_MagneticFluxDensityYImag:
     node->values[0][0][i] = -(1/(w)) * dudx1[i];
 }
 \end{verbatim}
-Nakonec zbývá vyjádřit rozložení vektoru magnetické indukce, což je možné v programovém kódu zapsat takto
+Nakonec zbývá vyjádřit rozložení vektoru magnetické indukce, což je možné v~programovém kódu zapsat takto
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensity:
 {
@@ -264,7 +264,7 @@ case PhysicFieldVariable_RF_MagneticFieldXReal:
 \end{verbatim}
 
 \subsection*{Poyntingův vektor}
-Programový kód pro rozložení Poyntingova vektoru ve směru $x$ je v modulu zapsán takto
+Programový kód pro rozložení Poyntingova vektoru ve směru $x$ je v~modulu zapsán takto
 \begin{verbatim}
 case PhysicFieldVariable_RF_PoyntingVectorX:
 {
