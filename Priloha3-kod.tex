@@ -1,192 +1,154 @@
 % !TeX root = Main.tex
 \chapter{Programový kód simulačního modulu} \label{kap:Program_kod}
 \section{Řešení Helmholtzovy rovnice (\ref{rce:sim_kar_helmholtz_num}) knihovnou Hermes2D}
-\subsubsection*{Reálná část (\ref{rce:sim_kar_weak_real})}
+\subsection*{Reálná část (\ref{rce:sim_kar_weak_real})}
 Implementace bilineární části odpovídá následujícím zápisům
 \begin{verbatim}
-template<typename Real, typename Scalar>
-Scalar rf_matrix_form_real_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
-                                    Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
-{
-    return - int_grad_u_grad_v<Real, Scalar>(n, wt, u, v)
-    + sqr(2 * M_PI * frequency) * (rfLabel[e->elem_marker].permeability * MU0)
-    * (rfLabel[e->elem_marker].permittivity * EPS0) * int_u_v<Real, Scalar>(n, wt, u, v);
-}
+add_matrix_form(new WeakFormsMaxwell::VolumetricMatrixForms::DefaultLinearMagnetostatics(0, 0,
+        QString::number(i).toStdString(),
+        - 1.0 / (material->permeability.number * MU0),
+        HERMES_NONSYM,
+        convertProblemType(Util::scene()->problemInfo()->problemType),
+        (Util::scene()->problemInfo()->problemType == ProblemType_Planar ? 0 : 3)));
 
-template<typename Real, typename Scalar>
-Scalar rf_matrix_form_real_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
-                                     Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
-{
-    return + 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) 
-    * rfLabel[e->elem_marker].conductivity * int_u_v<Real, Scalar>(n, wt, u, v);
-}
-
+add_matrix_form(new WeakFormsH1::VolumetricMatrixForms::DefaultLinearMass(0, 0,
+        QString::number(i).toStdString(),
+        sqr(2 * M_PI * Util::scene()->problemInfo()->frequency) *
+                                                     (material->permittivity.number * EPS0),
+        HERMES_NONSYM,
+        HERMES_PLANAR));
+  
+add_matrix_form(new WeakFormsH1::VolumetricMatrixForms::DefaultLinearMass(0, 1,
+        QString::number(i).toStdString(),
+        2 * M_PI * Util::scene()->problemInfo()->frequency * material->conductivity.number,
+        HERMES_NONSYM,
+        HERMES_PLANAR));
 \end{verbatim}
 Lineární člen na pravé straně rovnice je potřeba zapsat ve tvaru
 \begin{verbatim}
-template<typename Real, typename Scalar>
-Scalar rf_vector_form_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v,
-                                              Geom<Real> *e, ExtData<Scalar> *ext)
-{
-    Scalar result = 0 ;
-    int u~= 0;
-    for (int i = 0; i < n; i++)
-        result += wt[i] * (rfLabel[e->elem_marker].current_density_imag * v->val[i]);
-
-    return - 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) * result;
-}
+add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(0,
+        QString::number(i).toStdString(),
+        2 * M_PI * Util::scene()->problemInfo()->frequency * 
+                                                  material->current_density_imag.number,
+        HERMES_PLANAR));
 \end{verbatim}
 
-\subsubsection*{Imaginární část (\ref{rce:sim_kar_weak_imag})}
-Složky kódu s~indexy \uv{imag\_real} a \uv{imag\_imag} jsou zapsána
+\subsection*{Imaginární část (\ref{rce:sim_kar_weak_imag})}
+Složky kódu s~indexy \uv{imag\_real} a \uv{imag\_imag} jsou zapsány
 \begin{verbatim}
-template<typename Real, typename Scalar>
-Scalar rf_matrix_form_imag_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
-									Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
-{
-    return - 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) 
-    * rfLabel[e->elem_marker].conductivity * int_u_v<Real, Scalar>(n, wt, u, v);
-}
+add_matrix_form(new WeakFormsMaxwell::VolumetricMatrixForms::DefaultLinearMagnetostatics(1, 1,
+       QString::number(i).toStdString(),
+       - 1.0 / (material->permeability.number * MU0),
+       HERMES_NONSYM,
+       convertProblemType(Util::scene()->problemInfo()->problemType),
+       (Util::scene()->problemInfo()->problemType == ProblemType_Planar ? 0 : 3)));
 
-template<typename Real, typename Scalar>
-Scalar rf_matrix_form_imag_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
-                                    Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
-{
-    return - int_grad_u_grad_v<Real, Scalar>(n, wt, u, v) 
-    + sqr(2 * M_PI * frequency) * (rfLabel[e->elem_marker].permeability * MU0) 
-    * (rfLabel[e->elem_marker].permittivity * EPS0) * int_u_v<Real, Scalar>(n, wt, u, v);
-}
+
+add_matrix_form(new WeakFormsH1::VolumetricMatrixForms::DefaultLinearMass(1, 1,
+       QString::number(i).toStdString(),
+       sqr(2 * M_PI * Util::scene()->problemInfo()->frequency) *
+                                                    (material->permittivity.number * EPS0),
+       HERMES_NONSYM,
+       HERMES_PLANAR));
+       
+add_matrix_form(new WeakFormsH1::VolumetricMatrixForms::DefaultLinearMass(1, 0,
+       QString::number(i).toStdString(),
+       - 2 * M_PI * Util::scene()->problemInfo()->frequency * material->conductivity.number,
+       HERMES_NONSYM,
+       HERMES_PLANAR));
 \end{verbatim}
 Nakonec lineární člen imaginární části řešené rovnice je implemetován zápisem
 \begin{verbatim}
-template<typename Real, typename Scalar>
-Scalar rf_vector_form_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *v,
-                                              Geom<Real> *e, ExtData<Scalar> *ext)
-{
-    Scalar result = 0 ;
-    int u~= 0;
-    for (int i = 0; i < n; i++)
-        result += wt[i] * (rfLabel[e->elem_marker].current_density_real * v->val[i]);
+add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(1,
+       QString::number(i).toStdString(),
+       - 2 * M_PI * Util::scene()->problemInfo()->frequency * 
+                                                   material->current_density_real.number,
+       HERMES_PLANAR));
+\end{verbatim}
 
-    return 2 * M_PI * frequency * (rfLabel[e->elem_marker].permeability * MU0) * result;
-}
-\end{verbatim}
-\subsubsection*{Registrace forem}
-Zmíněné funkce pro řešení Helmholtzovy rovnice (\ref{rce:sim_kar_helmholtz_num}) je dále potřeba zaregistrovat ve třídě \textsc{WeakForm} následujícím způsobem
-\begin{verbatim}
-wf->add_matrix_form(0, 0, callback(rf_matrix_form_real_real));
-wf->add_matrix_form(0, 1, callback(rf_matrix_form_real_imag));
-wf->add_matrix_form(1, 0, callback(rf_matrix_form_imag_real));
-wf->add_matrix_form(1, 1, callback(rf_matrix_form_imag_imag));
-wf->add_vector_form(0, callback(rf_vector_form_real))
-wf->add_vector_form(1, callback(rf_vector_form_imag));
-\end{verbatim}
 
 \section{Kód okrajových podmínek}
 Při řešení problémů vztahující se k~elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v~dialogu \uv{new boundary condition}. 
 
-\subsubsection*{Electric field}
-Programový kód, který přísluší k~zadáni Dirichletovy podmínky na hranici $\Gamma$, je v~modulu zapsán nastavením tříd \textsc{BCTypes} a \textsc{BCValues} následovně
+\subsection*{Elektrické pole}
+Programový kód, který přísluší k~zadáni Dirichletovy podmínky na hranici $\Gamma$, je v~modulu zapsán následovně
 \begin{verbatim}
-BCTypes bcTypesReal, bcTypesImag;
-bcTypesReal.add_bc_dirichlet(i+1);
-bcTypesImag.add_bc_dirichlet(i+1);
-                
-BCValues bcValuesReal, bcValuesImag;
-bcValuesReal.add_const(i+1, edgeRFMarker->value_real.number);
-bcValuesImag.add_const(i+1, edgeRFMarker->value_imag.number);
+Dirichlet
 \end{verbatim}
 
-\subsubsection*{Magnetic field}
-Touto volbou zadáváme hodnotu normálové derivace funkce $\frac{\partial E_{(z)}}{\partial n}$, jenž představuje Neumannovu okrajovou podmínku na hranici $\Gamma$. Opět má charakter komplexní veličiny, ve slabých formách vyjádřených v~(\ref{rce:sim_kar_weak_real} ) a (\ref{rce:sim_kar_weak_imag}) podmínka představuje členy $\int_{\Gamma}\frac{\partial E_R}{\partial n}\cdot v\dif l$, případně $\int_{\Gamma}\frac{\partial E_I}{\partial n}\cdot v\dif l$. Příslušný kód je zapsán třídou \textsc{BCTypes}
+\subsubsection*{Povrchová proudová hustota}
 \begin{verbatim}
-BCTypes bcTypesReal, bcTypesImag;
-bcTypesReal.add_bc_neumann(i+1);
-bcTypesImag.add_bc_neumann(i+1);               
-\end{verbatim}
-a funkcí vracející povrchovou lineární formu Neumannovy okrajové podmínky. V~případě nulové Neumannovy okrajové podmínky však lze danou funkci vynechat, tak jako v~tomto případě.
-
-\subsubsection*{Matched boundary}
-Ve výpočtu se tedy jedná se o~Newtonovu okrajovou podmínku ve tvaru
-\begin{equation}
-	\bigg(\frac{\partial E_{(z)}}{\partial n} - \mj\beta E_{(z)}\bigg)|_{\Gamma} = 0.
-	\label{rce:sim_BC_matched_boundary}
-\end{equation}
-Pro její implementaci je potřeba nastavit třídu \textsc{BCTypes} následovně
-\begin{verbatim}
-BCTypes bcTypesReal, bcTypesImag;
-bcTypesReal.add_bc_newton(i+1);
-bcTypesImag.add_bc_newton(i+1);              
-\end{verbatim}
-a také zapsat funkce pro povrchové bilineární formy. Pro reálnou složku odpovídá 
-\begin{verbatim}
-template<typename Real, typename Scalar>
-Scalar rf_matrix_form_surf_imag_real(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
-                                         Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
+if (boundary->type == PhysicFieldBC_RF_SurfaceCurrent)
 {
-    if (!(rfEdge[e->edge_marker].type == PhysicFieldBC_RF_MatchedBoundary ||
-          rfEdge[e->edge_marker].type == PhysicFieldBC_RF_Port))
-    return 0.0;
-
-    double mu = rfLabel[e->elem_marker].permeability * MU0;
-    double eps = rfLabel[e->elem_marker].permittivity * EPS0;
-    double height = rfEdge[e->edge_marker].height;
-    double beta = 0.0;
-    double Z~= 0.0;
-
-    if(!rfEdge[e->edge_marker].height == 0)
-    {
-        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps - sqr(1 * M_PI / height));
-        return beta * int_u_v<Real, Scalar>(n, wt, u, v);
-    }
-    else
-    {
-        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps);
-        Z~= ((2 * M_PI * frequency) * mu ) / beta;
-        return Z~* int_u_v<Real, Scalar>(n, wt, u, v);
-    }
+    if (fabs(boundary->value_imag.number) > EPS_ZERO)
+        add_vector_form_surf(new WeakFormsH1::SurfaceVectorForms::DefaultVectorFormSurf(0,
+                QString::number(i + 1).toStdString(),
+                - 2 * M_PI * Util::scene()->problemInfo()->frequency * boundary->value_imag.number,
+                HERMES_PLANAR));
+    if (fabs(boundary->value_real.number) > EPS_ZERO)
+        add_vector_form_surf(new WeakFormsH1::SurfaceVectorForms::DefaultVectorFormSurf(1,
+                QString::number(i + 1).toStdString(),
+                2 * M_PI * Util::scene()->problemInfo()->frequency * boundary->value_real.number,
+                HERMES_PLANAR));
 }
 \end{verbatim}
-Pro imaginární část okrajové podmínky platí
+
+\subsubsection*{Impedančně přizpůsobená hranice}
+Programovému zápisu pro registraci a zápis slabých forem odpovídá
 \begin{verbatim}
-template<typename Real, typename Scalar>
-Scalar rf_matrix_form_surf_real_imag(int n, double *wt, Func<Real> *u_ext[], Func<Real> *u,
-                                         Func<Real> *v, Geom<Real> *e, ExtData<Scalar> *ext)
+add_matrix_form_surf(new CustomMatrixFormSurfMatchedBoundary(0, 1,
+       QString::number(i + 1).toStdString(),
+       1.0,
+       2 * M_PI * Util::scene()->problemInfo()->frequency));
+       
+add_matrix_form_surf(new CustomMatrixFormSurfMatchedBoundary(1, 0,
+       QString::number(i + 1).toStdString(),
+       - 1.0,
+       2 * M_PI * Util::scene()->problemInfo()->frequency));            
+\end{verbatim}
+Funkci \texttt{CustomMatrixFormSurfMatchedBoundary} je potřeba v modulu blíže definovat
+\begin{verbatim}
+class CustomMatrixFormSurfMatchedBoundary : public WeakForm::MatrixFormSurf
 {
-    if (!(rfEdge[e->edge_marker].type == PhysicFieldBC_RF_MatchedBoundary ||
-          rfEdge[e->edge_marker].type == PhysicFieldBC_RF_Port))
-    return 0.0;
+  public:
+    CustomMatrixFormSurfMatchedBoundary(int i, int j, std::string area, 
+                                         scalar coeff, scalar frequency)
+      : WeakForm::MatrixFormSurf(i, j, area), coeff(coeff), frequency(frequency) { }
 
-    double mu = rfLabel[e->elem_marker].permeability * MU0;
-    double eps = rfLabel[e->elem_marker].permittivity * EPS0;
-    double height = rfEdge[e->edge_marker].height;
-    double beta = 0.0;
-    double Z~= 0.0;
+    virtual scalar value(int n, double *wt, Func<scalar> *u_ext[], Func<double> *u, 
+                    Func<double> *v, Geom<double> *e, ExtData<scalar> *ext) const {
+      
+      SceneMaterialRF *material = dynamic_cast<SceneMaterialRF *>
+                             (Util::scene()->labels[Util::scene()->sceneSolution()->
+                             agrosMaterialMarker(e->elem_marker)]->material);
 
-    if(!rfEdge[e->edge_marker].height == 0)
-    {
-        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps - sqr(1 * M_PI / height));
-        return beta * int_u_v<Real, Scalar>(n, wt, u, v);
+      double mu = material->permeability.number * MU0;
+      double eps = material->permittivity.number * EPS0;
+      double conductivity = material->conductivity.number;
+
+      return coeff * sqrt((eps - conductivity / frequency) / mu) * 
+                              int_u_v<double, scalar>(n, wt, u, v);
     }
-    else
-    {
-        beta = sqrt(sqr(2 * M_PI * frequency) * mu * eps);
-        Z~= ((2 * M_PI * frequency) * mu ) / beta;
-        return Z~* int_u_v<Real, Scalar>(n, wt, u, v);
-    }
-}
-\end{verbatim}
-Lineární část je u~vztahu (\ref{rce:sim_BC_matched_boundary}) nulová, proto lze funkci pro její zápis vynechat.
-Nakonec je potřeba výše uvedené funkce zaregistrovat ve třídě \textsc{WeakForm} takto
-\begin{verbatim}
-wf->add_vector_form_surf(0, callback(rf_vector_form_surf_real));
-wf->add_vector_form_surf(1, callback(rf_vector_form_surf_imag));           
-\end{verbatim}
-                
-\subsubsection*{Port}
 
-\section{Programový zápis pro zobrazení výsledků řešení}
-\subsection*{Electric field}
+    virtual Ord ord(int n, double *wt, Func<Ord> *u_ext[], Func<Ord> *u,
+                        Func<Ord> *v, Geom<Ord> *e, ExtData<Ord> *ext) const {
+    
+      return int_u_v<Ord, Ord>(n, wt, u, v);
+    }
+
+        // This is to make the form usable in rk_time_step().
+    virtual WeakForm::MatrixFormSurf* clone() {
+
+      return new CustomMatrixFormSurfMatchedBoundary(*this);
+    }
+
+    private:
+        scalar coeff, frequency;
+};
+\end{verbatim}
+
+\section{Zobrazení veličin postprocessingu}
+\subsection*{Intenzita elektrického pole}
 Programová implementace pro elektrickou složku pole v~kartézských souřanicích je v~modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu, neboť se jedná o~přímé řešení výchozí rovnice (\ref{rce:sim_helmholtz_vychozi} )
 \begin{verbatim}
 case PhysicFieldVariable_RF_ElectricField:
@@ -251,7 +213,7 @@ case PhysicFieldVariable_RF_MagneticFluxDensity:
 }
 \end{verbatim}
 
-\subsection*{Magnetic field}
+\subsection*{Intenzita magnetického pole}
 Pro úplnost je níže uveden kód pro reálnou složku intenzity magnetického pole ve směru $x$, tj. $H_{x\Re}$
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFieldXReal:

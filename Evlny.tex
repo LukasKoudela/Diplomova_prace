@@ -671,12 +671,12 @@ Nakonec je možné definovat činitele prostupu (\ref{rce:evlny_cin_prostupu}) a
 \section{Vlnovody}
 Během šíření vln ve volném prostředí od zdroje k~přijímací anténě dochází přirozeně k~rozptylu energie do prostoru. Anténou je tak zachycena pouze její část. To platí i pro směrové vysílací antény, pokud přenos probíhá na velké vzdálenosti. Pro zvýšení jeho efektivity je potřeba použít nějaké konstrukce, která umožňuje vedení energie.
 
-To je možné zprostředkovat právě pomocí vlnovodů, jejichž nejběžnější provedení jsou na obrázku \ref{obr:evlny_vlnovody_konstrukce}. Vlnovody představují přípravek, ve kterém se elektromagnetická vlna šíří podélně ve směru osy $z$. V~příčném směru (tj. podle os $x$ a $y$) vzniká tzv. stojaté vlnění.
+To je možné zprostředkovat právě pomocí vlnovodů, jejichž nejběžnější provedení jsou na obrázku \ref{obr:evlny_vlnovody}. Vlnovody představují přípravek, ve kterém se elektromagnetická vlna šíří podélně ve směru osy $z$. V~příčném směru (tj. podle os $x$ a $y$) vzniká tzv. stojaté vlnění.
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=7cm]{evlny_vlnovody_konstrukce.png}
+	\includegraphics[width=7cm]{evlny_vlnovody.png}
 	\caption{Nejběžnější konstrukce vlnovodů. \cite{emp}}
-	\label{obr:evlny_vlnovody_konstrukce}
+	\label{obr:evlny_vlnovody}
 \end{figure}
 Výhody vlnovodů jsou, kromě malých ztrát přenosu, v~nízké úrovni vyzařování do okolí  . Nevýhodou může být jejich cena a výroba pro velmi vysoké kmitočty. 
 
@@ -688,10 +688,7 @@ Vedené vlny lze rozlišit na několik druhů. Toto dělení se děje podle pod�
 \subsubsection*{TEM vlny}
 U~TEM, nebo-li transverzálně elektromagnetických vln jsou obě podélné složky pole nulové. Pro příčné složky, označené indexem $\perp$, platí dle \cite{emp} vztahy
 \begin{displaymath}
-	\nabla^{2}_{\perp} \vecfaz E_{\perp} = 0,
-\end{displaymath}
-\begin{displaymath}
-	\nabla^{2}_{\perp} \vecfaz E_{\perp} = 0.
+	\nabla^{2}_{\perp} \vecfaz E_{\perp} = 0,\qquad\nabla^{2}_{\perp} \vecfaz H_{\perp} = 0.
 \end{displaymath}
 Charakterem odpovídají tyto rovnice elektrostatickému poli, proto i rozložení pole pro TEM vlny bude obdobné.
 
@@ -755,7 +752,7 @@ V~elektrotechnice se běžně používají systémy, založené na principu rezo
 Významnou skupinu představují rezonátory vytvořené z~vlnovodů, kterým se uzavře vstupní a výstupní brána. Obecně se jedná o~objem dielektrika libovolného tvaru, který je uzavřen dobře vodivým pláštěm. V~praxi se však upřednostňují rezonátory jednoduchých geometrických forem, například pravoúhlé (obrázek \ref{obr:evlny_rezonator}), cylindrické nebo toroidiální. 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=7cm]{evlny_rezonator.png}
+	\includegraphics[width=5cm]{evlny_rezonator.png}
 	\caption{Pravoúhlý dutinový rezonátor. \cite{tripak}}
 	\label{obr:evlny_rezonator}
 \end{figure}
