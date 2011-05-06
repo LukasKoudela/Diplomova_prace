@@ -3,7 +3,7 @@
 Pro demonstraci simulačního modulu aplikace Agros2D, jehož řešené rovnice jsou popsány v~kapitole \ref{kap:Simulace}, je zde uveden příklad z~oboru vysokofrekvenční techniky. 
 
 \section{Zadání úlohy}
-Geometrické rozměry pravoúhlého vlnovodu R100 \cite{R100} jsou následující. Vstup má $a = 22,86 \unit{mm}$, $b = 10,16 \unit{mm}$ a celková délka vlnovodu $l$ je $0,17 \unit{m}$. Vlnovodem se šíří dominantní elektické vidy a vnitřním materiálem je vzduch. 
+Geometrické rozměry pravoúhlého vlnovodu R100 \cite{R100} jsou následující. Vstup má $a = 22,86 \unit{mm}$, $b = 10,16 \unit{mm}$ a celková délka vlnovodu $d$ je $0,17 \unit{m}$. Vlnovodem se šíří dominantní elektické vidy a vnitřním materiálem je vzduch. 
 \begin{enumerate}
 \item[a)] Určete mezní kmitočet vlnovodu R100 a rozhodněte, zda se může šířit vlna o~frekvenci $f_0 = 9 \unit{GHz}$. Následně proveďte rozbor pomocí programu Agros2D pro tento kmitočet. 
 \item[b)] Uvažujte změnu geometrie tak, že ve vzdálenosti $0,076 \unit{m}$ od vstupu je vlnovod skokově zúžen, rozměr širší strany $a$ se zmenší na $9 \unit {mm}$. Délka zúžení je $5 \unit{mm}$. 
@@ -19,14 +19,14 @@ f_{m1} = \frac{c}{2\pi\sqrt{\varepsilon_{r}\mu_{r}}}\cdot\sqrt{\bigg(\frac{\pi}{
 Zadaná frekvence $f_0$ je vyšší než mezní kmitočet a proto se vlna může vlnovodem šířit.
 
 \subsection*{Geometrie a okrajové podmínky}
-Dle zadaných rozměrů zakreslíme geometrii vlnovodu dle postupu, který je uveden v~příloze \ref{kap:tutorial}. 
+Podle zadaných rozměrů zakreslíme geometrii vlnovodu dle postupu, který je uveden v~příloze \ref{kap:tutorial}. 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=15cm]{priklad_R100_diskretizace.png}
 	\caption{Diskretizace řešené oblasti vlnovodu trojúhelníkovými prvky.}
 	\label{obr:priklad_R100_diskretizace}
 \end{figure}
-Oblast na obrázku \ref{obr:priklad_R100_diskretizace} pokryjeme diskretizační sítí, u~které definujeme, pomocí značky oblasti použitého materiálu, maximální obsah prvku na $0,00001 \unit{m^{2}}$. Dále je pro řešení potřeba specifikovat okrajové podmínky na příslušných hranicích.
+Oblast na obrázku \ref{obr:priklad_R100_diskretizace} nejprve pokryjeme diskretizační sítí. Pomocí značky oblasti použitého materiálu zadáme maximální obsah prvku na $0,00001 \unit{m^{2}}$. Dále je pro řešení potřeba specifikovat okrajové podmínky na příslušných hranicích.
 \begin{itemize}
 \item {\bf Elektrické pole} ($\faz E = 0 + \mj0\unit{[V/m]}$) - Představuje podmínku označovanou jako \uv{prefect electric conductor} vyjádřenou pomocí intenzity elektrického pole. Zadáme ji na obě podélné hranice na obrázku \ref{obr:priklad_R100_diskretizace}.
 \item {\bf Povrchový proud} ($\faz J_{t} = 10 + \mj10\unit{[A/m^{2}]}$) - Pomocí této okrajové podmínky zadáme povrchový proud vstupujícího do vlnovodu. Přísluší k~levé hranici, dle obrázku\ref{obr:priklad_R100_diskretizace}.
@@ -36,13 +36,13 @@ Po spuštění řešení pro zadanou frekvenci $f_0 = 9\unit{GHz}$ získáme pom
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=15cm]{priklad_R100_Ere.png}
-	\caption{Rozložení reálné složky intenzity elektrické pole.}
+	\caption{Rozložení reálné složky intenzity elektrického pole.}
 	\label{obr:priklad_R100_Ere}
 \end{figure}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=15cm]{priklad_R100_E.png}
-	\caption{Modul intenzity elektrické pole.}
+	\caption{Modul intenzity elektrického pole.}
 	\label{obr:priklad_R100_E}
 \end{figure}
 \begin{figure}[!h]
@@ -69,7 +69,7 @@ Opět provedem nejprve výpočet mezního kmitočtu, ale tentokrát pro část v
 \begin{displaymath}
 f_{m2} = \frac{c}{2\pi\sqrt{\varepsilon_{r}\mu_{r}}}\cdot\sqrt{\bigg(\frac{\pi}{a}\bigg)^{2}} = \frac{3\cdot 10^{8}}{2\pi\sqrt{1}}\cdot\sqrt{\bigg(\frac{\pi}{9\cdot 10^{-3}}\bigg)^{2}} = 16,67 \unit{GHz}.
 \end{displaymath}
-Pro kmitočty v~rozmezí $f_{m1}$ až $f_{m2}$ by mělo ve vstupní části vlnovodu dojít ke vzniku vln, které ale budou při průchodu zúženou částí tlumeny. Je to z~důvodu existence  podkritického vlnovodu pro kmitočty menší než mezní kmitočet. Tento průběh se dá očekávat pro zadanou frekvenci $f_1$. Naopak pro $f_2$, která je vyšší než vypočtená $f_{m2}$ dojde k~průchodu vln do další části.
+Pro kmitočty v~rozmezí $f_{m1}$ až $f_{m2}$ by mělo ve vstupní části vlnovodu dojít ke vzniku vln, které ale budou při průchodu zúženou částí tlumeny. Je to z~důvodu existence  podkritického vlnovodu pro kmitočty menší než mezní kmitočet. Tento průběh se dá očekávat pro zadané frekvence $f_1$ a $f_2$. Naopak pro $f_3$, která je vyšší než vypočtená $f_{m2}$ dojde k~průchodu vln do další části.
 
 Po zadání stejných okrajových podmínek a shodného materiálu vlnovodu provedeme analýzu pro změněnou geometrii v~aplikaci Agros2D.
 
@@ -104,7 +104,7 @@ Zobrazení dalších veličin plně koresponduje s~ověřeným předpokladem. U~
 
 \newpage
 \subsubsection*{Frekvence 12,4 GHz}
-Zvyšováním kmitočtu dochází k~pronikání přes podkritický úsek. Ačkoliv je frekvence stále nižší než $f_{m2}$, tak velikost amlitudy vlny v~druhé části činí cca $25 \%$ amplitudy vlny vstupující.
+Zvyšováním kmitočtu dochází k~pronikání přes podkritický úsek. Ačkoliv je frekvence stále nižší než $f_{m2}$, tak velikost amplitudy vlny v~druhé části činí cca $25 \%$ amplitudy vlny vstupující.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=15cm]{priklad_R100narrow_Ere_12Ghz.png}
@@ -113,7 +113,7 @@ Zvyšováním kmitočtu dochází k~pronikání přes podkritický úsek. Ačkol
 \end{figure}
 
 \subsubsection*{Frekvence 17,5 GHz}
-Při tomto kmitočtu, který je vyšší než mezní $f_{m2}$, je dobře patrné šíření vlny přes zúžené místo vlnovodu. Aplituda proniklé vlny je cca $45 \%$.
+Při tomto kmitočtu, který je vyšší než mezní $f_{m2}$, je dobře patrné šíření vlny přes zúžené místo vlnovodu. Amplituda proniklé vlny je cca $45 \%$.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=15cm]{priklad_R100narrow_Ere_17Ghz.png}

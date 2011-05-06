@@ -13,7 +13,7 @@ Samotný modul pro simulaci elektromagnetického pole tedy využívá z~programu
 \section{Metoda konečných prvků}
 Základem samotné knihovny Hermes2D je numerické řešení pomocí tzv. metody konečných prvků neboli FEM (Finite Element Method). Historie spadá do první poloviny 20. století, kdy byly základy FEM popsány v~práci a Richarda Couranta (1943). Až v~roce 1953 byly rovnice popsány v~maticovém tvaru, což umožnilo řešení na počítačích a v~té době se FEM využívala v~leteckém průmyslu. K~jejímu šiřšímu využití v~dalších oborech však došlo až s~nástupem modernější výpočetní techniky v~průběhu 60. a 70. let. Například na problémy týkající se elektromagnetismu nebyla FEM použita dříve než v~roce 1968. V~současné době se však pomocí FEM výhodně řeší fyzikální problémy z~oborů statiky, dynamiky, akustiky, tepla, elektromagnetického pole, proudění, elektrostatiky a z~dalších vědeckých disciplín. 
 
-Ačkoliv existují také jiné numerické metody řešení, například metoda konečných diferencí (FDM) nebo momentová metoda (MOM), které nejsou tak náročné na programovou implementaci, tak právě FEM je metodou nejvíce používanou. Důvodem je její všestrannost a výkonnost. Dalším aspektem je to, že programy vyvinuté pro konkrétní problémy mohou být snadno použity k~řešení příkladů v~naprosto jiném oboru pomocí drobných nebo dokonce žádných změn.
+Ačkoliv existují také jiné numerické metody řešení, například metoda konečných diferencí (FDM) nebo momentová metoda (MOM), které nejsou tak náročné na programovou implementaci, tak právě varianty metody FEM (v případě Hermes2D jde o $hp$-FEM) jsou nejvíce používané. Důvodem je jejich všestrannost a výkonnost. Dále také proto, že programy vyvinuté pro konkrétní problémy mohou být snadno použity k~řešení příkladů v~naprosto jiném oboru pomocí drobných nebo dokonce žádných změn.
 
 \subsection{Kroky řešení pomocí FEM}
 Analýza jakéhokoliv problému prostřednictvím metody konečných prvků zahrnuje v~podstatě čtyři kroky:
@@ -301,13 +301,13 @@ Pro výslednou hodnotu Poyntingova vektoru na řešené oblasti $\Omega$ platí
 \end{displaymath}
 
 \subsection*{Jouleovy ztráty}
-Rozložení ztrát v~řešené oblasti odpovídá součinu proudové husoty $J$ a hodnoty intenzity elektrického pole $E$ 
+Rozložení ztrát v~řešené oblasti odpovídá součinu proudové hustoty $J$ a hodnoty intenzity elektrického pole $E$ 
 \begin{displaymath}
 	P_j = \faz J \cdot \faz E = \sigma \faz E^{2} = \sigma \sqrt{E_{z\Re}^{2} + E_{z\Im}^{2}}\unit{[J/m^{3}]}.
 \end{displaymath}
 
 \section{Numerická integrace}
-Výpočet určitých interálů, který se v~řešených vztazích vyskytují, je analyticky možný pouze v~určitých jednoduchých případech. Pro obecné funkce se integrace provádí numericky. Jednou z~možností je výpočet pomocí Gaussovy kvadratury.
+Výpočet určitých integrálů, které se v~řešených vztazích vyskytují, je analyticky možný pouze v~určitých jednoduchých případech. Pro obecné funkce se integrace provádí numericky. Jednou z~možností je výpočet pomocí Gaussovy kvadratury.
 
 Účelem je vypočítat numericky hodnodutu integrálu obecné funkce $g(\xi)$ na intervalu $x\in\langle a, b\rangle$,  pomocí aproximace výrazem
 \begin{displaymath}
@@ -327,12 +327,12 @@ Více o~této metodě Gaussovy kvadratury je možné zjistit v~\cite{gk_tichy} n
 
 \subsection{Numerický zápis rovnic kartézské souřadnicové soustavy}
 \subsubsection*{Vyjádření členů rovnice (\ref{rce:sim_kar_weak_real})}
-Bilineární člen rovnice, tj. vztah (\ref{rce:sim_kar_bilinear_real}) se ještě rozdělí části reprezentovaná reálnou a imaginární složkou. Nejprve vyjádříme zápis, který je v~programu označen indexem \uv{real\_real}. Rozepsáním operátoru $\nabla$ a numerickým řešením integrálů obdržíme výraz
+Bilineární člen rovnice, tj. vztah (\ref{rce:sim_kar_bilinear_real}) se ještě rozdělí na část reprezentovanou reálnou a imaginární složkou. Nejprve vyjádříme zápis, který je v~programu označen indexem \uv{real\_real}. Rozepsáním operátoru $\nabla$ a numerickým řešením integrálů obdržíme výraz
 \begin{equation}
-	-\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_{z\Re}}{\partial x}\cdot \frac{\partial v}{\partial x} + \frac{\partial E_{z\Re}}{\partial y}\cdot \frac{\partial v}{\partial y} \bigg) + \omega^{2}\varepsilon\mu\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{z\Re}\cdot v\bigg),
+	-\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(\frac{\partial E_{z\Re}}{\partial x}\cdot \frac{\partial v}{\partial x} + \frac{\partial E_{z\Re}}{\partial y}\cdot \frac{\partial v}{\partial y} \bigg) + \omega^{2}\varepsilon\mu\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{z\Re}\cdot v\bigg).
 	\label{rce:sim_kar_weak_real_real_num} 
 \end{equation}
-Obdobným způsobem postupujeme u~druhé složky bilineární části vyjádřené pomocí $E_{z\Im}$. Index funkce v~programu se změní na \uv{real\_imag}
+Podobným způsobem postupujeme u~druhé složky bilineární části vyjádřené pomocí $E_{z\Im}$. Index funkce v~programu se změní na \uv{real\_imag}
 \begin{equation}
  \omega\mu\sigma\sum_{i=0}^{n}\mathrm{w}_{t}[i]\bigg(E_{z\Im}\cdot v\bigg).
 	\label{rce:sim_kar_weak_real_imag_num} 

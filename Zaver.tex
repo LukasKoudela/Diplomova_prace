@@ -1,11 +1,16 @@
 % !TeX root = Main.tex
 
 Hlavním posláním této diplomové práce bylo vytvořit prostředek, pomocí kterého by bylo možné simulovat rozložení elektromagnetického pole při znalosti materiálových parametrů v~řešené oblasti a okrajových podmínek. Pro numerické řešení harmonické vlnové rovnice byla využita knihova Hermes2D, založená na metodě konečných prvků vyšších řádů přesnosti.
+Celý simulační kód byl koncipován jako modul pro multiplatformní aplikaci Agros2D, dostupnou pod GNU GPL licencí. Příslušné parciální diferenciální rovnice, potřebné pro řešení, byly odvozeny z~Maxwellových rovnic.
 
-Celý simulační kód byl koncipován jako modul pro multiplatformní aplikaci Agros2D.  
+Pomocí vytvořeného simulačního prostředku je nyní možné řešit vybrané vlnové problémy nejen pro účely výuky předmětu KTE/EV. Je možné simulovat typické varianty šíření elektromagnetických vln, které jsou také popsané v této práci. Lze například zobrazit rozložení elektromagnetického pole v okolí vodiče ve volném prostředí, na rozhraní dvou a více prostředí, případně řešit úlohy z již zmiňovaných vlnovodů. Veškeré tyto typové úlohy jsou součástí aplikace po jejím stažení z domovských internetových stránek a instalaci. 
+
+Možnosti simulačního modulu byly demonstrovány na příkladu řešení vlnovodu R100 v~kapitole \ref{kap:Priklad}. Ověření výsledků bylo provedeno na stejném příkladu pomocí profesionálního programu COMSOL. Z~porovnání výsledků je patrné, že rozložení elektromagnetického pole je u~obou aplikací téměř identické. Drobné odlišnosti jsou způsobeny především přesností numerického řešení, která je závislá na míře diskretizace řešené oblasti ($h$-adaptivita) a řádu polynomu na použitých prvcích ($p$-adaptivita).
+
+Aplikaci je možné dále rozšiřovat, podobně jako je vytvořený tento modul pro simulaci TM vln. Po implementací příslušných rovnic lze dále řešit TE vlny. Další rozšíření by mohla představovat možnost analýzy v ustáleném stavu a případně přidání dalších okrajových podmínek. 
 
 
-Možnosti simulačního modulu byly demonstrovány na příkladu řešení vlnovodu R100 v~kapitole \ref{kap:Priklad}. Ověření výsledků bylo provedeno na stejném příkladu pomocí profesionálního programu COMSOL. Z~porovnání výsledků je patrné, že rozložení elektromagnetického pole je u~obou aplikací téměř identické. Drobné odlišnosti jsou způsobeny především přesností numerického řešení, která je závislá na míře diskretizace řešené oblasti ($h$-FEM) a řádu polynomu použitých prvků ($p$-FEM).
 
-Příslušné parciální diferenciální rovnice byly odvozeny z~Maxwellových rovnic.
+
+
 
