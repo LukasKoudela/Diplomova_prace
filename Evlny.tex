@@ -36,7 +36,7 @@ Rovnice (\ref{rce:J_sigmaE}) pro vektor proudové hustoty $\vec J$ v~prostředí
 	\hline
 	permitivita		& $\varepsilon$	& $\unit{[F/m]}$ & 	& $\varepsilon_{0} = 8,854\cdot10^{-12}\unit{F/m} $\\
 	
-	permeabilita		& $\mu$		& $\unit{[H/m]}$ & 	& $\mu_{0} = 4\pi\cdot10^{-7}\unit{H/m}$\\
+	permeabilita	& $\mu$			& $\unit{[H/m]}$ & 	& $\mu_{0} = 4\pi\cdot10^{-7}\unit{H/m}$\\
 	
 	měrná vodivost	& $\sigma$		& $\unit{[S/m]}$ & 	&\\
 	\hline
@@ -73,8 +73,8 @@ Jde o~komplexní parametr, který ovlivňuje charakter šíření elektromagneti
 	\label{rce:evlny_alphabeta}
 \end{equation}
 \begin{description}
-\item[$\beta\unit{[dB/m]}$] - je {\bf fázová konstanta}, která určuje fázi šířící se harmonické vlny.
-\item[$\alpha\unit{[rad/m]}$] - je označován {\bf měrný útlum}, vyjadřující změnu amlitudy vlny.
+\item[$\beta\unit{[rad/m]}$] - je {\bf fázová konstanta}, která určuje fázi šířící se harmonické vlny.
+\item[$\alpha\unit{[dB/m]}$] - je označován {\bf měrný útlum}, vyjadřující změnu amlitudy vlny.
 \end{description}
 
 Dalším používaným parametrem, kterým je možné popsat dané prostředí, se označuje jako {\bf vlnová (charakteristická) impedance}  $\faz Z$. Lze jí definovat vztahem
@@ -249,11 +249,11 @@ Nakonec se podle předpisu (\ref{rce:casova_zavislost}) vyjádří okamžitá ho
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=14cm]{evlny_postupna_odrazena.png}
-	\caption{Šíření postupné a odražené rovinné homogenní vlny dle (\ref{rce:evlny_postupna_odrazena}).}
+	\caption{Šíření postupné a odražené rovinné vlny fázovou rychlostí $v_f$ dle (\ref{rce:evlny_postupna_odrazena}).}
 	\label{obr:evlny_postupna_odrazena}
 \end{figure}
 \subsubsection*{Fázová rychlost vlny $v_{f}$}
-Na obrázku \ref{obr:evlny_postupna_odrazena} je naznačen směr pohybu vln pomocí $v_{f}$. Rychlost, kterou se vlnoplocha ve směru osy $z$ pohybuje se označuje jako {\bf fázová rychlost vlny}. Výraz pro vyjádření odvodíme z~rovnice (\ref{rce:evlny_postupna_odrazena}). Vzhledem k~tomu, že vlnoplocha představuje rovinu bodů se stejnou fází, bude v~rovnici platit, $\omega t - \beta z + \varphi^{+} = \mathrm{konst.}$ pro postupnou vlnu. Podobně pro odraženou lze zapsat $\omega t + \beta z + \varphi^{-} = \mathrm{konst.}$
+Na obrázku \ref{obr:evlny_postupna_odrazena} je naznačen směr pohybu postupné vlny pomocí $v_{f}$. Rychlost, kterou se vlnoplocha ve směru osy $z$ pohybuje se označuje jako {\bf fázová rychlost vlny}. Výraz pro vyjádření odvodíme z~rovnice (\ref{rce:evlny_postupna_odrazena}). Vzhledem k~tomu, že vlnoplocha představuje rovinu bodů se stejnou fází, bude v~rovnici platit, $\omega t - \beta z + \varphi^{+} = \mathrm{konst.}$ pro postupnou vlnu. Podobně pro odraženou lze zapsat $\omega t + \beta z + \varphi^{-} = \mathrm{konst.}$
 
 Pro odvození fázové rychlosti postupné vlny zderivujeme výraz $\omega t - \beta z + \varphi^{+} = \mathrm{konst.}$ podle času a následně upravíme
 \begin{displaymath}
@@ -268,7 +268,7 @@ Analogickým odvozením z~výrazu pro odraženou vlnu  $\omega t + \beta z + \va
 \end{displaymath}
 
 \subsubsection*{Obecné řešení rovnice (\ref{rce:evlny_VlnR_ElPole_harm_BezZdroju}) metodou separace proměnných}
-V~řadě aplikacích není možné zavést pro řešení rovnice $\nabla^{2}\vecfaz E +\faz k^{2}\vecfaz E = 0$  zjednodušující předpoklady, vycházející z~obrázku \ref{obr:evlny_vlnoplocha}. Potom se rovnice řeší analyticky pomocí metody separace proměnných. Principem je nalézt řešení pro jednotlivé složky vektoru $\vecfaz E$ pomocí součinu tří funkcí, vždy jedné proměnné
+V~řadě aplikacích není možné zavést pro řešení rovnice $\nabla^{2}\vecfaz E +\faz k^{2}\vecfaz E = 0$  zjednodušující předpoklady, vycházející z~obrázku \ref{obr:evlny_vlnoplocha}. Pokud se rovnice neřeší numericky, další analytický postup je možný pomocí metody separace proměnných. Principem je nalézt řešení pro jednotlivé složky vektoru $\vecfaz E$ pomocí součinu tří funkcí, vždy jedné proměnné
 \begin{equation}
 	\faz E_{i}(x,y,z) = X(x)\cdot Y(y)\cdot Z(z)\qquad\mathrm{pro}\ i = x, y, z.
 	\label{rce:evlny_obecne_xyz}
@@ -318,7 +318,7 @@ Splnění podmínek na rozhraní pro tečné složky vektorů $\vec E$ a $\vec H
 \begin{displaymath}
 	\vec k_{i}\sin\vartheta_{i} = \vec k_{r}\sin\vartheta_{r} = \vec k_{t}\sin\vartheta_{t}.
 \end{displaymath}
-Vzhledem k~shodnosti prostředí, ve kterém se nachází postupná a odražená vlna, je možné s~využitím vztahu (\ref{rce:evlny_vlnovy_vektor}) definovat $\faz k_{1} = \vec k_{i} = \vec k_{r}$. Obdobně pro druhé prostředí platí $\faz k_{2} = \vec k_{t}$. Vyjádřený vztah (\ref{rce:evlny_snell_odvozeni}) je výchozím pro Snellovy zákony
+Vzhledem k~shodnosti prostředí, ve kterém se nachází postupná a odražená vlna, je možné s~využitím vztahu (\ref{rce:evlny_vlnovy_vektor}) definovat $\faz k_{1}\vec n_0 = \vec k_{i} = \vec k_{r}$. Obdobně pro druhé prostředí platí $\faz k_{2}\vec n_0 = \vec k_{t}$. Vyjádřený vztah (\ref{rce:evlny_snell_odvozeni}) je výchozím pro Snellovy zákony
 \begin{equation}
 	\faz k_{1}\sin\vartheta_{i} = \faz k_{1}\sin\vartheta_{r} = \faz k_{2}\sin\vartheta_{t}.
 	\label{rce:evlny_snell_odvozeni}

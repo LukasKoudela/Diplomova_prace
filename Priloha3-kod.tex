@@ -1,8 +1,8 @@
 % !TeX root = Main.tex
 \chapter{Programový kód simulačního modulu} \label{kap:Program_kod}
 \section{Řešení Helmholtzovy rovnice (\ref{rce:sim_kar_helmholtz_num}) knihovnou Hermes2D}
-\subsection*{Reálná část (\ref{rce:sim_kar_weak_real})}
-Implementace bilineární části odpovídá následujícím zápisům
+\subsection*{Rovnice (\ref{rce:sim_kar_weak_real}) zapisující reálnou část}
+Implementace bilineární části odpovídá následujícím kódům
 \begin{verbatim}
 add_matrix_form(new WeakFormsMaxwell::VolumetricMatrixForms::DefaultLinearMagnetostatics(0, 0,
         QString::number(i).toStdString(),
@@ -24,7 +24,7 @@ add_matrix_form(new WeakFormsH1::VolumetricMatrixForms::DefaultLinearMass(0, 1,
         HERMES_NONSYM,
         HERMES_PLANAR));
 \end{verbatim}
-Lineární člen na pravé straně rovnice je potřeba zapsat ve tvaru
+Lineární člen na pravé straně rovnice (\ref{rce:sim_kar_weak_real}) je potřeba zapsat ve tvaru
 \begin{verbatim}
 add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(0,
         QString::number(i).toStdString(),
@@ -33,8 +33,8 @@ add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(0
         HERMES_PLANAR));
 \end{verbatim}
 
-\subsection*{Imaginární část (\ref{rce:sim_kar_weak_imag})}
-Složky kódu s~indexy \uv{imag\_real} a \uv{imag\_imag} jsou zapsány
+\subsection*{Rovnice (\ref{rce:sim_kar_weak_imag}) vyjadřující imaginární část}
+Složky kódu bilineární části jsou definovány
 \begin{verbatim}
 add_matrix_form(new WeakFormsMaxwell::VolumetricMatrixForms::DefaultLinearMagnetostatics(1, 1,
        QString::number(i).toStdString(),
@@ -57,7 +57,7 @@ add_matrix_form(new WeakFormsH1::VolumetricMatrixForms::DefaultLinearMass(1, 0,
        HERMES_NONSYM,
        HERMES_PLANAR));
 \end{verbatim}
-Nakonec lineární člen imaginární části řešené rovnice je implemetován zápisem
+Nakonec lineární člen řešené rovnice (\ref{rce:sim_kar_weak_imag}) je implemetován zápisem
 \begin{verbatim}
 add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(1,
        QString::number(i).toStdString(),
@@ -66,17 +66,23 @@ add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(1
        HERMES_PLANAR));
 \end{verbatim}
 
-
 \section{Kód okrajových podmínek}
-Při řešení problémů vztahující se k~elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se zadávají v~dialogu \uv{new boundary condition}. 
+Při řešení problémů vztahující se k~elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se volí v~dialogu \uv{new boundary condition}. 
 
 \subsection*{Elektrické pole}
 Programový kód, který přísluší k~zadáni Dirichletovy podmínky na hranici $\Gamma$, je v~modulu zapsán následovně
 \begin{verbatim}
-Dirichlet
+if (boundary->type == PhysicFieldBC_RF_ElectricField)
+{
+    bc1.add_boundary_condition(new DefaultEssentialBCConst
+               (QString::number(i+1).toStdString(), boundary->value_real.number));
+    bc2.add_boundary_condition(new DefaultEssentialBCConst
+               (QString::number(i+1).toStdString(), boundary->value_imag.number));
+}
 \end{verbatim}
 
 \subsubsection*{Povrchová proudová hustota}
+Tato volba představuje Neumannovu okrajovou podmínku. Je pro ní potřeba definovat funkci, která vrací lineární formu dané okrajové podmínky
 \begin{verbatim}
 if (boundary->type == PhysicFieldBC_RF_SurfaceCurrent)
 {
@@ -94,7 +100,7 @@ if (boundary->type == PhysicFieldBC_RF_SurfaceCurrent)
 \end{verbatim}
 
 \subsubsection*{Impedančně přizpůsobená hranice}
-Programovému zápisu pro registraci a zápis slabých forem odpovídá
+Programovému kódu pro registraci a zápis příslušných slabých forem okrajové podmínky odpovídá
 \begin{verbatim}
 add_matrix_form_surf(new CustomMatrixFormSurfMatchedBoundary(0, 1,
        QString::number(i + 1).toStdString(),
@@ -106,7 +112,7 @@ add_matrix_form_surf(new CustomMatrixFormSurfMatchedBoundary(1, 0,
        - 1.0,
        2 * M_PI * Util::scene()->problemInfo()->frequency));            
 \end{verbatim}
-Funkci \texttt{CustomMatrixFormSurfMatchedBoundary} je potřeba v modulu blíže definovat
+Třídu \texttt{CustomMatrixFormSurfMatchedBoundary} je potřeba v modulu blíže specifikovat
 \begin{verbatim}
 class CustomMatrixFormSurfMatchedBoundary : public WeakForm::MatrixFormSurf
 {
@@ -149,22 +155,19 @@ class CustomMatrixFormSurfMatchedBoundary : public WeakForm::MatrixFormSurf
 
 \section{Zobrazení veličin postprocessingu}
 \subsection*{Intenzita elektrického pole}
-Programová implementace pro elektrickou složku pole v~kartézských souřanicích je v~modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu, neboť se jedná o~přímé řešení výchozí rovnice (\ref{rce:sim_helmholtz_vychozi} )
+Programová implementace pro elektrickou složku pole v~kartézských souřanicích je v~modulu zajištěn ve funkci \texttt{ViewScalarFilterRF} pomocí následujícího kódu, neboť se jedná o~přímé řešení výchozí rovnice (\ref{rce:sim_helmholtz_vychozi})
 \begin{verbatim}
 case PhysicFieldVariable_RF_ElectricField:
 {
     node->values[0][0][i] = sqrt(sqr(value1[i]) + sqr(value2[i]));
 }    
 \end{verbatim}
-kde je patrná reálná složka elektrického pole, jejíž samostatný zápis v~modulu je
+Zápis pro zobrazení samostatné reálné a imaginární složky je v~modulu následující.
 \begin{verbatim}
 case PhysicFieldVariable_RF_ElectricFieldReal:
 {
     node->values[0][0][i] = value1[i];
 }    
-\end{verbatim}
-a obdobně imaginární složka 
-\begin{verbatim}
 case PhysicFieldVariable_RF_ElectricFieldImag:
 {    
     node->values[0][0][i] = value2[i];
@@ -172,38 +175,33 @@ case PhysicFieldVariable_RF_ElectricFieldImag:
 \end{verbatim}
 
 \subsection*{Magnetická indukce}
-Reálná část magnetické indukce ve směru $x$ je ve funkci \texttt{ViewScalarFilterRF} zapsána programovým kódem
+Reálná a imaginární část magnetické indukce ve směru $x$ se zapíše ve funkci \texttt{ViewScalarFilterRF} kódem
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensityXReal:
 {
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
     node->values[0][0][i] = -(1/(w)) * dudy2[i];
 }
-\end{verbatim}
-Analogickým způsobem je možné popsat imaginární část
-\begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensityXImag:
 {
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
     node->values[0][0][i] = (1/(w)) * dudy1[i];
 }    
 \end{verbatim}
-Dále je potřeba zapsat implementaci kódu pro magnetickou indukci ve směru $y$
+Dále je potřeba implementovat kód pro složky magnetické indukce ve směru $y$
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensityYReal:
 {
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
     node->values[0][0][i] = (1/(w)) * dudx2[i];
 }
-\end{verbatim}
-\begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensityYImag:
 {
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
     node->values[0][0][i] = -(1/(w)) * dudx1[i];
 }
 \end{verbatim}
-Nakonec zbývá vyjádřit rozložení vektoru magnetické indukce, což je možné v~programovém kódu zapsat takto
+Nakonec zbývá vyjádřit rozložení vektoru magnetické indukce, což je možné v~programu zapsat takto
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensity:
 {
@@ -214,7 +212,8 @@ case PhysicFieldVariable_RF_MagneticFluxDensity:
 \end{verbatim}
 
 \subsection*{Intenzita magnetického pole}
-Pro úplnost je níže uveden kód pro reálnou složku intenzity magnetického pole ve směru $x$, tj. $H_{x\Re}$
+Zápisy kódu pro zobrazení intenzit magnetického pole jsou obdobné jako u magnetické indukce, pouze vydělené hodnotou permeability dle obecného vztahu (\ref{rce:B_muH}).
+Pro názornost veličině $H_{x\Re}$ odpovídá
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFieldXReal:
 {
@@ -226,7 +225,7 @@ case PhysicFieldVariable_RF_MagneticFieldXReal:
 \end{verbatim}
 
 \subsection*{Poyntingův vektor}
-Programový kód pro rozložení Poyntingova vektoru ve směru $x$ je v~modulu zapsán takto
+Programový kód pro rozložení Poyntingova vektoru ve směrech $x$ a $y$ je v~modulu zapsán tímto způsobem
 \begin{verbatim}
 case PhysicFieldVariable_RF_PoyntingVectorX:
 {
@@ -236,9 +235,6 @@ case PhysicFieldVariable_RF_PoyntingVectorX:
     node->values[0][0][i] = - 0.5 * ((value2[i] * 1/(w*mu) * dudx1[i]) 
                                    - (value1[i] * 1/(w*mu) * dudx2[i]));
 }
-\end{verbatim}
-Pro Poyntingův vektor ve směru $y$ analogicky platí
-\begin{verbatim}
 case PhysicFieldVariable_RF_PoyntingVectorY:
 {
     SceneMaterialRF *marker = dynamic_cast<SceneMaterialRF *>(material);

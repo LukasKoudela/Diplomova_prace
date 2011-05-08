@@ -29,7 +29,7 @@ Podle zadaných rozměrů zakreslíme geometrii vlnovodu dle postupu, který je 
 Oblast na obrázku \ref{obr:priklad_R100_diskretizace} nejprve pokryjeme diskretizační sítí. Pomocí značky oblasti použitého materiálu zadáme maximální obsah prvku na $0,00001 \unit{m^{2}}$. Dále je pro řešení potřeba specifikovat okrajové podmínky na příslušných hranicích.
 \begin{itemize}
 \item {\bf Elektrické pole} ($\faz E = 0 + \mj0\unit{[V/m]}$) - Představuje podmínku označovanou jako \uv{prefect electric conductor} vyjádřenou pomocí intenzity elektrického pole. Zadáme ji na obě podélné hranice na obrázku \ref{obr:priklad_R100_diskretizace}.
-\item {\bf Povrchový proud} ($\faz J_{t} = 10 + \mj10\unit{[A/m^{2}]}$) - Pomocí této okrajové podmínky zadáme povrchový proud vstupujícího do vlnovodu. Přísluší k~levé hranici, dle obrázku\ref{obr:priklad_R100_diskretizace}.
+\item {\bf Povrchový proud} ($\faz J_{t} = 10 + \mj10\unit{[A/m^{2}]}$) - Pomocí této okrajové podmínky zadáme povrchový proud vstupujícího do vlnovodu. Přísluší k~levé hranici, dle obrázku \ref{obr:priklad_R100_diskretizace}.
 \item {\bf Impedanční přizpůsobení} - Nakonec na pravou stranu přiřadíme impedančně přizpůsobenou hranici, která nezpůsobuje odrazy vln od konce vlnovodu.
 \end{itemize}
 Po spuštění řešení pro zadanou frekvenci $f_0 = 9\unit{GHz}$ získáme pomocí postprocesoru následující výsledky. První dva obrázky, tj. \ref{obr:priklad_R100_Ere} a \ref{obr:priklad_R100_E}, popisují intenzitu elektrického pole. Dále obrázky \ref{obr:priklad_R100_Hre} a \ref{obr:priklad_R100_H} znázorňují intenzitu magnetického pole. Nakonec obrázek \ref{obr:priklad_R100_N} je výsledkem rozložení výkonu dle Poyntingova vektoru na řešené oblasti.
