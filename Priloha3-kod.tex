@@ -70,19 +70,30 @@ add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(1
 Při řešení problémů vztahující se k~elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se volí v~dialogu \uv{new boundary condition}. 
 
 \subsection*{Elektrické pole}
-Programový kód, který přísluší k~zadáni Dirichletovy podmínky na hranici $\Gamma$, je v~modulu zapsán následovně
+Programový kód, který přísluší k~zadáni Dirichletovy podmínky na hranici $\Gamma$, představuje v~modulu implementaci pomocí Dirichletova zdvihu.
+Řešení se nejprve formálně provede pro nulovou okrajovou podmínku. Poté se na pravou stranu rovnice matice tuhosti pronásobená zadanou
+hodnotou. 
 \begin{verbatim}
-if (boundary->type == PhysicFieldBC_RF_ElectricField)
-{
-    bc1.add_boundary_condition(new DefaultEssentialBCConst
-               (QString::number(i+1).toStdString(), boundary->value_real.number));
-    bc2.add_boundary_condition(new DefaultEssentialBCConst
-               (QString::number(i+1).toStdString(), boundary->value_imag.number));
-}
+EssentialBCs bc_1;
+EssentialBCs bc_2;
+
+bc_1.add_boundary_condition(new
+DefaultEssentialBCConst(QString::number(i+1).toStdString(),
+boundary->value_real.number));
+
+bc_2.add_boundary_condition(new
+DefaultEssentialBCConst(QString::number(i+1).toStdString(),
+boundary->value_real.number));
+
+initialPolynomialOrder = 1;
+
+Hermes::vector<Space *> space;
+space.push_back(new H1Space(mesh, bc_1, initialPolynomialOrder));
+space.push_back(new H1Space(mesh, bc_2, initialPolynomialOrder));
 \end{verbatim}
 
 \subsubsection*{Povrchová proudová hustota}
-Tato volba představuje Neumannovu okrajovou podmínku. Je pro ní potřeba definovat funkci, která vrací lineární formu dané okrajové podmínky
+Tato volba představuje Neumannovu okrajovou podmínku. Je pro ní potřeba registrovat funkci, která vrací lineární formu dané okrajové podmínky
 \begin{verbatim}
 if (boundary->type == PhysicFieldBC_RF_SurfaceCurrent)
 {
@@ -91,6 +102,7 @@ if (boundary->type == PhysicFieldBC_RF_SurfaceCurrent)
                 QString::number(i + 1).toStdString(),
                 - 2 * M_PI * Util::scene()->problemInfo()->frequency * boundary->value_imag.number,
                 HERMES_PLANAR));
+                
     if (fabs(boundary->value_real.number) > EPS_ZERO)
         add_vector_form_surf(new WeakFormsH1::SurfaceVectorForms::DefaultVectorFormSurf(1,
                 QString::number(i + 1).toStdString(),
@@ -135,19 +147,6 @@ class CustomMatrixFormSurfMatchedBoundary : public WeakForm::MatrixFormSurf
       return coeff * sqrt((eps - conductivity / frequency) / mu) * 
                               int_u_v<double, scalar>(n, wt, u, v);
     }
-
-    virtual Ord ord(int n, double *wt, Func<Ord> *u_ext[], Func<Ord> *u,
-                        Func<Ord> *v, Geom<Ord> *e, ExtData<Ord> *ext) const {
-    
-      return int_u_v<Ord, Ord>(n, wt, u, v);
-    }
-
-        // This is to make the form usable in rk_time_step().
-    virtual WeakForm::MatrixFormSurf* clone() {
-
-      return new CustomMatrixFormSurfMatchedBoundary(*this);
-    }
-
     private:
         scalar coeff, frequency;
 };
@@ -232,7 +231,7 @@ case PhysicFieldVariable_RF_PoyntingVectorX:
     SceneMaterialRF *marker = dynamic_cast<SceneMaterialRF *>(material);
     double mu = marker->permeability.number * MU0;
     double w = 2 * M_PI * Util::scene()->problemInfo()->frequency;
-    node->values[0][0][i] = - 0.5 * ((value2[i] * 1/(w*mu) * dudx1[i]) 
+    node->values[0][0][i] = 0.5 * ((value2[i] * 1/(w*mu) * dudx1[i]) 
                                    - (value1[i] * 1/(w*mu) * dudx2[i]));
 }
 case PhysicFieldVariable_RF_PoyntingVectorY:

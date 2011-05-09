@@ -246,12 +246,12 @@ ze kterého lze vyjádřit $x$-ová a $y$-ová složka magnetické indukce. $\fa
 \end{displaymath}
 kde po dosazení za $\faz E_z$ můžeme vyjádřit reálnou a imaginární složku magnetické indukce ve směru $x$, které lze pak implemetovat do modulu
 \begin{equation}
-	B_{x\Re} = -\frac{1}{\mj\omega}\frac{\partial E_{z\Im}}{\partial y}, \qquad \qquad B_{x\Im} = \frac{1}{\mj\omega}\frac{\partial E_{z\Re}}{\partial y}.
+	B_{x\Re} = -\frac{1}{\omega}\frac{\partial E_{z\Im}}{\partial y}, \qquad \qquad B_{x\Im} = \frac{1}{\omega}\frac{\partial E_{z\Re}}{\partial y}.
 	\label{rce:sim_flux_x_re}
 \end{equation}
 Z~rovnice (\ref{rce:sim_zobrazeni_flux}) je pak dále možné stejným způsobem odvodit vztahy pro obě složky indukce ve směru $y$
 \begin{equation}
-	B_{y\Re} = \frac{1}{\mj\omega}\frac{\partial E_{z\Im}}{\partial x}, \qquad \qquad B_{y\Im} = -\frac{1}{\mj\omega}\frac{\partial E_{z\Re}}{\partial x}.
+	B_{y\Re} = \frac{1}{\omega}\frac{\partial E_{z\Im}}{\partial x}, \qquad \qquad B_{y\Im} = -\frac{1}{\omega}\frac{\partial E_{z\Re}}{\partial x}.
 	\label{rce:sim_flux_y_im}
 \end{equation}
 Nakonec zbývá vyjádřit rozložení modulu magnetické indukce. Pro jeho velikost platí
@@ -284,26 +284,29 @@ Je zřejmé, že $N_z$ je dle výrazu (\ref{rce:sim_poynting_vec_rozepsany}) nul
 \begin{displaymath}
 	\faz N_x = -(E_{z\Re} + \mj E_{z\Im})\cdot (H_{y\Re} + \mj H_{y\Im}),
 \end{displaymath}
-což ve výsledku vede na vztah
 \begin{displaymath}
-	\faz N_x = E_{z\Im} H_{y\Im} - E_{z\Re} H_{y\Re} - \mj (E_{z\Re} H_{y\Im} + E_{z\Im} H_{y\Re}).
+	\faz N_x = - E_{z\Re} H_{y\Re} + E_{z\Im} H_{y\Im} - \mj (E_{z\Re} H_{y\Im} + E_{z\Im} H_{y\Re}).
+\end{displaymath}
+Protože Poyntingův vektor reprezentuje hustotu výkonu elektromagnetického pole, je nutné aby jeho hodnota byla pouze reálné číslo.
+\begin{displaymath}
+	N_x = - E_{z\Re} H_{y\Re} + E_{z\Im} H_{y\Im}.
 \end{displaymath}
 Pro Poyntingův vektor ve směru $y$ analogicky vychází
 \begin{displaymath}
 	\faz N_y = \faz E_z \faz H_x,
 \end{displaymath}
 \begin{displaymath}
-	\faz N_y = E_{z\Re} H_{x\Re} - E_{z\Im} H_{x\Im} + \mj (E_{z\Re} H_{x\Im} + E_{z\Im} H_{x\Re}).
+	N_y = E_{z\Re} H_{x\Re} - E_{z\Im} H_{x\Im}.
 \end{displaymath}
 Pro výslednou hodnotu Poyntingova vektoru na řešené oblasti $\Omega$ platí
 \begin{displaymath}
-	N = \sqrt{N_{x}^{2} + N_{y}^{2}} = \sqrt{(E_{z\Im} H_{y\Im} - E_{z\Re} H_{y\Re})^{2} + (E_{z\Im} H_{x\Im} - E_{z\Re} H_{x\Re})^{2}}.
+	N = \sqrt{N_{x}^{2} + N_{y}^{2}} = \sqrt{(E_{z\Im} H_{y\Im} - E_{z\Re} H_{y\Re})^{2} + (E_{z\Re} H_{x\Re} - E_{z\Im} H_{x\Im})^{2}}.
 \end{displaymath}
 
 \subsection*{Jouleovy ztráty}
 Rozložení ztrát v~řešené oblasti odpovídá součinu proudové hustoty $J$ a hodnoty intenzity elektrického pole $E$ 
 \begin{displaymath}
-	P_j = \faz J \cdot \faz E = \sigma \faz E^{2} = \sigma \sqrt{E_{z\Re}^{2} + E_{z\Im}^{2}}\unit{[J/m^{3}]}.
+	P_j = \faz J \cdot \faz E = \sigma \faz E^{2} = \sigma \big(E_{z\Re}^{2} + E_{z\Im}^{2}\big)\unit{[J/m^{3}]}.
 \end{displaymath}
 
 \section{Numerická integrace}
