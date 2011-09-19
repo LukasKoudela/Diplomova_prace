@@ -65,7 +65,7 @@ odpovídá $\rho = 0$ a $\vec J_{\mathrm{ext}} = 0$. Zavedení této úpravy zí
 	\label{rce:VlnR_ElPole_BezZdroju}
 \end{equation}
 
-\subsection{Vlnová rovnice pro vektor indukce magnetického pole $\vec B$}
+\subsection{Vlnová rovnice pro vektor magnetické indukce $\vec B$}
 Vycházíme ze stejné počáteční úvahy jako při odvození vlnové rovnice pro vektor elektrické intenzity $\vec E$. Z~modifikované první Maxwellovy rovnice (\ref{rce:1MaxwR_vn}) opět vyjádříme $\rot \vec B$. Následně aplikujeme operaci rotace
 \begin{displaymath}
 	\rot\vec B = \mu\sigma\vec E+\mu\varepsilon\frac{\partial\vec E}{\partial t}+\mu\vec J_{\mathrm{ext}},
@@ -96,19 +96,19 @@ Pro úplnost jsou zde uvedeny i zobecněné nehomohenní vlnové rovnice pro vek
 \begin{displaymath}
 	\nabla^{2}\vec H -\mu\sigma\frac{\partial\vec H}{\partial t}-\mu\varepsilon\frac{\partial^{2}\vec H}{\partial t^{2}}= -\rot\vec J_{\mathrm{ext}}.
 \end{displaymath}
-Je zřejmé, že tyto vztahy můžeme získat rovnou z~vlnových rovnic pro daný vektor vynásobením nebo vydělením příslušnou materiálovou konstantou. Také pro tyto rovnice platí skutečnost, že pro oblast bez vnějších zdrojů bude pravá strana rovnic nulová a vztahy přejdou na zobecněné homogenní vlnové rovnice.
+Je zřejmé, že tyto vztahy můžeme získat rovnou z~vlnových rovnic pro daný vektor vynásobením nebo vydělením příslušnou materiálovou konstantou. Také pro tyto rovnice platí skutečnost, že pro oblast bez vnějších zdrojů bude pravá strana rovnic nulová a~vztahy přejdou na zobecněné homogenní vlnové rovnice.
 
 \section{Harmonicky proměnné pole} \label{sec:Odvozeni_HarmPole}
 
 \subsection*{Vlnová rovnice harmonického pole pro fázor vektoru $\vecfaz E$}
-Veličny pole se pro harmonické pole vyjadřují pomocí fázorů. Z~výše odvozené vlnové rovnice (\ref{rce:VlnR_ElPole}) pomocí vztahu pro obraz derivace $\frac{\partial}{\partial t}=\mj\omega$ dostaneme
+Veličny pole se pro harmonické pole vyjadřují pomocí fázorů. Z~odvozené vlnové rovnice (\ref{rce:VlnR_ElPole}) pomocí vztahu pro obraz derivace $\frac{\partial}{\partial t}=\mj\omega$ dostaneme
 \begin{displaymath}
 	\nabla^{2}\vecfaz E -\mj\omega\mu\sigma\vecfaz E-\mj^{2}\omega ^{2}\mu\varepsilon\vecfaz E = \grad\frac{\rho}{\varepsilon}+\mj\omega\mu\vecfaz J_{\mathrm{ext}},
 \end{displaymath}
 \begin{displaymath}
 	\nabla^{2}\vecfaz E -\mj\omega\mu(\sigma+\mj\omega\varepsilon)\vecfaz E = \grad\frac{\rho}{\varepsilon}+ \mj\omega\mu\vecfaz J_{\mathrm{ext}}.
 \end{displaymath}
-Zavedeme konstantu šíření $\faz k=\pm\sqrt{-\mj\omega\mu(\sigma+\mj\omega\varepsilon)}$. Tím dostaneme výslednou vlnovou rovnici pro vektor intenzity elektrického pole v~harmonickém prostředí. Označuje se jako {\bf nehomogenní Helmholtzova vlnová rovnice}, podle německého fyzika Hermanna Ludwiga Helmholtze
+Zavedeme konstantu šíření $\faz k=\pm\sqrt{-\mj\omega\mu(\sigma+\mj\omega\varepsilon)}$. Tím dostaneme výslednou vlnovou rovnici pro vektor intenzity elektrického pole v~harmonickém prostředí. Označuje se jako {\bf nehomogenní Helmholtzova vlnová rovnice} podle německého fyzika Hermanna Ludwiga Helmholtze
 \begin{equation}
 	\nabla^{2}\vecfaz E +\faz k^{2}\vecfaz E = \grad\frac{\rho}{\varepsilon}+ \mj\omega\mu\vecfaz J_{\mathrm{ext}}.
 	\label{rce:VlnR_ElPole_harm} 
@@ -132,7 +132,7 @@ Pro konstantu šíření $\faz k=\pm\sqrt{-\mj\omega\mu(\sigma+\mj\omega\varepsi
 	\nabla^{2}\vecfaz B +\faz k^{2}\vecfaz B = -\mu\,\rot\vecfaz J_{\mathrm{ext}}.
 	\label{rce:VlnR_MagPole_harm} 
 \end{equation}
-Pokud se jedná o~oblast ve které nejsou žádné vnější zdroje platí, platí $\vecfaz J_{\mathrm{ext}} = 0$. Tímto doplněním z~rovnice  (\ref{rce:VlnR_MagPole_harm}) obdržíme homogenní Helmholtzovu rovnici
+Pokud se jedná o~oblast, ve které nejsou žádné vnější zdroje, platí $\vecfaz J_{\mathrm{ext}} = 0$. Tímto doplněním z~rovnice  (\ref{rce:VlnR_MagPole_harm}) obdržíme homogenní Helmholtzovu rovnici
 \begin{equation}
 	\nabla^{2}\vecfaz B +\faz k^{2}\vecfaz B = 0.
 	\label{rce:VlnR_MagPole_harm_BezZdroju} 

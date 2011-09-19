@@ -67,11 +67,11 @@ add_vector_form(new WeakFormsH1::VolumetricVectorForms::DefaultVectorFormConst(1
 \end{verbatim}
 
 \section{Kód okrajových podmínek}
-Při řešení problémů vztahující se k~elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se volí v~dialogu \uv{new boundary condition}. 
+Při řešení problémů vztahující se k~elektromagnetickému poli je možné použít na řešenou oblast několik typů okrajových podmínek, které se volí v~dialogu \uv{nová okrajová podmínka}. 
 
 \subsection*{Elektrické pole}
 Programový kód, který přísluší k~zadáni Dirichletovy podmínky na hranici $\Gamma$, představuje v~modulu implementaci pomocí Dirichletova zdvihu.
-Řešení se nejprve formálně provede pro nulovou okrajovou podmínku. Poté se na pravou stranu rovnice matice tuhosti pronásobená zadanou
+Řešení se nejprve formálně provede pro nulovou okrajovou podmínku. Poté se na pravou stranu rovnice přidá matice tuhosti, která je pronásobená zadanou
 hodnotou. 
 \begin{verbatim}
 EssentialBCs bc_1;
@@ -93,7 +93,7 @@ space.push_back(new H1Space(mesh, bc_2, initialPolynomialOrder));
 \end{verbatim}
 
 \subsubsection*{Povrchová proudová hustota}
-Tato volba představuje Neumannovu okrajovou podmínku. Je pro ní potřeba registrovat funkci, která vrací lineární formu dané okrajové podmínky
+Tato volba představuje Neumannovu okrajovou podmínku. Je pro ní potřeba registrovat funkci, která vrací povrchovou lineární formu dané okrajové podmínky
 \begin{verbatim}
 if (boundary->type == PhysicFieldBC_RF_SurfaceCurrent)
 {
@@ -124,7 +124,7 @@ add_matrix_form_surf(new CustomMatrixFormSurfMatchedBoundary(1, 0,
        - 1.0,
        2 * M_PI * Util::scene()->problemInfo()->frequency));            
 \end{verbatim}
-Třídu \texttt{CustomMatrixFormSurfMatchedBoundary} je potřeba v modulu blíže specifikovat
+Třídu \texttt{CustomMatrixFormSurfMatchedBoundary} je potřeba v~modulu blíže specifikovat
 \begin{verbatim}
 class CustomMatrixFormSurfMatchedBoundary : public WeakForm::MatrixFormSurf
 {
@@ -161,7 +161,7 @@ case PhysicFieldVariable_RF_ElectricField:
     node->values[0][0][i] = sqrt(sqr(value1[i]) + sqr(value2[i]));
 }    
 \end{verbatim}
-Zápis pro zobrazení samostatné reálné a imaginární složky je v~modulu následující.
+Zápisy pro zobrazení samostatné reálné a imaginární složky jsou v~modulu následující.
 \begin{verbatim}
 case PhysicFieldVariable_RF_ElectricFieldReal:
 {
@@ -174,7 +174,7 @@ case PhysicFieldVariable_RF_ElectricFieldImag:
 \end{verbatim}
 
 \subsection*{Magnetická indukce}
-Reálná a imaginární část magnetické indukce ve směru $x$ se zapíše ve funkci \texttt{ViewScalarFilterRF} kódem
+Reálná a imaginární část magnetické indukce ve směru $x$ se zapíše kódem
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensityXReal:
 {
@@ -200,7 +200,7 @@ case PhysicFieldVariable_RF_MagneticFluxDensityYImag:
     node->values[0][0][i] = -(1/(w)) * dudx1[i];
 }
 \end{verbatim}
-Nakonec zbývá vyjádřit rozložení vektoru magnetické indukce, což je možné v~programu zapsat takto
+Nakonec zbývá vyjádřit rozložení vektoru magnetické indukce, což je možné v~programu ve funkci \texttt{ViewScalarFilterRF} zapsat takto
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFluxDensity:
 {
@@ -211,7 +211,7 @@ case PhysicFieldVariable_RF_MagneticFluxDensity:
 \end{verbatim}
 
 \subsection*{Intenzita magnetického pole}
-Zápisy kódu pro zobrazení intenzit magnetického pole jsou obdobné jako u magnetické indukce, pouze vydělené hodnotou permeability dle obecného vztahu (\ref{rce:B_muH}).
+Zápisy kódu pro zobrazení intenzit magnetického pole jsou obdobné jako u~magnetické indukce, pouze vydělené hodnotou permeability dle vztahu (\ref{rce:B_muH}).
 Pro názornost veličině $H_{x\Re}$ odpovídá
 \begin{verbatim}
 case PhysicFieldVariable_RF_MagneticFieldXReal:

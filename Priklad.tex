@@ -3,7 +3,7 @@
 Pro demonstraci simulačního modulu aplikace Agros2D, jehož řešené rovnice jsou popsány v~kapitole \ref{kap:Simulace}, je zde uveden příklad z~oboru vysokofrekvenční techniky. 
 
 \section{Zadání úlohy}
-Geometrické rozměry pravoúhlého vlnovodu R100 \cite{R100} jsou následující. Vstup má $a = 22,86 \unit{mm}$, $b = 10,16 \unit{mm}$ a celková délka vlnovodu $d$ je $0,17 \unit{m}$. Vlnovodem se šíří dominantní elektické vidy a vnitřním materiálem je vzduch. 
+Geometrické rozměry pravoúhlého vlnovodu R100 \cite{R100} jsou následující. Vstup má strany $a = 22,86 \unit{mm}$, $b = 10,16 \unit{mm}$ a celková délka vlnovodu $d$ je $0,17 \unit{m}$. Vnitřním materiálem vlnovodu je vzduch a šíří se jím dominantní elektrické vidy TE. 
 \begin{enumerate}
 \item[a)] Určete mezní kmitočet vlnovodu R100 a rozhodněte, zda se může šířit vlna o~frekvenci $f_0 = 9 \unit{GHz}$. Následně proveďte rozbor pomocí programu Agros2D pro tento kmitočet. 
 \item[b)] Uvažujte změnu geometrie tak, že ve vzdálenosti $0,076 \unit{m}$ od vstupu je vlnovod skokově zúžen, rozměr širší strany $a$ se zmenší na $9 \unit {mm}$. Délka zúžení je $5 \unit{mm}$. 
@@ -140,4 +140,13 @@ Při tomto kmitočtu, který je vyšší než mezní $f_{m2}$, je dobře patrné
 	\includegraphics[width=14cm]{priklad_R100narrow_Ere_17Ghz_3D.png}
 	\caption{Zobrazení $E_{z\Re}$ v~prostoru pro $f_1 = 17,5\unit{Ghz}$.}
 	\label{obr:priklad_R100narrow_Ere_17Ghz_3D}
+\end{figure}
+
+\subsubsection*{Srovnání výsledků s profesionálním programem COMSOL}
+Porovnání výsledného rozložení pole bylo provedeno pro geometrii upraveného vlnovodu R100 při frekvenci $12,4\unit{GHz}$. Srovnáním s obrázkem \ref{obr:priklad_R100narrow_Ere_12Ghz} je patrné, že se shoduje jak rozložení pole v oblasti, tak i~příslušné hodnoty.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=15cm]{priklad_R100_comsol.png}
+	\caption{Zobrazení $E_{z\Re}$ programem COMSOL pro kmitočet $12,4\unit{Ghz}$.}
+	\label{obr:priklad_R100_comsol}
 \end{figure}
